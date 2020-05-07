@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public abstract class Player : MonoBehaviour
+public abstract class MovingObject : MonoBehaviour
 {
     public float moveTime = 0.1f; //tiempo que dura un movimiento
     public LayerMask blockingLayer; //capa a la que pertenece
@@ -11,13 +11,13 @@ public abstract class Player : MonoBehaviour
     private BoxCollider2D boxCollider; //referencia al box collider
     private Rigidbody2D rb2D; //referencia al rigidbody
 
-    private void Awake()
+    protected virtual void Awake()
     {
         boxCollider = GetComponent<BoxCollider2D>();
         rb2D = GetComponent<Rigidbody2D>();
     }
 
-    void Start()
+    protected virtual void Start()
     {
         movementSpeed = 1f / moveTime;
 
@@ -55,7 +55,7 @@ public abstract class Player : MonoBehaviour
 
     protected abstract void OnCantMove(GameObject go);
 
-    protected void AttemptMove(int xDir, int yDir)
+    protected virtual void AttemptMove(int xDir, int yDir)
     {
         RaycastHit2D hit;
         bool canMove = Move(xDir, yDir, out hit);

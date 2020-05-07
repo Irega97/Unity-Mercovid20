@@ -5,7 +5,8 @@ using UnityEngine;
 public class GameManager : MonoBehaviour
 {
     public BoardManager boardScript;
-    public static GameManager instance = null;	
+    public static GameManager instance = null;
+    public int healthPoints = 100;
 
     void Awake()
     {
@@ -26,5 +27,10 @@ public class GameManager : MonoBehaviour
     void InitGame()
     {
         boardScript.SetupScene();
+    }
+
+    public void GameOver()
+    {
+        enabled = false;
     }
 }
