@@ -23,7 +23,6 @@ public class GameManager : MonoBehaviour
 		
     }
 
-
     void InitGame()
     {
         boardScript.SetupScene();

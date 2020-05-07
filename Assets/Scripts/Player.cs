@@ -127,7 +127,7 @@ public class Player : MovingObject
 
   void Restart()
     {
-        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+       // SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 
     public void LoseHealth(int loss)
