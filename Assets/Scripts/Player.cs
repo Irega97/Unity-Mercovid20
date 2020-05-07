@@ -8,6 +8,10 @@ public class Player : MovingObject
 {
 
     public float restartLevelDelay = 1f;
+    int countf = 0;
+    int countb = 0;
+    int countl = 0;
+    int countr = 0;
 
 
     private Animator animator;
@@ -46,7 +50,7 @@ public class Player : MovingObject
     // Update is called once per frame
     void Update()
     {
-        int estado = 0;
+        int estado;
         int horizontal;
         int vertical;
 
@@ -54,35 +58,64 @@ public class Player : MovingObject
         vertical = (int)Input.GetAxisRaw("Vertical"); //-1 si abajo, 1 si arriba y 0 si no pulsamos
 
         if (horizontal != 0) vertical = 0;
-        if (vertical != 0) horizontal = 0;
 
         if (horizontal == 1)
         {
             estado = 3;
             CambiarIdle(estado);
-            AttemptMove(horizontal, vertical);
-            animator.SetTrigger("rightMove");
+            countr++;
+            if (countr >= 2)
+            {
+                AttemptMove(horizontal, vertical);
+                animator.SetTrigger("rightMove");
+                ResetEstados();
+            }
 
 
         } else if (horizontal == -1)
         {
             estado = 2;
             CambiarIdle(estado);
-            AttemptMove(horizontal, vertical);
-            animator.SetTrigger("leftMove");
-        }else if (vertical == 1)
+            countl++;
+            if (countl >= 2)
+            {
+                AttemptMove(horizontal, vertical);
+                animator.SetTrigger("leftMove");
+                ResetEstados();
+            }
+        }
+        else if (vertical >= 1)
         {
             estado = 0;
             CambiarIdle(estado);
-            AttemptMove(horizontal, vertical);
-            animator.SetTrigger("backMove");
-        }else if (vertical == -1)
+            countb++;
+            if (countb >= 2)
+            {
+                AttemptMove(horizontal, vertical);
+                animator.SetTrigger("backMove");
+                ResetEstados();
+            }
+        }
+        else if (vertical == -1)
         {
             estado = 1;
             CambiarIdle(estado);
-            AttemptMove(horizontal, vertical);
-            animator.SetTrigger("frontMove");
+            countf++;
+            if (countf >= 2)
+            {
+                AttemptMove(horizontal, vertical);
+                animator.SetTrigger("frontMove");
+                ResetEstados();
+            }
         }
+
+    }
+    public void ResetEstados()
+    {
+        countf = 0;
+        countb = 0;
+        countl = 0;
+        countr = 0;
 
     }
 
@@ -115,7 +148,6 @@ public class Player : MovingObject
             animator.SetBool("backIdle", false);
             animator.SetBool("leftIdle", false);
             animator.SetBool("rightIdle", true);
-
         }
 
     }
