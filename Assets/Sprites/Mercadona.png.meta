@@ -37,7 +37,7 @@ TextureImporter:
     second: Mercadona_10
   - first:
       213: 5044252500458144505
-    second: Mercadona_11
+    second: Puerta1
   - first:
       213: -8431456738529757659
     second: Mercadona_12
@@ -73,7 +73,7 @@ TextureImporter:
     second: Mercadona_22
   - first:
       213: 2367458755212765759
-    second: Mercadona_23
+    second: Puerta2
   - first:
       213: -374756511312102167
     second: Mercadona_24
@@ -109,7 +109,7 @@ TextureImporter:
     second: Mercadona_34
   - first:
       213: -630709971525325572
-    second: Mercadona_35
+    second: Puerta3
   - first:
       213: -4728950375432903669
     second: Mercadona_36
@@ -118,7 +118,7 @@ TextureImporter:
     second: Mercadona_37
   - first:
       213: 6736678661589417321
-    second: Mercadona_38
+    second: Puerta0
   - first:
       213: -8766004198137576151
     second: Mercadona_39
@@ -145,7 +145,7 @@ TextureImporter:
     second: Mercadona_46
   - first:
       213: -6365968515043863802
-    second: Mercadona_47
+    second: Puerta4
   externalObjects: {}
   serializedVersion: 11
   mipmaps:
@@ -474,7 +474,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Mercadona_11
+      name: Puerta1
       rect:
         serializedVersion: 2
         x: 352
@@ -726,7 +726,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Mercadona_23
+      name: Puerta2
       rect:
         serializedVersion: 2
         x: 352
@@ -978,7 +978,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Mercadona_35
+      name: Puerta3
       rect:
         serializedVersion: 2
         x: 352
@@ -1041,7 +1041,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Mercadona_38
+      name: Puerta0
       rect:
         serializedVersion: 2
         x: 64
@@ -1230,7 +1230,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Mercadona_47
+      name: Puerta4
       rect:
         serializedVersion: 2
         x: 352

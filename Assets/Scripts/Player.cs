@@ -12,13 +12,9 @@ public class Player : MovingObject
     int countb = 0;
     int countl = 0;
     int countr = 0;
-<<<<<<< HEAD
-    int updateTime = 20;
 
-=======
     int tiempoupdate = 20;
     
->>>>>>> 3d80790877900b66bc580b092884fdefa222be93
 
     private Animator animator;
     private int health; //puntos de vida 
@@ -71,12 +67,10 @@ public class Player : MovingObject
             estado = 3;
             CambiarIdle(estado);
             countr++;
-<<<<<<< HEAD
-            if (countr >= updateTime)
-=======
+
             Debug.Log("Derecha: " + countr);
             if (countr >= tiempoupdate)
->>>>>>> 3d80790877900b66bc580b092884fdefa222be93
+
             {
                 AttemptMove(horizontal, vertical);
                 animator.SetTrigger("rightMove");
@@ -89,34 +83,25 @@ public class Player : MovingObject
             estado = 2;
             CambiarIdle(estado);
             countl++;
-<<<<<<< HEAD
-            if (countl >= updateTime)
-=======
+
             Debug.Log("Izquierda: " + countl);
             if (countl >= tiempoupdate)
->>>>>>> 3d80790877900b66bc580b092884fdefa222be93
+
             {
                 AttemptMove(horizontal, vertical);
                 animator.SetTrigger("leftMove");
             }
         }
-<<<<<<< HEAD
-=======
 
-        
-
->>>>>>> 3d80790877900b66bc580b092884fdefa222be93
         else if (vertical == 1)
         {
             estado = 0;
             CambiarIdle(estado);
             countb++;
-<<<<<<< HEAD
-            if (countb >= updateTime)
-=======
+
             Debug.Log("Arriba: " + countb);
             if (countb >= tiempoupdate)
->>>>>>> 3d80790877900b66bc580b092884fdefa222be93
+
             {
                 AttemptMove(horizontal, vertical);
                 animator.SetTrigger("backMove");
@@ -128,12 +113,10 @@ public class Player : MovingObject
             estado = 1;
             CambiarIdle(estado);
             countf++;
-<<<<<<< HEAD
-            if (countf >= updateTime)
-=======
+
             Debug.Log("Abajo: " + countf);
             if (countf >= tiempoupdate)
->>>>>>> 3d80790877900b66bc580b092884fdefa222be93
+
             {
                 AttemptMove(horizontal, vertical);
                 animator.SetTrigger("frontMove");

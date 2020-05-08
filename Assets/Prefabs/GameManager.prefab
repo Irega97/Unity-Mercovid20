@@ -46,6 +46,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   acera: {fileID: 5817393525991469102, guid: b0c9389c0da267042a918fc42dd098bd, type: 3}
   carretera: []
+  player: {fileID: 1050818061070948436, guid: 37d8fdfa473361c498381bf10d301e4f, type: 3}
 --- !u!114 &1431000569802020838
 MonoBehaviour:
   m_ObjectHideFlags: 0
