@@ -7,9 +7,11 @@ public class BoardManager : MonoBehaviour
     public GameObject acera;
     private Transform boardHolder;
     public List<GameObject> carretera;
+    public GameObject player;
 
     public void SetupScene()
     {
+        GameObject jugador = Instantiate(player, new Vector3(0f, 0f, 0f), Quaternion.identity);
         boardHolder = new GameObject("Board").transform;
         for (float x = -49.5f; x < 10.5; x++)
         {
