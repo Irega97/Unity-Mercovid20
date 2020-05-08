@@ -12,8 +12,13 @@ public class Player : MovingObject
     int countb = 0;
     int countl = 0;
     int countr = 0;
+<<<<<<< HEAD
     int updateTime = 20;
 
+=======
+    int tiempoupdate = 20;
+    
+>>>>>>> 3d80790877900b66bc580b092884fdefa222be93
 
     private Animator animator;
     private int health; //puntos de vida 
@@ -23,7 +28,6 @@ public class Player : MovingObject
     {
         animator = GetComponent<Animator>();
         base.Awake();
-        
     }
 
     protected override void Start()
@@ -59,64 +63,103 @@ public class Player : MovingObject
         vertical = (int)Input.GetAxisRaw("Vertical"); //-1 si abajo, 1 si arriba y 0 si no pulsamos
 
         if (horizontal != 0) vertical = 0;
+        else if (vertical != 0) horizontal = 0;
+
 
         if (horizontal == 1)
         {
             estado = 3;
             CambiarIdle(estado);
             countr++;
+<<<<<<< HEAD
             if (countr >= updateTime)
+=======
+            Debug.Log("Derecha: " + countr);
+            if (countr >= tiempoupdate)
+>>>>>>> 3d80790877900b66bc580b092884fdefa222be93
             {
                 AttemptMove(horizontal, vertical);
                 animator.SetTrigger("rightMove");
-                ResetEstados();
             }
 
+        }
 
-        } else if (horizontal == -1)
+        else if (horizontal == -1)
         {
             estado = 2;
             CambiarIdle(estado);
             countl++;
+<<<<<<< HEAD
             if (countl >= updateTime)
+=======
+            Debug.Log("Izquierda: " + countl);
+            if (countl >= tiempoupdate)
+>>>>>>> 3d80790877900b66bc580b092884fdefa222be93
             {
                 AttemptMove(horizontal, vertical);
                 animator.SetTrigger("leftMove");
-                ResetEstados();
             }
         }
+<<<<<<< HEAD
+=======
+
+        
+
+>>>>>>> 3d80790877900b66bc580b092884fdefa222be93
         else if (vertical == 1)
         {
             estado = 0;
             CambiarIdle(estado);
             countb++;
+<<<<<<< HEAD
             if (countb >= updateTime)
+=======
+            Debug.Log("Arriba: " + countb);
+            if (countb >= tiempoupdate)
+>>>>>>> 3d80790877900b66bc580b092884fdefa222be93
             {
                 AttemptMove(horizontal, vertical);
                 animator.SetTrigger("backMove");
-                ResetEstados();
             }
         }
+
         else if (vertical == -1)
         {
             estado = 1;
             CambiarIdle(estado);
             countf++;
+<<<<<<< HEAD
             if (countf >= updateTime)
+=======
+            Debug.Log("Abajo: " + countf);
+            if (countf >= tiempoupdate)
+>>>>>>> 3d80790877900b66bc580b092884fdefa222be93
             {
                 AttemptMove(horizontal, vertical);
                 animator.SetTrigger("frontMove");
-                ResetEstados();
             }
         }
 
+        if (horizontal == 0)
+            ResetEstados("x");
+
+        if (vertical == 0)
+            ResetEstados("y");
+
     }
-    public void ResetEstados()
+    public void ResetEstados(string dir)
     {
-        countf = 0;
-        countb = 0;
-        countl = 0;
-        countr = 0;
+        if (dir == "x")
+        {
+            countl = 0;
+            countr = 0;
+        }
+
+        else if (dir == "y")
+        {
+            countf = 0;
+            countb = 0;
+        }
 
     }
 
