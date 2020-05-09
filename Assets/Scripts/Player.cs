@@ -66,10 +66,10 @@ public class Player : MovingObject
             estado = 3;
             CambiarIdle(estado);
             countr++;
-            Debug.Log("Derecha: " + countr);
             if (countr >= tiempoupdate)
             {
                 AttemptMove(horizontal, vertical);
+                Debug.Log(horizontal);
                 animator.SetTrigger("rightMove");
             }
 
@@ -80,7 +80,6 @@ public class Player : MovingObject
             estado = 2;
             CambiarIdle(estado);
             countl++;
-            Debug.Log("Izquierda: " + countl);
             if (countl >= tiempoupdate)
             {
                 AttemptMove(horizontal, vertical);
@@ -88,14 +87,12 @@ public class Player : MovingObject
             }
         }
 
-        
 
         else if (vertical == 1)
         {
             estado = 0;
             CambiarIdle(estado);
             countb++;
-            Debug.Log("Arriba: " + countb);
             if (countb >= tiempoupdate)
             {
                 AttemptMove(horizontal, vertical);
@@ -108,7 +105,6 @@ public class Player : MovingObject
             estado = 1;
             CambiarIdle(estado);
             countf++;
-            Debug.Log("Abajo: " + countf);
             if (countf >= tiempoupdate)
             {
                 AttemptMove(horizontal, vertical);
