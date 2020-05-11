@@ -31,10 +31,10 @@ public class Player : MovingObject
         base.Start();
     }
 
-    private void OnDisable()
+    /*private void OnDisable()
     {
         GameManager.instance.healthPoints = health;
-    }
+    }*/
 
     void CheckIfGameOver()
     {
@@ -69,7 +69,6 @@ public class Player : MovingObject
             if (countr >= tiempoupdate)
             {
                 AttemptMove(horizontal, vertical);
-                Debug.Log(horizontal);
                 animator.SetTrigger("rightMove");
             }
 
