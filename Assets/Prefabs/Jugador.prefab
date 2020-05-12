@@ -165,7 +165,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveTime: 0.1
-  BlockingLayer:
+  blockingLayer:
     serializedVersion: 2
     m_Bits: 256
   restartLevelDelay: 1

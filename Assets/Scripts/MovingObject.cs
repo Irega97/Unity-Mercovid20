@@ -6,7 +6,7 @@ using UnityEngine;
 public abstract class MovingObject : MonoBehaviour
 {
     public float moveTime = 0.1f; //tiempo que dura un movimiento
-    public LayerMask BlockingLayer; //capa a la que pertenece
+    public LayerMask blockingLayer; //capa a la que pertenece
 
     private float movementSpeed; //velocidad de movimiento
     private BoxCollider2D boxCollider; //referencia al box collider
@@ -45,8 +45,7 @@ public abstract class MovingObject : MonoBehaviour
         end.x = float.Parse(Decimal.Round(Convert.ToDecimal(end.x)).ToString(), System.Globalization.CultureInfo.InvariantCulture);
         end.y = float.Parse(Decimal.Round(Convert.ToDecimal(end.y)).ToString(), System.Globalization.CultureInfo.InvariantCulture);
         boxCollider.enabled = false;
-        hit = Physics2D.Linecast(start, end, BlockingLayer);
-        Debug.Log("Capa Layer " + Convert.ToInt32(BlockingLayer));
+        hit = Physics2D.Linecast(start, end, blockingLayer);
 
         boxCollider.enabled = true;
         

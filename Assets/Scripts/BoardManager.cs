@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -15,35 +16,37 @@ public class BoardManager : MonoBehaviour
         boardHolder = new GameObject("Board").transform;
 
 
-        /*string escenario = "          \n" +
-                           "          \n" +
-                           "   C   C  \n" +
-                           "          \n" +
-                           "  12345   \n" +
-                           "  67890   \n" +
-                           "          \n" +
-                           "          \n" +
-                           "          \n" +
-                           "          \n";
-
-        string escenario = "          \n" +
-                   "          \n" +
-                   "          \n" +
-                   "          \n" +
-                   "          \n" +
-                   "          \n" +
-                   "          \n" +
-                   "          \n" +
-                   "   12345  \n" +
-                   "   67890  \n";
+        string escenario = "20 20               \n" +
+                           "                    \n" +
+                           "                    \n" +
+                           "                    \n" +
+                           "                    \n" +
+                           "                    \n" +
+                           "                    \n" +
+                           "                    \n" +
+                           "                    \n" +
+                           "                    \n" +
+                           "                    \n" +
+                           "                    \n" +
+                           "                    \n" +
+                           "                    \n" +
+                           "                    \n" +
+                           "                    \n" +
+                           "                    \n" +
+                           "                    \n" +
+                           "                    \n" +
+                           "                    \n" +
+                           "                    \n";
 
         string[] lineas = escenario.Split('\n');
+        int xtotal = Convert.ToInt32(lineas[0].Split(' ')[0]);
+        int ytotal = Convert.ToInt32(lineas[0].Split(' ')[1]);
 
-        for(int y=0; y<10; y++)
+        for (int y=0; y<ytotal; y++)
         {
-            string linea = lineas[y];
+            string linea = lineas[y+1];
 
-            for(int x=0; x<10; x++)
+            for(int x=0; x<xtotal; x++)
             {
                 char ch = linea[x];
 
@@ -51,34 +54,25 @@ public class BoardManager : MonoBehaviour
 
                 switch (ch)
                 {
-
-                    case ' ':
-                        instance = Instantiate(acera, new Vector3(x, y, 0f), Quaternion.identity);
-                        
-                        break;
-                    case 'P':
-                        instance = Instantiate(puerta, new Vector3(x, y, 0f), Quaternion.identity);
-                        
-                        break;
                     default:
-                        instance = Instantiate(acera, new Vector3(x, y, 0f), Quaternion.identity);
+                    instance = Instantiate(acera, new Vector3(x-9.5f, y-9.5f, 0f), Quaternion.identity);
                         break;
-                }
+            }
                 instance.transform.SetParent(boardHolder);
 
         }
 
-        }*/
+        }
 
 
 
-        for (float x = -49.5f; x < 10.5; x++)
+        /*for (float x = -49.5f; x < 10.5; x++)
         {
             for (float y = -9.5f; y < 10.5; y++)
             {   
                 GameObject instance = Instantiate(acera, new Vector3(x, y, 0f), Quaternion.identity);
                 instance.transform.SetParent(boardHolder);
             }
-        }
+        }*/
     }
 }
