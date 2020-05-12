@@ -32,10 +32,10 @@ public class Player : MovingObject
         base.Start();
     }
 
-    private void OnDisable()
+    /*private void OnDisable()
     {
         GameManager.instance.healthPoints = health;
-    }
+    }*/
 
     void CheckIfGameOver()
     {
@@ -68,7 +68,6 @@ public class Player : MovingObject
             CambiarIdle(estado);
             countr++;
 
-            Debug.Log("Derecha: " + countr);
             if (countr >= tiempoupdate)
 
             {
@@ -84,7 +83,6 @@ public class Player : MovingObject
             CambiarIdle(estado);
             countl++;
 
-            Debug.Log("Izquierda: " + countl);
             if (countl >= tiempoupdate)
 
             {
@@ -99,7 +97,6 @@ public class Player : MovingObject
             CambiarIdle(estado);
             countb++;
 
-            Debug.Log("Arriba: " + countb);
             if (countb >= tiempoupdate)
 
             {
@@ -114,7 +111,6 @@ public class Player : MovingObject
             CambiarIdle(estado);
             countf++;
 
-            Debug.Log("Abajo: " + countf);
             if (countf >= tiempoupdate)
 
             {
