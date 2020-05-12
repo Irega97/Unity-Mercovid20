@@ -7,7 +7,8 @@ public class BoardManager : MonoBehaviour
 {
     public GameObject acera;
     private Transform boardHolder;
-    public List<GameObject> carretera;
+    public GameObject[] carretera;
+    public GameObject[] mercadona;
     public GameObject player;
 
     public void SetupScene()
