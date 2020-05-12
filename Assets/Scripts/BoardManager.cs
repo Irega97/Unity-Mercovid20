@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -13,13 +14,65 @@ public class BoardManager : MonoBehaviour
     {
         GameObject jugador = Instantiate(player, new Vector3(0f, 0f, 0f), Quaternion.identity);
         boardHolder = new GameObject("Board").transform;
-        for (float x = -49.5f; x < 10.5; x++)
+
+
+        string escenario = "20 20               \n" +
+                           "                    \n" +
+                           "                    \n" +
+                           "                    \n" +
+                           "                    \n" +
+                           "                    \n" +
+                           "                    \n" +
+                           "                    \n" +
+                           "                    \n" +
+                           "                    \n" +
+                           "                    \n" +
+                           "                    \n" +
+                           "                    \n" +
+                           "                    \n" +
+                           "                    \n" +
+                           "                    \n" +
+                           "                    \n" +
+                           "                    \n" +
+                           "                    \n" +
+                           "                    \n" +
+                           "                    \n";
+
+        string[] lineas = escenario.Split('\n');
+        int xtotal = Convert.ToInt32(lineas[0].Split(' ')[0]);
+        int ytotal = Convert.ToInt32(lineas[0].Split(' ')[1]);
+
+        for (int y=0; y<ytotal; y++)
+        {
+            string linea = lineas[y+1];
+
+            for(int x=0; x<xtotal; x++)
+            {
+                char ch = linea[x];
+
+                GameObject instance;
+
+                switch (ch)
+                {
+                    default:
+                    instance = Instantiate(acera, new Vector3(x-9.5f, y-9.5f, 0f), Quaternion.identity);
+                        break;
+            }
+                instance.transform.SetParent(boardHolder);
+
+        }
+
+        }
+
+
+
+        /*for (float x = -49.5f; x < 10.5; x++)
         {
             for (float y = -9.5f; y < 10.5; y++)
             {   
                 GameObject instance = Instantiate(acera, new Vector3(x, y, 0f), Quaternion.identity);
                 instance.transform.SetParent(boardHolder);
             }
-        }
+        }*/
     }
 }

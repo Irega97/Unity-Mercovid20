@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -33,13 +34,16 @@ public abstract class MovingObject : MonoBehaviour
             distanciaRestante = Vector2.Distance(rb2D.position, end);
             yield return null;
         }
+
     }
 
-    protected bool Move(int xDir, int yDir, out RaycastHit2D hit) //movimiento
-    {
+ 
+        protected bool Move(int xDir, int yDir, out RaycastHit2D hit) //movimiento
+        { 
         Vector2 start = transform.position;
         Vector2 end = start + new Vector2(xDir, yDir);
-
+        end.x = float.Parse(Decimal.Round(Convert.ToDecimal(end.x)).ToString(), System.Globalization.CultureInfo.InvariantCulture);
+        end.y = float.Parse(Decimal.Round(Convert.ToDecimal(end.y)).ToString(), System.Globalization.CultureInfo.InvariantCulture);
         boxCollider.enabled = false;
         hit = Physics2D.Linecast(start, end, blockingLayer);
 
@@ -51,9 +55,7 @@ public abstract class MovingObject : MonoBehaviour
             return true;
         }
         return false;
-        //StartCoroutine(SmoothMovement(end));
-        //return true;
-    }
+        }       
 
     protected abstract void OnCantMove(GameObject go);
 
