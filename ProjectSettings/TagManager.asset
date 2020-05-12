@@ -3,7 +3,14 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags: []
+  tags:
+  - Acera
+  - Carretera
+  - Paso Cebra
+  - Enemigo
+  - Coche
+  - Mercadona
+  - PuertaMercadona
   layers:
   - Default
   - TransparentFX
@@ -14,7 +21,7 @@ TagManager:
   - 
   - 
   - BlockingLayer
-  - 
+  - Carretera
   - 
   - 
   - 
