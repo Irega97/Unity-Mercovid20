@@ -1,17 +1,16 @@
-﻿using System;
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EnemigoVertical : MovingObject
+public class EnemigoHorizontal : MovingObject
 {
     public int playerDamage;
 
     private Animator animator;
-    
 
 
- 
+
+
     protected override void Awake()
     {
         animator = GetComponent<Animator>();
@@ -38,9 +37,9 @@ public class EnemigoVertical : MovingObject
         bool canMove = true;
         while (canMove)
         {
-            AttemptMove("Enemigo", xDir, yDir++);
+            AttemptMove("Enemigo", xDir++, yDir);
         }
-             
+
     }
 
 
@@ -65,5 +64,4 @@ public class EnemigoVertical : MovingObject
         }*/
 
     }
-
 }

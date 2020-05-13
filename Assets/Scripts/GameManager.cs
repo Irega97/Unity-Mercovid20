@@ -1,12 +1,14 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
 {
     public BoardManager boardScript;
     public static GameManager instance = null;
     public int healthPoints = 100;
+
 
     void Awake()
     {
@@ -22,6 +24,7 @@ public class GameManager : MonoBehaviour
 		InitGame();
 		
     }
+
 
     void InitGame()
     {
