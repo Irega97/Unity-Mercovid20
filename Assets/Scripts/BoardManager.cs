@@ -7,7 +7,8 @@ public class BoardManager : MonoBehaviour
 {
     public GameObject acera;
     private Transform boardHolder;
-    public GameObject[] carretera = new GameObject[40];
+    public GameObject[] carretera;
+    public GameObject[] mercadona;
     public GameObject player;
 
     public void SetupScene()
@@ -57,22 +58,11 @@ public class BoardManager : MonoBehaviour
                     default:
                     instance = Instantiate(acera, new Vector3(x-9.5f, y-9.5f, 0f), Quaternion.identity);
                         break;
-            }
+                }
                 instance.transform.SetParent(boardHolder);
 
-        }
-
-        }
-
-
-
-        /*for (float x = -49.5f; x < 10.5; x++)
-        {
-            for (float y = -9.5f; y < 10.5; y++)
-            {   
-                GameObject instance = Instantiate(acera, new Vector3(x, y, 0f), Quaternion.identity);
-                instance.transform.SetParent(boardHolder);
             }
-        }*/
+
+        }
     }
 }
