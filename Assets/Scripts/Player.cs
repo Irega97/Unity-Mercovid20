@@ -12,6 +12,7 @@ public class Player : MovingObject
     int countb = 0;
     int countl = 0;
     int countr = 0;
+
     int tiempoupdate = 20;
     
 
@@ -66,7 +67,9 @@ public class Player : MovingObject
             estado = 3;
             CambiarIdle(estado);
             countr++;
+
             if (countr >= tiempoupdate)
+
             {
                 AttemptMove(horizontal, vertical);
                 animator.SetTrigger("rightMove");
@@ -79,20 +82,23 @@ public class Player : MovingObject
             estado = 2;
             CambiarIdle(estado);
             countl++;
+
             if (countl >= tiempoupdate)
+
             {
                 AttemptMove(horizontal, vertical);
                 animator.SetTrigger("leftMove");
             }
         }
 
-
         else if (vertical == 1)
         {
             estado = 0;
             CambiarIdle(estado);
             countb++;
+
             if (countb >= tiempoupdate)
+
             {
                 AttemptMove(horizontal, vertical);
                 animator.SetTrigger("backMove");
@@ -104,7 +110,9 @@ public class Player : MovingObject
             estado = 1;
             CambiarIdle(estado);
             countf++;
+
             if (countf >= tiempoupdate)
+
             {
                 AttemptMove(horizontal, vertical);
                 animator.SetTrigger("frontMove");
