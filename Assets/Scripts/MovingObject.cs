@@ -39,7 +39,7 @@ public abstract class MovingObject : MonoBehaviour
     }
 
  
-        protected bool Move(string a, int xDir, int yDir, out RaycastHit2D hit) //movimiento
+        protected bool Move(string objectname, int xDir, int yDir, out RaycastHit2D hit) //movimiento
         { 
         Vector2 start = transform.position;
         Vector2 end = start + new Vector2(xDir, yDir);
@@ -52,7 +52,7 @@ public abstract class MovingObject : MonoBehaviour
         
         if (hit.transform == null)
         {
-            if (a != "coche")
+            if (objectname != "coche")
             {
                 RaycastHit2D hit2 = Physics2D.Linecast(start, end, carretera);
                 if (hit2.transform == null)
@@ -74,10 +74,10 @@ public abstract class MovingObject : MonoBehaviour
 
     protected abstract void OnCantMove(GameObject go);
 
-    protected virtual void AttemptMove(string a, int xDir, int yDir)
+    protected virtual void AttemptMove(string objectname, int xDir, int yDir)
     {
         RaycastHit2D hit;
-        bool canMove = Move(a, xDir, yDir, out hit);
+        bool canMove = Move(objectname, xDir, yDir, out hit);
 
         if (canMove) return;
 
