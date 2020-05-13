@@ -7,6 +7,7 @@ public abstract class MovingObject : MonoBehaviour
 {
     public float moveTime = 0.1f; //tiempo que dura un movimiento
     public LayerMask blockingLayer; //capa a la que pertenece
+    public LayerMask carretera;
 
     private float movementSpeed; //velocidad de movimiento
     private BoxCollider2D boxCollider; //referencia al box collider
@@ -38,7 +39,7 @@ public abstract class MovingObject : MonoBehaviour
     }
 
  
-        protected bool Move(int xDir, int yDir, out RaycastHit2D hit) //movimiento
+        protected bool Move(string a, int xDir, int yDir, out RaycastHit2D hit) //movimiento
         { 
         Vector2 start = transform.position;
         Vector2 end = start + new Vector2(xDir, yDir);
@@ -51,21 +52,35 @@ public abstract class MovingObject : MonoBehaviour
         
         if (hit.transform == null)
         {
-            StartCoroutine(SmoothMovement(end));
-            return true;
+            if (a != "coche")
+            {
+                RaycastHit2D hit2 = Physics2D.Linecast(start, end, carretera);
+                if (hit2.transform == null)
+                {
+                    StartCoroutine(SmoothMovement(end));
+                    return true;
+                }
+            }
+
+            else
+            {
+                StartCoroutine(SmoothMovement(end));
+                return true;
+            }
+            
         }
         return false;
         }       
 
     protected abstract void OnCantMove(GameObject go);
 
-    protected virtual void AttemptMove(int xDir, int yDir)
+    protected virtual void AttemptMove(string a, int xDir, int yDir)
     {
         RaycastHit2D hit;
-        bool canMove = Move(xDir, yDir, out hit);
+        bool canMove = Move(a, xDir, yDir, out hit);
 
         if (canMove) return;
 
-        OnCantMove(hit.transform.gameObject);
+        //OnCantMove(hit.transform.gameObject);
     }
 }

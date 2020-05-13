@@ -42,9 +42,9 @@ public class Player : MovingObject
         if (health <= 0) GameManager.instance.GameOver();
     }
 
-    protected override void AttemptMove(int xDir, int yDir)
+    protected override void AttemptMove(string a, int xDir, int yDir)
     {
-        base.AttemptMove(xDir, yDir);
+        base.AttemptMove(a, xDir, yDir);
     }
 
 
@@ -71,7 +71,7 @@ public class Player : MovingObject
             if (countr >= tiempoupdate)
 
             {
-                AttemptMove(horizontal, vertical);
+                AttemptMove("player", horizontal, vertical);
                 animator.SetTrigger("rightMove");
             }
 
@@ -86,7 +86,7 @@ public class Player : MovingObject
             if (countl >= tiempoupdate)
 
             {
-                AttemptMove(horizontal, vertical);
+                AttemptMove("player", horizontal, vertical);
                 animator.SetTrigger("leftMove");
             }
         }
@@ -100,7 +100,7 @@ public class Player : MovingObject
             if (countb >= tiempoupdate)
 
             {
-                AttemptMove(horizontal, vertical);
+                AttemptMove("player", horizontal, vertical);
                 animator.SetTrigger("backMove");
             }
         }
@@ -114,7 +114,7 @@ public class Player : MovingObject
             if (countf >= tiempoupdate)
 
             {
-                AttemptMove(horizontal, vertical);
+                AttemptMove("player", horizontal, vertical);
                 animator.SetTrigger("frontMove");
             }
         }
