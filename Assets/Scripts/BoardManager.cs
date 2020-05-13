@@ -7,7 +7,7 @@ public class BoardManager : MonoBehaviour
 {
     public GameObject acera;
     private Transform boardHolder;
-    public List<GameObject> carretera;
+    public GameObject[] carretera = new GameObject[40];
     public GameObject player;
 
     public void SetupScene()
@@ -17,6 +17,13 @@ public class BoardManager : MonoBehaviour
 
 
         string escenario = "20 20               \n" +
+                           "2                  3\n" +
+                           "                    \n" +
+                           "                    \n" +
+                           "                    \n" +
+                           "                    \n" +
+                           "     111111111      \n" +
+                           "     111111111      \n" +
                            "                    \n" +
                            "                    \n" +
                            "                    \n" +
@@ -29,14 +36,7 @@ public class BoardManager : MonoBehaviour
                            "                    \n" +
                            "                    \n" +
                            "                    \n" +
-                           "                    \n" +
-                           "                    \n" +
-                           "                    \n" +
-                           "                    \n" +
-                           "                    \n" +
-                           "                    \n" +
-                           "                    \n" +
-                           "                    \n";
+                           "1                  4\n";
 
         string[] lineas = escenario.Split('\n');
         int xtotal = Convert.ToInt32(lineas[0].Split(' ')[0]);
