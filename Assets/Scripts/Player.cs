@@ -42,9 +42,9 @@ public class Player : MovingObject
         if (health <= 0) GameManager.instance.GameOver();
     }
 
-    protected override void AttemptMove(string a, int xDir, int yDir)
+    protected override void AttemptMove(string objectname, int xDir, int yDir)
     {
-        base.AttemptMove(a, xDir, yDir);
+        base.AttemptMove(objectname, xDir, yDir);
     }
 
 
