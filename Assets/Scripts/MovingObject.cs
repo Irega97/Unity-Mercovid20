@@ -60,8 +60,13 @@ public abstract class MovingObject : MonoBehaviour
                     StartCoroutine(SmoothMovement(end));
                     return true;
                 }
+                else if(hit2.transform != null && objectname == "enemigo")
+                {
+                    hit2 = hit;
+                }
             }
 
+          
             else
             {
                 StartCoroutine(SmoothMovement(end));
@@ -81,6 +86,6 @@ public abstract class MovingObject : MonoBehaviour
 
         if (canMove) return;
 
-        //OnCantMove(hit.transform.gameObject);
+        OnCantMove(hit.transform.gameObject);
     }
 }
