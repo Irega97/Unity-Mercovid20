@@ -9,9 +9,8 @@ public class EnemigoVertical : MovingObject
 
     private Animator animator;
 
-    int x = 0;
     int y = 0;
-    int move = 0;
+    int move = 1;
 
     //necesto un variable que me guarde la posicion del enemigo y me lo pasa el boardManager
 
@@ -37,25 +36,28 @@ public class EnemigoVertical : MovingObject
 
     void Update()
     {
-        if (move == 0)
+        if (!moving)
         {
-            AttemptMove("enemigo", 0, y++);
-        } else
-        {
-            AttemptMove("enemigo", 0, y--);
-        }
-             
+            if (move == 0)
+            {
+                AttemptMove("enemigo", 0, y++);
+            }
+            else
+            {
+                AttemptMove("enemigo", 0, y--);
+            }
+        }   
     }
 
     protected override void OnCantMove(GameObject go)
     {
 
-        /*Player hitPlayer = go.GetComponent<Player>();
+        Player hitPlayer = go.GetComponent<Player>();
 
         if (hitPlayer != null)
         {
             hitPlayer.LoseHealth(playerDamage);
-        }*/
+        }
 
 
         if (transform.position.y < go.transform.position.y)
@@ -64,7 +66,8 @@ public class EnemigoVertical : MovingObject
             animator.SetBool("TopeAbajo", false);
             move = 1;
 
-        } else if(transform.position.y > go.transform.position.y)
+        } 
+        else if(transform.position.y > go.transform.position.y)
         {
             animator.SetBool("TopeArriba", false);
             animator.SetBool("TopeAbajo", true);
