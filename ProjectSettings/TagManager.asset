@@ -11,6 +11,7 @@ TagManager:
   - Coche
   - Mercadona
   - PuertaMercadona
+  - Casa
   layers:
   - Default
   - TransparentFX
