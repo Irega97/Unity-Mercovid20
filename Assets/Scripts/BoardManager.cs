@@ -100,12 +100,16 @@ public class BoardManager : MonoBehaviour
                            "715555555555555555555541555555555415555555555555555555555548\n" +
                            "026666666666666666666622666666666226666666666666666666666623\n";
 
-        string personajes = "13       \n" +
+        string personajes = "19       \n" +
                             "P -22 -27\n" +
                             "H -5 -21 \n" +
                             "H -13 -11\n" +
                             "H -5 20  \n" +
                             "H -13 10 \n" +
+                            "H -27 0  \n" +
+                            "H 28 0   \n" +
+                            "H -27 -8 \n" +
+                            "H -16 7  \n" +
                             "V -8 -21 \n" +
                             "V 6 -21  \n" +
                             "V -16 -11\n" +
@@ -113,6 +117,8 @@ public class BoardManager : MonoBehaviour
                             "V -16 17 \n" +
                             "V 17 17  \n" +
                             "V -8 27  \n" +
+                            "V -6 -8  \n" +
+                            "V 5 -8   \n" +
                             "V 6 27   \n";
 
         string[] lineas = escenario.Split('\n');
