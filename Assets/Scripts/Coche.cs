@@ -1,17 +1,24 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.U2D;
 
-public class Coche1 : MovingObject
+public class Coche : MovingObject
 {
     public int playerDamage;
     public Sprite goizquierda;
     public Sprite goderecha;
     public Sprite goarriba;
     public Sprite goabajo;
+    public int hormax = 23;
+    public int vermax = 11;
+    private int[] movev;
 
     private SpriteRenderer spriterenderer;
-    int move = 0;
+    public int move = 0;
+    int horizontal = 0;
+    int vertical = 0;
+    public int ordenmovimiento;
 
     //necesto un variable que me guarde la posicion del enemigo y me lo pasa el boardManager
 
@@ -27,6 +34,7 @@ public class Coche1 : MovingObject
         GameManager.instance.AddEnemyToList(this);
         target = GameObject.FindGameObjectWithTag("Player").transform;*/
         moveTime = 0.05f;
+        InicializarCoche();
         base.Start();
     }
 
@@ -41,49 +49,96 @@ public class Coche1 : MovingObject
         if (!moving)
         {
             if (move == 0)
+            {
                 AttemptMove("coche", 1, 0);
-            
+                horizontal++;
+            }
 
             else if (move == 1)
+            {
                 AttemptMove("coche", 0, 1);
-            
+                vertical++;
+            }
+                
             else if (move == 2)
+            {
                 AttemptMove("coche", -1, 0);
-            
+                horizontal--;
+            }
+                
             else
+            {
                 AttemptMove("coche", 0, -1);
+                vertical--;
+            }   
         }
 
         Comprobarposicion();
     }
+
+    private void InicializarCoche()
+    {
+        if (move == 0)
+            spriterenderer.sprite = goderecha;
+
+        else if (move == 1)
+            spriterenderer.sprite = goarriba;
+
+        else if (move == 2)
+            spriterenderer.sprite = goizquierda;
+
+        else
+            spriterenderer.sprite = goabajo;
+
+        if (ordenmovimiento == 0)
+            movev = new int[] {0, 1, 2, 3 };
+        else
+            movev = new int[] {2, 3, 0, 1 };
+    }
     private void Comprobarposicion()
     {
-        if (transform.position.x == -6f && transform.position.y == -30f)
+        if (horizontal == hormax)
         {
-            move = 1;
+            move = movev[1];
             spriterenderer.sprite = goarriba;
+            horizontal = 0;
         }
 
-        else if (transform.position.x == -6 && transform.position.y == -19)
+        else if (vertical == vermax)
         {
-            move = 2;
+            move = movev[2];
             spriterenderer.sprite = goizquierda;
+            vertical = 0;
         }
-        else if (transform.position.x == -29 && transform.position.y == -19)
+
+        else if (horizontal == -hormax)
         {
-            move = 3;
+            move = movev[3];
             spriterenderer.sprite = goabajo;
+            horizontal = 0;
         }
-        else if (transform.position.x == -29 && transform.position.y == -30)
+        else if (vertical == -vermax)
         {
-            move = 0;
+            move = movev[0];
             spriterenderer.sprite = goderecha;
+            vertical = 0;
         }
     }
 
     protected override void OnCantMove(GameObject go)
     {
-        moving = false;
+        if (move == 0)
+            horizontal--;
+
+        else if (move == 1)
+            vertical--;
+
+        else if (move == 2)
+            horizontal++;
+
+        else
+            vertical++;
+
         /*Player hitPlayer = go.GetComponent<Player>();
 
         if (hitPlayer != null)
