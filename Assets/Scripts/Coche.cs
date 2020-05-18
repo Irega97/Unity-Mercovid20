@@ -12,7 +12,6 @@ public class Coche : MovingObject
     public Sprite goabajo;
     public int hormax = 23;
     public int vermax = 11;
-    private int[] movev;
 
     private SpriteRenderer spriterenderer;
     public int move = 0;
@@ -89,40 +88,68 @@ public class Coche : MovingObject
 
         else
             spriterenderer.sprite = goabajo;
-
-        if (ordenmovimiento == 0)
-            movev = new int[] {0, 1, 2, 3 };
-        else
-            movev = new int[] {2, 3, 0, 1 };
     }
     private void Comprobarposicion()
     {
-        if (horizontal == hormax)
+        if (ordenmovimiento ==0)
         {
-            move = movev[1];
-            spriterenderer.sprite = goarriba;
-            horizontal = 0;
-        }
+            if (horizontal == hormax)
+            {
+                move = 1;
+                spriterenderer.sprite = goarriba;
+                horizontal = 0;
+            }
 
-        else if (vertical == vermax)
-        {
-            move = movev[2];
-            spriterenderer.sprite = goizquierda;
-            vertical = 0;
-        }
+            else if (vertical == vermax)
+            {
+                move = 2;
+                spriterenderer.sprite = goizquierda;
+                vertical = 0;
+            }
 
-        else if (horizontal == -hormax)
-        {
-            move = movev[3];
-            spriterenderer.sprite = goabajo;
-            horizontal = 0;
+            else if (horizontal == -hormax)
+            {
+                move = 3;
+                spriterenderer.sprite = goabajo;
+                horizontal = 0;
+            }
+            else if (vertical == -vermax)
+            {
+                move = 0;
+                spriterenderer.sprite = goderecha;
+                vertical = 0;
+            }
         }
-        else if (vertical == -vermax)
+        else
         {
-            move = movev[0];
-            spriterenderer.sprite = goderecha;
-            vertical = 0;
+            if (horizontal == hormax)
+            {
+                move = 3;
+                spriterenderer.sprite = goabajo;
+                horizontal = 0;
+            }
+
+            else if (vertical == vermax)
+            {
+                move = 0;
+                spriterenderer.sprite = goderecha;
+                vertical = 0;
+            }
+
+            else if (horizontal == -hormax)
+            {
+                move = 1;
+                spriterenderer.sprite = goarriba;
+                horizontal = 0;
+            }
+            else if (vertical == -vermax)
+            {
+                move = 2;
+                spriterenderer.sprite = goizquierda;
+                vertical = 0;
+            }
         }
+        
     }
 
     protected override void OnCantMove(GameObject go)
