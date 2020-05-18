@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor.Experimental;
 using UnityEngine;
 
 public abstract class MovingObject : MonoBehaviour
@@ -41,7 +42,7 @@ public abstract class MovingObject : MonoBehaviour
 
  
     protected bool Move(string objectname, int xDir, int yDir, out RaycastHit2D hit) //movimiento
-        { 
+    {
         Vector2 start = transform.position;
         Vector2 end = start + new Vector2(xDir, yDir);
         boxCollider.enabled = false;
@@ -71,5 +72,6 @@ public abstract class MovingObject : MonoBehaviour
         if (canMove) return;
 
         OnCantMove(hit.transform.gameObject);
+        
     }
 }

@@ -26,6 +26,7 @@ public class BoardManager : MonoBehaviour
     public GameObject[] hospital;
     public GameObject[] tienda;
     public GameObject[] parque;
+    public GameObject[] coches;
     public GameObject player;
     public GameObject enemigov;
     public GameObject enemigoh;
@@ -39,18 +40,18 @@ public class BoardManager : MonoBehaviour
 
 
         string escenario = "60 60                                                       \n" +
-                           "A9555555555555555555559955555555599555555555555555555555559C\n" +
-                           "7B66666666666666666666DB666666666DB66666666666666666666666D8\n" +
-                           "EF                    EF         EF                       EF\n" +
-                           "EF   Ábbbbá  Áaaaaá   EF   eee   EF   Áccccá    ddddd     EF\n" +
-                           "EF   Ébbbbé  Éaaaaé   EF   eee   EF   Éccccé    ddddd     EF\n" +
-                           "EF   Íbbbbí  Íaaaaí   IJ   eee   IJ   Íccccí    ddddd     EF\n" +
-                           "EF   Óbbbbó  Óaaaaó   EF   eee   EF   Óccccó    ddddd     EF\n" +
-                           "EF                    EF         EF                       EF\n" +
-                           "EF                    EF         EF                       EF\n" +
-                           "EF                    EF         EF                       EF\n" +
-                           "7155555555555599555555415555G5555415555555559955555555555548\n" +
-                           "7B666666666666DB666666226666H666622666666666DB666666666666D8\n" +
+                           "A9555555555555555555559955555555599599555555555555555555559C\n" +
+                           "7B66666666666666666666DB666666666666DB66666666666666666666D8\n" +
+                           "EF                    EF            EF                    EF\n" +
+                           "EF                    EF            EF                    EF\n" +
+                           "EF   Ábbbbá  Áaaaaá   EF            EF   Áccccá  ddddd    EF\n" +
+                           "EF   Ébbbbé  Éaaaaé   EF    eee     EF   Éccccé  ddddd    EF\n" +
+                           "EF   Íbbbbí  Íaaaaí   IJ    eee     EF   Íccccí  ddddd    EF\n" +
+                           "EF   Óbbbbó  Óaaaaó   EF    eee     EF   Óccccó  ddddd    EF\n" +
+                           "EF                    EF    eee     EF                    EF\n" +
+                           "EF                    EF            EF                    EF\n" +
+                           "7155555555555599555555415555G5555555415555559955555555555548\n" +
+                           "7B666666666666DB666666226666H666666622666666DB666666666666D8\n" +
                            "EF            EF                            EF            EF\n" +
                            "EF            EF   hhhhh                    EF            EF\n" +
                            "EF   Áccccá   EF   hhhhh       ttttt        EF   Áaaaaá   EF\n" +
@@ -88,20 +89,25 @@ public class BoardManager : MonoBehaviour
                            "EF            EF                            EF            EF\n" +
                            "EF            EF                            EF            EF\n" +
                            "7155555555555541555555995555G5555995555555554155555555555548\n" +
-                           "7B66666666666622666666DB6666H6666DB66666666622666666666666D8\n" +
-                           "EF                    EF         EF                       EF\n" +
-                           "EF                    EF         EF                       EF\n" +
-                           "EF   Ábbbbá  Áaaaaá   EF         EF   Áccccá    ddddd     EF\n" +
-                           "EF   Ébbbbé  Éaaaaé   EF   eee   EF   Éccccé    ddddd     EF\n" +
-                           "EF   Íbbbbí  Íaaaaí   IJ   eee   IJ   Íccccí    ddddd     EF\n" +
-                           "EF   Óbbbbó  Óaaaaó   EF   eee   EF   Óccccó    ddddd     EF\n" +
-                           "EF                    EF   eee   EF                       EF\n" +
-                           "EF                    EF         EF                       EF\n" +
-                           "715555555555555555555541555555555415555555555555555555555548\n" +
-                           "026666666666666666666622666666666226666666666666666666666623\n";
+                           "7B66666666666622666666DB6666H6666666DB66666622666666666666D8\n" +
+                           "EF                    EF            EF                    EF\n" +
+                           "EF                    EF            EF                    EF\n" +
+                           "EF   Ábbbbá  Áaaaaá   EF            EF   Áccccá  ddddd    EF\n" +
+                           "EF   Ébbbbé  Éaaaaé   EF    eee     EF   Éccccé  ddddd    EF\n" +
+                           "EF   Íbbbbí  Íaaaaí   IJ    eee     EF   Íccccí  ddddd    EF\n" +
+                           "EF   Óbbbbó  Óaaaaó   EF    eee     EF   Óccccó  ddddd    EF\n" +
+                           "EF                    EF    eee     EF                    EF\n" +
+                           "EF                    EF            EF                    EF\n" +
+                           "715555555555555555555541555555555555415555555555555555555548\n" +
+                           "026666666666666666666622666666666666226666666666666666666623\n";
 
-        string personajes = "19       \n" +
+        string personajes = "23       \n" +
                             "P -22 -27\n" +
+                            "0 -29 -30 23 11 0 0\n" +
+                            "1 7 -30 23 11 0 0  \n" +
+                            "2 -29 18 23 11 0 0 \n" +
+                            "3 7 18 23 11 0 0   \n" +
+                            "4 -7 -29 21 9 2 1  \n" +
                             "H -5 -21 \n" +
                             "H -13 -11\n" +
                             "H -5 20  \n" +
@@ -111,7 +117,7 @@ public class BoardManager : MonoBehaviour
                             "H -27 -8 \n" +
                             "H -16 7  \n" +
                             "V -8 -21 \n" +
-                            "V 6 -21  \n" +
+                            "V 9 -21  \n" +
                             "V -16 -11\n" +
                             "V 17 -11 \n" +
                             "V -16 17 \n" +
@@ -119,7 +125,7 @@ public class BoardManager : MonoBehaviour
                             "V -8 27  \n" +
                             "V -6 -8  \n" +
                             "V 5 -8   \n" +
-                            "V 6 27   \n";
+                            "V 9 27   \n";
 
         string[] lineas = escenario.Split('\n');
         int xtotal = Convert.ToInt32(lineas[0].Split(' ')[0]);
@@ -426,6 +432,51 @@ public class BoardManager : MonoBehaviour
             {
                 case 'P':
                     instance = Instantiate(player, new Vector3(Convert.ToInt32(jugadores[pl+1].Split(' ')[1]), Convert.ToInt32(jugadores[pl + 1].Split(' ')[2]), 0f), Quaternion.identity);
+                    break;
+
+                case '0':
+                    instance = Instantiate(coches[0], new Vector3(Convert.ToInt32(jugadores[pl + 1].Split(' ')[1]), Convert.ToInt32(jugadores[pl + 1].Split(' ')[2]), 0f), Quaternion.identity);
+                    Coche cochecontrol0 = instance.GetComponent<Coche>();
+                    cochecontrol0.hormax = Int32.Parse(jugadores[pl + 1].Split(' ')[3]);
+                    cochecontrol0.vermax = Int32.Parse(jugadores[pl + 1].Split(' ')[4]);
+                    cochecontrol0.move = Int32.Parse(jugadores[pl + 1].Split(' ')[5]);
+                    cochecontrol0.ordenmovimiento = Int32.Parse(jugadores[pl + 1].Split(' ')[6]);
+                    break;
+
+                case '1':
+                    instance = Instantiate(coches[1], new Vector3(Convert.ToInt32(jugadores[pl + 1].Split(' ')[1]), Convert.ToInt32(jugadores[pl + 1].Split(' ')[2]), 0f), Quaternion.identity);
+                    Coche cochecontrol1 = instance.GetComponent<Coche>();
+                    cochecontrol1.hormax = Int32.Parse(jugadores[pl + 1].Split(' ')[3]);
+                    cochecontrol1.vermax = Int32.Parse(jugadores[pl + 1].Split(' ')[4]);
+                    cochecontrol1.move = Int32.Parse(jugadores[pl + 1].Split(' ')[5]);
+                    cochecontrol1.ordenmovimiento = Int32.Parse(jugadores[pl + 1].Split(' ')[6]);
+                    break;
+
+                case '2':
+                    instance = Instantiate(coches[2], new Vector3(Convert.ToInt32(jugadores[pl + 1].Split(' ')[1]), Convert.ToInt32(jugadores[pl + 1].Split(' ')[2]), 0f), Quaternion.identity);
+                    Coche cochecontrol2 = instance.GetComponent<Coche>();
+                    cochecontrol2.hormax = Int32.Parse(jugadores[pl + 1].Split(' ')[3]);
+                    cochecontrol2.vermax = Int32.Parse(jugadores[pl + 1].Split(' ')[4]);
+                    cochecontrol2.move = Int32.Parse(jugadores[pl + 1].Split(' ')[5]);
+                    cochecontrol2.ordenmovimiento = Int32.Parse(jugadores[pl + 1].Split(' ')[6]);
+                    break;
+
+                case '3':
+                    instance = Instantiate(coches[3], new Vector3(Convert.ToInt32(jugadores[pl + 1].Split(' ')[1]), Convert.ToInt32(jugadores[pl + 1].Split(' ')[2]), 0f), Quaternion.identity);
+                    Coche cochecontrol3 = instance.GetComponent<Coche>();
+                    cochecontrol3.hormax = Int32.Parse(jugadores[pl + 1].Split(' ')[3]);
+                    cochecontrol3.vermax = Int32.Parse(jugadores[pl + 1].Split(' ')[4]);
+                    cochecontrol3.move = Int32.Parse(jugadores[pl + 1].Split(' ')[5]);
+                    cochecontrol3.ordenmovimiento = Int32.Parse(jugadores[pl + 1].Split(' ')[6]);
+                    break;
+
+                case '4':
+                    instance = Instantiate(coches[4], new Vector3(Convert.ToInt32(jugadores[pl + 1].Split(' ')[1]), Convert.ToInt32(jugadores[pl + 1].Split(' ')[2]), 0f), Quaternion.identity);
+                    Coche cochecontrol4 = instance.GetComponent<Coche>();
+                    cochecontrol4.hormax = Int32.Parse(jugadores[pl + 1].Split(' ')[3]);
+                    cochecontrol4.vermax = Int32.Parse(jugadores[pl + 1].Split(' ')[4]);
+                    cochecontrol4.move = Int32.Parse(jugadores[pl + 1].Split(' ')[5]);
+                    cochecontrol4.ordenmovimiento = Int32.Parse(jugadores[pl + 1].Split(' ')[6]);
                     break;
 
                 case 'V':

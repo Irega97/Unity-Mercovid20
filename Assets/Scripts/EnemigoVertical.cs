@@ -9,7 +9,6 @@ public class EnemigoVertical : MovingObject
 
     private Animator animator;
 
-    int y = 0;
     int move = 1;
 
     //necesto un variable que me guarde la posicion del enemigo y me lo pasa el boardManager
@@ -40,11 +39,11 @@ public class EnemigoVertical : MovingObject
         {
             if (move == 0)
             {
-                AttemptMove("enemigo", 0, y++);
+                AttemptMove("enemigo", 0, 1);
             }
             else
             {
-                AttemptMove("enemigo", 0, y--);
+                AttemptMove("enemigo", 0, -1);
             }
         }   
     }
