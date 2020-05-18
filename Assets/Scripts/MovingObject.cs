@@ -12,6 +12,7 @@ public abstract class MovingObject : MonoBehaviour
     private float movementSpeed; //velocidad de movimiento
     private BoxCollider2D boxCollider; //referencia al box collider
     private Rigidbody2D rb2D; //referencia al rigidbody
+    protected bool moving = false;
 
     protected virtual void Awake()
     {
@@ -35,47 +36,30 @@ public abstract class MovingObject : MonoBehaviour
             distanciaRestante = Vector2.Distance(rb2D.position, end);
             yield return null;
         }
-
+        moving = false;
     }
 
  
-        protected bool Move(string objectname, int xDir, int yDir, out RaycastHit2D hit) //movimiento
+    protected bool Move(string objectname, int xDir, int yDir, out RaycastHit2D hit) //movimiento
         { 
         Vector2 start = transform.position;
         Vector2 end = start + new Vector2(xDir, yDir);
-        end.x = float.Parse(Decimal.Round(Convert.ToDecimal(end.x)).ToString(), System.Globalization.CultureInfo.InvariantCulture);
-        end.y = float.Parse(Decimal.Round(Convert.ToDecimal(end.y)).ToString(), System.Globalization.CultureInfo.InvariantCulture);
         boxCollider.enabled = false;
         hit = Physics2D.Linecast(start, end, blockingLayer);
-
         boxCollider.enabled = true;
         
         if (hit.transform == null)
         {
-            if (objectname != "coche")
+            hit = Physics2D.Linecast(start, end, carretera);
+            if (hit.transform == null || objectname == "coche")
             {
-                RaycastHit2D hit2 = Physics2D.Linecast(start, end, carretera);
-                if (hit2.transform == null)
-                {
-                    StartCoroutine(SmoothMovement(end));
-                    return true;
-                }
-                else if(hit2.transform != null && objectname == "enemigo")
-                {
-                    hit2 = hit;
-                }
-            }
-
-          
-            else
-            {
+                moving = true;
                 StartCoroutine(SmoothMovement(end));
                 return true;
             }
-            
         }
         return false;
-        }       
+    }       
 
     protected abstract void OnCantMove(GameObject go);
 

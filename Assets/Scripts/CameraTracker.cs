@@ -21,16 +21,16 @@ public class CameraTracker : MonoBehaviour
             x = player.transform.position.x;
             y = player.transform.position.y;
 
-            if (x < -4.5)
-                x = -4.5f;
-            else if (x > 5.5)
-                x = 5.5f;
+            if (x < -24.5)
+                x = -24.5f;
+            else if (x > 25.5)
+                x = 25.5f;
 
-            if (y < -5.5)
-                y = -5.5f;
+            if (y < -25.5)
+                y = -25.5f;
 
-            else if (y > 4.5)
-                y = 4.5f;
+            else if (y > 24.5)
+                y = 24.5f;
 
             transform.position = new Vector3(x, y, -10);
         }

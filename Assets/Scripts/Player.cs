@@ -12,12 +12,14 @@ public class Player : MovingObject
     int countb = 0;
     int countl = 0;
     int countr = 0;
+    int tiempoupdate = 15;
+    int estado;
+    int horizontal;
+    int vertical;
 
-    int tiempoupdate = 20;
-    
 
     private Animator animator;
-    private int health; //puntos de vida 
+    public int health; //puntos de vida 
 
 
     protected override void Awake()
@@ -51,81 +53,101 @@ public class Player : MovingObject
     // Update is called once per frame
     void Update()
     {
-        int estado;
-        int horizontal;
-        int vertical;
-
         horizontal = (int)Input.GetAxisRaw("Horizontal"); //-1 si es la izquierda, 1 si es derecha, 0 si no pulsa ninguna tecla
         vertical = (int)Input.GetAxisRaw("Vertical"); //-1 si abajo, 1 si arriba y 0 si no pulsamos
 
         if (horizontal != 0) vertical = 0;
         else if (vertical != 0) horizontal = 0;
 
-
-        if (horizontal == 1)
+        if (!moving)
         {
-            estado = 3;
-            CambiarIdle(estado);
-            countr++;
-
-            if (countr >= tiempoupdate)
-
+            if (horizontal == 1)
             {
-                AttemptMove("player", horizontal, vertical);
-                animator.SetTrigger("rightMove");
+                if (estado != 3)
+                {
+                    estado = 3;
+                    CambiarIdle(estado);
+                }
+
+                countr++;
+
+                if (countr >= tiempoupdate)
+
+                {
+                    AttemptMove("player", horizontal, vertical);
+                    animator.SetTrigger("rightMove");
+                }
+
             }
 
-        }
-
-        else if (horizontal == -1)
-        {
-            estado = 2;
-            CambiarIdle(estado);
-            countl++;
-
-            if (countl >= tiempoupdate)
-
+            else if (horizontal == -1)
             {
-                AttemptMove("player", horizontal, vertical);
-                animator.SetTrigger("leftMove");
+                if (estado != 2)
+                {
+                    estado = 2;
+                    CambiarIdle(estado);
+                }
+
+                countl++;
+
+                if (countl >= tiempoupdate)
+
+                {
+                    AttemptMove("player", horizontal, vertical);
+                    animator.SetTrigger("leftMove");
+                }
+            }
+
+            else if (vertical == 1)
+            {
+                if (estado != 0)
+                {
+                    estado = 0;
+                    CambiarIdle(estado);
+                }
+
+                countb++;
+
+                if (countb >= tiempoupdate)
+
+                {
+                    AttemptMove("player", horizontal, vertical);
+                    animator.SetTrigger("backMove");
+                }
+            }
+
+            else if (vertical == -1)
+            {
+                if (estado != 1)
+                {
+                    estado = 1;
+                    CambiarIdle(estado);
+                }
+
+                countf++;
+
+                if (countf >= tiempoupdate)
+
+                {
+                    AttemptMove("player", horizontal, vertical);
+                    animator.SetTrigger("frontMove");
+                }
             }
         }
-
-        else if (vertical == 1)
-        {
-            estado = 0;
-            CambiarIdle(estado);
-            countb++;
-
-            if (countb >= tiempoupdate)
-
-            {
-                AttemptMove("player", horizontal, vertical);
-                animator.SetTrigger("backMove");
-            }
-        }
-
-        else if (vertical == -1)
-        {
-            estado = 1;
-            CambiarIdle(estado);
-            countf++;
-
-            if (countf >= tiempoupdate)
-
-            {
-                AttemptMove("player", horizontal, vertical);
-                animator.SetTrigger("frontMove");
-            }
-        }
+        
 
         if (horizontal == 0)
+        {
             ResetEstados("x");
+        }
+
 
         if (vertical == 0)
+        {
             ResetEstados("y");
-
+        }
     }
+
     public void ResetEstados(string dir)
     {
         if (dir == "x")
@@ -139,9 +161,7 @@ public class Player : MovingObject
             countf = 0;
             countb = 0;
         }
-
     }
-
     public void CambiarIdle(int estado)
     {
         if ( estado == 0)
@@ -189,5 +209,6 @@ public class Player : MovingObject
     {
         health -= loss;
         CheckIfGameOver();
+        Debug.Log(health);
     }
 }
