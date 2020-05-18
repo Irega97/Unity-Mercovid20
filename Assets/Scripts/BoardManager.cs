@@ -39,8 +39,8 @@ public class BoardManager : MonoBehaviour
 
 
         string escenario = "60 60                                                       \n" +
-                           "A9555555555555555555555555555555555555555555555555555555559C\n" +
-                           "7B66666666666666666666666666666666666666666666666666666666D8\n" +
+                           "A9555555555555555555559955555555599555555555555555555555559C\n" +
+                           "7B66666666666666666666DB666666666DB66666666666666666666666D8\n" +
                            "EF                    EF         EF                       EF\n" +
                            "EF   Ábbbbá  Áaaaaá   EF   eee   EF   Áccccá    ddddd     EF\n" +
                            "EF   Ébbbbé  Éaaaaé   EF   eee   EF   Éccccé    ddddd     EF\n" +
