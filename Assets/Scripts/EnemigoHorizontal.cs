@@ -8,7 +8,6 @@ public class EnemigoHorizontal : MovingObject
 
     private Animator animator;
 
-    int x = 0;
     int move = 1;
 
     //necesto un variable que me guarde la posicion del enemigo y me lo pasa el boardManager
@@ -39,11 +38,11 @@ public class EnemigoHorizontal : MovingObject
         {
             if (move == 0)
             {
-                AttemptMove("enemigo", x++, 0);
+                AttemptMove("enemigo", 1, 0);
             }
             else
             {
-                AttemptMove("enemigo", x--, 0);
+                AttemptMove("enemigo", -1, 0);
             }
         }
     }
@@ -66,6 +65,7 @@ public class EnemigoHorizontal : MovingObject
             move = 1;
 
         }
+
         else if (transform.position.x > go.transform.position.x)
         {
             animator.SetBool("TopeRight", false);

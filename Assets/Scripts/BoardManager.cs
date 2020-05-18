@@ -26,6 +26,7 @@ public class BoardManager : MonoBehaviour
     public GameObject[] hospital;
     public GameObject[] tienda;
     public GameObject[] parque;
+    public GameObject coche1;
     public GameObject player;
     public GameObject enemigov;
     public GameObject enemigoh;
@@ -100,8 +101,9 @@ public class BoardManager : MonoBehaviour
                            "715555555555555555555541555555555415555555555555555555555548\n" +
                            "026666666666666666666622666666666226666666666666666666666623\n";
 
-        string personajes = "19       \n" +
+        string personajes = "20       \n" +
                             "P -22 -27\n" +
+                            "C -28 -30\n" +
                             "H -5 -21 \n" +
                             "H -13 -11\n" +
                             "H -5 20  \n" +
@@ -426,6 +428,10 @@ public class BoardManager : MonoBehaviour
             {
                 case 'P':
                     instance = Instantiate(player, new Vector3(Convert.ToInt32(jugadores[pl+1].Split(' ')[1]), Convert.ToInt32(jugadores[pl + 1].Split(' ')[2]), 0f), Quaternion.identity);
+                    break;
+
+                case 'C':
+                    instance = Instantiate(coche1, new Vector3(Convert.ToInt32(jugadores[pl + 1].Split(' ')[1]), Convert.ToInt32(jugadores[pl + 1].Split(' ')[2]), 0f), Quaternion.identity);
                     break;
 
                 case 'V':
