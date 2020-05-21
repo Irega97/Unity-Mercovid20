@@ -13,9 +13,9 @@ GameObject:
   - component: {fileID: 2005199346871170595}
   - component: {fileID: 8462560953865415210}
   - component: {fileID: 1890589073054213944}
-  m_Layer: 8
+  m_Layer: 10
   m_Name: Coche3
-  m_TagString: Untagged
+  m_TagString: Coche
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

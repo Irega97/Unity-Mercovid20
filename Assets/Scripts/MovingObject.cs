@@ -59,14 +59,14 @@ public abstract class MovingObject : MonoBehaviour
                 boxCollider.enabled = false;
                 hit = Physics2D.Linecast(start, end, carretera);
                 boxCollider.enabled = true;
-                
+
                 if (hit.transform == null)
                 {
-                    moving = true;
-                    StartCoroutine(SmoothMovement(end));                        
-                    return true;
+                        moving = true;
+                        StartCoroutine(SmoothMovement(end));
+                        return true;                    
                 }
-             
+            
             }
 
             else if (objectname == "enemigo")
@@ -99,13 +99,13 @@ public abstract class MovingObject : MonoBehaviour
                 boxCollider.enabled = false;
                 hit = Physics2D.Linecast(start, end, player);
                 boxCollider.enabled = true;
+
                 if (hit.transform == null)
                 {
-                    moving = true;
-                    StartCoroutine(SmoothMovement(end));
-                    return true;
+                        moving = true;
+                        StartCoroutine(SmoothMovement(end));
+                        return true;                   
                 }
-                else return false;
                 
             }
             return false;
