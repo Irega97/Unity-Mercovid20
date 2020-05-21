@@ -11,8 +11,8 @@ GameObject:
   - component: {fileID: 5814307419205698877}
   - component: {fileID: 8802383156033729700}
   - component: {fileID: 8322294475285140744}
-  m_Layer: 9
-  m_Name: CarreteraU1
+  m_Layer: 10
+  m_Name: CarreteraU
   m_TagString: Carretera
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

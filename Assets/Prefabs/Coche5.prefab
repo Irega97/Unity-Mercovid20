@@ -130,7 +130,10 @@ MonoBehaviour:
   carretera:
     serializedVersion: 2
     m_Bits: 512
-  playerDamage: 0
+  player:
+    serializedVersion: 2
+    m_Bits: 0
+  playerDamage: 100
   goizquierda: {fileID: -7987332128420263098, guid: c4cd23ce9da85f94284ffc7ad04089f7,
     type: 3}
   goderecha: {fileID: -3117942761759475775, guid: c4cd23ce9da85f94284ffc7ad04089f7,
@@ -141,6 +144,7 @@ MonoBehaviour:
   hormax: 23
   vermax: 11
   move: 0
+  ordenmovimiento: 0
 --- !u!50 &2018248103940595235
 Rigidbody2D:
   serializedVersion: 4
