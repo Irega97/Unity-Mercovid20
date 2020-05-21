@@ -13,9 +13,9 @@ GameObject:
   - component: {fileID: 733566334491967323}
   - component: {fileID: 7245393252976747346}
   - component: {fileID: 847090290319453760}
-  m_Layer: 8
+  m_Layer: 10
   m_Name: Coche1
-  m_TagString: Untagged
+  m_TagString: Coche
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -130,13 +130,20 @@ MonoBehaviour:
   carretera:
     serializedVersion: 2
     m_Bits: 512
-  playerDamage: 0
+  player:
+    serializedVersion: 2
+    m_Bits: 0
+  playerDamage: 100
   goizquierda: {fileID: -8017347642053881074, guid: c4cd23ce9da85f94284ffc7ad04089f7,
     type: 3}
   goderecha: {fileID: 4429999121793425917, guid: c4cd23ce9da85f94284ffc7ad04089f7,
     type: 3}
   goarriba: {fileID: 810929788597663192, guid: c4cd23ce9da85f94284ffc7ad04089f7, type: 3}
   goabajo: {fileID: 2748037829641823846, guid: c4cd23ce9da85f94284ffc7ad04089f7, type: 3}
+  hormax: 23
+  vermax: 11
+  move: 0
+  ordenmovimiento: 0
 --- !u!50 &847090290319453760
 Rigidbody2D:
   serializedVersion: 4

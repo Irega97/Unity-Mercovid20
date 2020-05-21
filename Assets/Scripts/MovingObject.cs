@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Xml.Linq;
 using UnityEditor.Experimental;
 using UnityEngine;
 
@@ -9,6 +10,8 @@ public abstract class MovingObject : MonoBehaviour
     public float moveTime = 0.1f; //tiempo que dura un movimiento
     public LayerMask blockingLayer; //capa a la que pertenece
     public LayerMask carretera;
+    public LayerMask player;
+
 
     private float movementSpeed; //velocidad de movimiento
     private BoxCollider2D boxCollider; //referencia al box collider
@@ -51,15 +54,65 @@ public abstract class MovingObject : MonoBehaviour
         
         if (hit.transform == null)
         {
-            hit = Physics2D.Linecast(start, end, carretera);
-            if (hit.transform == null || objectname == "coche")
+            if(objectname == "player")
             {
-                moving = true;
-                StartCoroutine(SmoothMovement(end));
-                return true;
+                boxCollider.enabled = false;
+                hit = Physics2D.Linecast(start, end, carretera);
+                boxCollider.enabled = true;
+
+                if (hit.transform == null)
+                {
+                        moving = true;
+                        StartCoroutine(SmoothMovement(end));
+                        return true;                    
+                }
+            
             }
+
+            else if (objectname == "enemigo")
+            {
+                boxCollider.enabled = false;
+                hit = Physics2D.Linecast(start, end, player);
+                boxCollider.enabled = true;
+
+                if (hit.transform == null)
+                {
+
+                    boxCollider.enabled = false;
+                    hit = Physics2D.Linecast(start, end, carretera);
+                    boxCollider.enabled = true;
+
+                    if (hit.transform == null)
+                    {
+                        moving = true;
+                        StartCoroutine(SmoothMovement(end));
+                        return true;
+                    }
+
+                }
+                else return false;
+               
+
+            }
+            else if (objectname == "coche")
+            {
+                boxCollider.enabled = false;
+                hit = Physics2D.Linecast(start, end, player);
+                boxCollider.enabled = true;
+
+                if (hit.transform == null)
+                {
+                        moving = true;
+                        StartCoroutine(SmoothMovement(end));
+                        return true;                   
+                }
+                
+            }
+            return false;
+
         }
-        return false;
+
+        else return false;
     }       
 
     protected abstract void OnCantMove(GameObject go);

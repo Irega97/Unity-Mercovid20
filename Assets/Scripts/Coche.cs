@@ -165,14 +165,14 @@ public class Coche : MovingObject
         else
             vertical++;
 
-        /*Player hitPlayer = go.GetComponent<Player>();
+        Player hitPlayer = go.GetComponent<Player>();
 
         if (hitPlayer != null)
         {
             hitPlayer.LoseHealth(playerDamage);
         }
 
-
+        /*
         if (transform.position.x < go.transform.position.x)
         {
             

@@ -52,6 +52,7 @@ public class EnemigoVertical : MovingObject
     {
 
         Player hitPlayer = go.GetComponent<Player>();
+        
 
         if (hitPlayer != null)
         {
