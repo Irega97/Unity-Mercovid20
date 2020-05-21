@@ -427,7 +427,7 @@ public class BoardManager : MonoBehaviour
         for (int pl = 0; pl < ptotal; pl++)
         {
             char ch = jugadores[pl + 1][0];
-            GameObject instance;
+            GameObject instance = null;
             switch (ch)
             {
                 case 'P':
@@ -487,7 +487,10 @@ public class BoardManager : MonoBehaviour
                     instance = Instantiate(enemigoh, new Vector3(Convert.ToInt32(jugadores[pl + 1].Split(' ')[1]), Convert.ToInt32(jugadores[pl + 1].Split(' ')[2]), 0f), Quaternion.identity);
                     break;
             }
-            //instance.transform.SetParent(boardHolder4);
+            if (instance != null)
+                {
+                instance.transform.SetParent(boardHolder4);
+            }
         }
     }
 }

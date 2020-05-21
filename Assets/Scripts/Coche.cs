@@ -151,7 +151,6 @@ public class Coche : MovingObject
         }
         
     }
-
     protected override void OnCantMove(GameObject go)
     {
         if (move == 0)
