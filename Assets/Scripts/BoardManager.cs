@@ -488,9 +488,8 @@ public class BoardManager : MonoBehaviour
                     break;
             }
             if (instance != null)
-                {
                 instance.transform.SetParent(boardHolder4);
-            }
+            
         }
     }
 }
