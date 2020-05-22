@@ -129,10 +129,10 @@ MonoBehaviour:
     m_Bits: 256
   carretera:
     serializedVersion: 2
-    m_Bits: 512
+    m_Bits: 1024
   player:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 512
   playerDamage: 100
   goizquierda: {fileID: -8017347642053881074, guid: c4cd23ce9da85f94284ffc7ad04089f7,
     type: 3}
