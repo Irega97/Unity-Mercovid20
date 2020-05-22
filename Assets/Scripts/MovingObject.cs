@@ -11,6 +11,7 @@ public abstract class MovingObject : MonoBehaviour
     public LayerMask blockingLayer; //capa a la que pertenece
     public LayerMask carretera;
     public LayerMask player;
+    public LayerMask enemigo;
 
 
     private float movementSpeed; //velocidad de movimiento
@@ -72,27 +73,38 @@ public abstract class MovingObject : MonoBehaviour
             else if (objectname == "enemigo")
             {
                 boxCollider.enabled = false;
-                hit = Physics2D.Linecast(start, end, player);
+                hit = Physics2D.Linecast(start, end, enemigo);
                 boxCollider.enabled = true;
 
                 if (hit.transform == null)
                 {
 
                     boxCollider.enabled = false;
-                    hit = Physics2D.Linecast(start, end, carretera);
+                    hit = Physics2D.Linecast(start, end, player);
                     boxCollider.enabled = true;
-
                     if (hit.transform == null)
                     {
-                        moving = true;
-                        StartCoroutine(SmoothMovement(end));
-                        return true;
+                        boxCollider.enabled = false;
+                        hit = Physics2D.Linecast(start, end, carretera);
+                        boxCollider.enabled = true;
+
+                        if (hit.transform == null)
+                        {
+                            moving = true;
+                            StartCoroutine(SmoothMovement(end));
+                            return true;
+                        }
+
                     }
 
+
+                } 
+                
+                if(hit.transform != null)
+                {
+                        boxCollider.enabled = false;
                 }
                 else return false;
-               
-
             }
             else if (objectname == "coche")
             {

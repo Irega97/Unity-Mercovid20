@@ -51,11 +51,19 @@ public class EnemigoHorizontal : MovingObject
     {
 
         Player hitPlayer = go.GetComponent<Player>();
+        //EnemigoVertical ev = go.GetComponent<EnemigoVertical>();
 
         if (hitPlayer != null)
         {
             hitPlayer.LoseHealth(playerDamage);
         }
+
+        /*
+        if (ev != null)
+        {
+            AttemptMove("enemigo", 1, 0);
+        }*/
+
 
 
         if (transform.position.x < go.transform.position.x)

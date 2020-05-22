@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 2005199346871170595}
   - component: {fileID: 8462560953865415210}
   - component: {fileID: 1890589073054213944}
-  m_Layer: 10
+  m_Layer: 11
   m_Name: Coche3
   m_TagString: Coche
   m_Icon: {fileID: 0}
@@ -133,6 +133,9 @@ MonoBehaviour:
   player:
     serializedVersion: 2
     m_Bits: 512
+  enemigo:
+    serializedVersion: 2
+    m_Bits: 0
   playerDamage: 100
   goizquierda: {fileID: -3243953468353815432, guid: c4cd23ce9da85f94284ffc7ad04089f7,
     type: 3}

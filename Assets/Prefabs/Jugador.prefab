@@ -170,8 +170,11 @@ MonoBehaviour:
     m_Bits: 256
   carretera:
     serializedVersion: 2
-    m_Bits: 1024
+    m_Bits: 2048
   player:
+    serializedVersion: 2
+    m_Bits: 1024
+  enemigo:
     serializedVersion: 2
     m_Bits: 512
   restartLevelDelay: 1
