@@ -415,6 +415,8 @@ MonoBehaviour:
     type: 3}
   enemigoh: {fileID: 3293989620225325188, guid: fac613ae650268c41aade6b4364b5a82,
     type: 3}
+  sueloMercadona: {fileID: 140824912520052970, guid: fcf3921e1ea8fe84fb0811654e0d6ccf,
+    type: 3}
 --- !u!114 &1431000569802020838
 MonoBehaviour:
   m_ObjectHideFlags: 0
