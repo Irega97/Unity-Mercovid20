@@ -12,6 +12,7 @@ TagManager:
   - Mercadona
   - PuertaMercadona
   - Casa
+  - SueloMercadona
   layers:
   - Default
   - TransparentFX

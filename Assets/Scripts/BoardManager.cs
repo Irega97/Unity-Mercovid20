@@ -34,14 +34,14 @@ public class BoardManager : MonoBehaviour
 
     public void SetupScene()
     {
-        //boardHolder = new GameObject("Suelo").transform;
+        boardHolder = new GameObject("Suelo").transform;
         boardHolder = new GameObject("SueloMercadona").transform;
         boardHolder2 = new GameObject("Mercadona").transform;
         boardHolder3 = new GameObject("Casas").transform;
         boardHolder4 = new GameObject("Personajes").transform;
 
 
-        /*string escenario = "60 60                                                       \n" +
+        string escenario = "60 60                                                       \n" +
                            "A9555555555555555555559955555555599599555555555555555555559C\n" +
                            "7B66666666666666666666DB666666666666DB66666666666666666666D8\n" +
                            "EF                    EF            EF                    EF\n" +
@@ -96,14 +96,14 @@ public class BoardManager : MonoBehaviour
                            "EF                    EF            EF                    EF\n" +
                            "EF   Ábbbbá  Áaaaaá   EF            EF   Áccccá  ddddd    EF\n" +
                            "EF   Ébbbbé  Éaaaaé   EF    eee     EF   Éccccé  ddddd    EF\n" +
-                           "EF   Íbbbbí  Íaaaaí   IJ    eee     EF   Íccccí  ddddd    EF\n" +
+                           "EF   Íbbbbí  Íaaaaí   IJ    eee     IJ   Íccccí  ddddd    EF\n" +
                            "EF   Óbbbbó  Óaaaaó   EF    eee     EF   Óccccó  ddddd    EF\n" +
                            "EF                    EF    eee     EF                    EF\n" +
                            "EF                    EF            EF                    EF\n" +
                            "715555555555555555555541555555555555415555555555555555555548\n" +
-                           "026666666666666666666622666666666666226666666666666666666623\n"; */
+                           "026666666666666666666622666666666666226666666666666666666623\n";
 
-        string escenario = "10 10          \n" +
+        /*string escenario = "10 10          \n" +
                             "          \n" +
                             "          \n" +
                             "          \n" +
@@ -113,18 +113,19 @@ public class BoardManager : MonoBehaviour
                             "          \n" +
                             "          \n" +
                             "          \n" +
-                            "          \n";
-
-
+                            "          \n";*/
 
 
-        /*string personajes = "23       \n" +
+
+
+        string personajes = "23       \n" +
                              "P -22 -27\n" +
                              "0 -29 -30 23 11 0 0\n" +
                              "1 7 -30 23 11 0 0  \n" +
                              "2 -29 18 23 11 0 0 \n" +
                              "3 7 18 23 11 0 0   \n" +
                              "4 -7 -29 21 9 2 1  \n" +
+                             "2 -15 -20 31 11 0 0 \n" +
                              "H -5 -21 \n" +
                              "H -13 -11\n" +
                              "H -5 20  \n" +
@@ -142,13 +143,13 @@ public class BoardManager : MonoBehaviour
                              "V -8 27  \n" +
                              "V -6 -8  \n" +
                              "V 5 -8   \n" +
-                             "V 9 27   \n";*/
+                             "V 9 27   \n";
 
         string[] lineas = escenario.Split('\n');
         int xtotal = Convert.ToInt32(lineas[0].Split(' ')[0]);
         int ytotal = Convert.ToInt32(lineas[0].Split(' ')[1]);
-        /*string[] jugadores = personajes.Split('\n');
-        int ptotal = Convert.ToInt32(jugadores[0]);*/
+        string[] jugadores = personajes.Split('\n');
+        int ptotal = Convert.ToInt32(jugadores[0]);
         int m = 0;
         int c1 = 0;
         int c2 = 0;
@@ -166,18 +167,16 @@ public class BoardManager : MonoBehaviour
 
         for (int y = 0; y < ytotal; y++)
         {
-            //ymapa = -y + 29;
-            ymapa = y;
+            ymapa = -y + 29;
             string linea = lineas[y + 1];
 
             for (int x = 0; x < xtotal; x++)
             {
-                //xmapa = x - 29;
-                xmapa = x;
+                xmapa = x - 29;
                 char ch = linea[x];
 
                 GameObject instance;
-                
+
                 switch (ch)
                 {
                     case 'M':
@@ -187,7 +186,7 @@ public class BoardManager : MonoBehaviour
 
                         if (m == 44)
                             m = 0;
-                        
+
                         instancemercadona.transform.SetParent(boardHolder2);
                         break;
 
@@ -435,18 +434,18 @@ public class BoardManager : MonoBehaviour
 
                         break;
 
-                    /*default:
-                        instance = Instantiate(acera, new Vector3(xmapa, ymapa, 0f), Quaternion.identity);
-                        break;*/
                     default:
-                        instance = Instantiate(sueloMercadona, new Vector3(xmapa, ymapa, 0f), Quaternion.identity);
+                        instance = Instantiate(acera, new Vector3(xmapa, ymapa, 0f), Quaternion.identity);
                         break;
+                    /*default:
+                        instance = Instantiate(sueloMercadona, new Vector3(xmapa, ymapa, 0f), Quaternion.identity);
+                        break;*/
 
-                  }    
+                }
                 instance.transform.SetParent(boardHolder);
             }
         }
-        /*
+
         for (int pl = 0; pl < ptotal; pl++)
         {
             char ch = jugadores[pl + 1][0];
@@ -454,7 +453,7 @@ public class BoardManager : MonoBehaviour
             switch (ch)
             {
                 case 'P':
-                    instance = Instantiate(player, new Vector3(Convert.ToInt32(jugadores[pl+1].Split(' ')[1]), Convert.ToInt32(jugadores[pl + 1].Split(' ')[2]), 0f), Quaternion.identity);
+                    instance = Instantiate(player, new Vector3(Convert.ToInt32(jugadores[pl + 1].Split(' ')[1]), Convert.ToInt32(jugadores[pl + 1].Split(' ')[2]), 0f), Quaternion.identity);
                     break;
 
                 case '0':
@@ -512,7 +511,8 @@ public class BoardManager : MonoBehaviour
             }
 
             if (instance != null)
-                instance.transform.SetParent(boardHolder4);*/
+                instance.transform.SetParent(boardHolder4);
+        }
     }
 }
         
