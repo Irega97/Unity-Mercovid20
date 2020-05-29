@@ -104,6 +104,7 @@ public abstract class MovingObject : MonoBehaviour
                 {
                         boxCollider.enabled = false;
                 }
+
                 else return false;
             }
             else if (objectname == "coche")
@@ -139,4 +140,6 @@ public abstract class MovingObject : MonoBehaviour
         OnCantMove(hit.transform.gameObject);
         
     }
+
+    //protected IEnumerator Contagio { }
 }
