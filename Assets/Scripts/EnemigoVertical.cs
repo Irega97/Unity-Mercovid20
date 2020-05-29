@@ -52,6 +52,7 @@ public class EnemigoVertical : MovingObject
     {
 
         Player hitPlayer = go.GetComponent<Player>();
+        //EnemigoHorizontal eh = go.GetComponent<EnemigoHorizontal>();
         
 
         if (hitPlayer != null)
@@ -59,7 +60,11 @@ public class EnemigoVertical : MovingObject
             hitPlayer.LoseHealth(playerDamage);
         }
 
-
+        /*if(eh != null)
+        {
+            AttemptMove("enemigo", 0, -1);
+        }*/
+       
         if (transform.position.y < go.transform.position.y)
         {
             animator.SetBool("TopeArriba", true);
