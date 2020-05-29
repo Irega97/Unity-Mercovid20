@@ -35,13 +35,13 @@ public class BoardManager : MonoBehaviour
     public void SetupScene()
     {
         boardHolder = new GameObject("Suelo").transform;
-        boardHolder = new GameObject("SueloMercadona").transform;
+        //boardHolder = new GameObject("SueloMercadona").transform;
         boardHolder2 = new GameObject("Mercadona").transform;
         boardHolder3 = new GameObject("Casas").transform;
         boardHolder4 = new GameObject("Personajes").transform;
 
 
-        string escenario = "60 60                                                       \n" +
+        /*string escenario = "60 60                                                       \n" +
                            "A9555555555555555555559955555555599599555555555555555555559C\n" +
                            "7B66666666666666666666DB666666666666DB66666666666666666666D8\n" +
                            "EF                    EF            EF                    EF\n" +
@@ -101,9 +101,9 @@ public class BoardManager : MonoBehaviour
                            "EF                    EF    eee     EF                    EF\n" +
                            "EF                    EF            EF                    EF\n" +
                            "715555555555555555555541555555555555415555555555555555555548\n" +
-                           "026666666666666666666622666666666666226666666666666666666623\n";
+                           "026666666666666666666622666666666666226666666666666666666623\n";*/
 
-        /*string escenario = "10 10          \n" +
+          string escenario = "10 10    \n" +
                             "          \n" +
                             "          \n" +
                             "          \n" +
@@ -113,7 +113,7 @@ public class BoardManager : MonoBehaviour
                             "          \n" +
                             "          \n" +
                             "          \n" +
-                            "          \n";*/
+                            "          \n";
 
 
 
@@ -167,12 +167,14 @@ public class BoardManager : MonoBehaviour
 
         for (int y = 0; y < ytotal; y++)
         {
-            ymapa = -y + 29;
+            //ymapa = -y + 29;
+            ymapa = y;
             string linea = lineas[y + 1];
 
             for (int x = 0; x < xtotal; x++)
             {
-                xmapa = x - 29;
+                //xmapa = x - 29;
+                xmapa = x;
                 char ch = linea[x];
 
                 GameObject instance;
