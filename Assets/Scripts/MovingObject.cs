@@ -139,4 +139,6 @@ public abstract class MovingObject : MonoBehaviour
         OnCantMove(hit.transform.gameObject);
         
     }
+
+    //protected IEnumerator Contagio { }
 }

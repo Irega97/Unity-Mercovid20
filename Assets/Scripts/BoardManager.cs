@@ -103,7 +103,7 @@ public class BoardManager : MonoBehaviour
                            "715555555555555555555541555555555555415555555555555555555548\n" +
                            "026666666666666666666622666666666666226666666666666666666623\n"; 
 
-       /* string escenario = "10 10          \n" +
+        /*string escenario = "10 10          \n" +
                             "          \n" +
                             "          \n" +
                             "          \n" +
@@ -119,30 +119,30 @@ public class BoardManager : MonoBehaviour
 
 
         string personajes = "23       \n" +
-                             "P -22 -27\n" +
-                             "0 -29 -30 23 11 0 0\n" +
-                             "1 7 -30 23 11 0 0  \n" +
-                             "2 -29 18 23 11 0 0 \n" +
-                             "3 7 18 23 11 0 0   \n" +
-                             "4 -7 -29 21 9 2 1  \n" +
-                             "H -5 -21 \n" +
-                             "H -13 -11\n" +
-                             "H -5 20  \n" +
-                             "H -13 10 \n" +
-                             "H -27 0  \n" +
-                             "H 28 0   \n" +
-                             "H -27 -8 \n" +
-                             "H -16 7  \n" +
-                             "V -8 -21 \n" +
-                             "V 9 -21  \n" +
-                             "V -16 -11\n" +
-                             "V 17 -11 \n" +
-                             "V -16 17 \n" +
-                             "V 17 17  \n" +
-                             "V -8 27  \n" +
-                             "V -6 -8  \n" +
-                             "V 5 -8   \n" +
-                             "V 9 27   \n";
+                              "P -22 -27\n" +
+                              "0 -29 -30 23 11 0 0\n" +
+                              "1 7 -30 23 11 0 0  \n" +
+                              "2 -29 18 23 11 0 0 \n" +
+                              "3 7 18 23 11 0 0   \n" +
+                              "4 -7 -29 21 9 2 1  \n" +
+                              "H -5 -21 \n" +
+                              "H -13 -11\n" +
+                              "H -5 20  \n" +
+                              "H -13 10 \n" +
+                              "H -27 0  \n" +
+                              "H 28 0   \n" +
+                              "H -27 -8 \n" +
+                              "H -16 7  \n" +
+                              "V -8 -21 \n" +
+                              "V 9 -21  \n" +
+                              "V -16 -11\n" +
+                              "V 17 -11 \n" +
+                              "V -16 17 \n" +
+                              "V 17 17  \n" +
+                              "V -8 27  \n" +
+                              "V -6 -8  \n" +
+                              "V 5 -8   \n" +
+                              "V 9 27   \n";
 
         string[] lineas = escenario.Split('\n');
         int xtotal = Convert.ToInt32(lineas[0].Split(' ')[0]);
@@ -177,7 +177,7 @@ public class BoardManager : MonoBehaviour
                 char ch = linea[x];
 
                 GameObject instance;
-                
+
                 switch (ch)
                 {
                     case 'M':
@@ -187,7 +187,7 @@ public class BoardManager : MonoBehaviour
 
                         if (m == 44)
                             m = 0;
-                        
+
                         instancemercadona.transform.SetParent(boardHolder2);
                         break;
 
@@ -442,77 +442,78 @@ public class BoardManager : MonoBehaviour
                         instance = Instantiate(sueloMercadona, new Vector3(xmapa, ymapa, 0f), Quaternion.identity);
                         break;*/
 
-                  }    
+                }
                 instance.transform.SetParent(boardHolder);
             }
         }
 
-        for (int pl = 0; pl < ptotal; pl++)
-        {
-            char ch = jugadores[pl + 1][0];
-            GameObject instance = null;
-            switch (ch)
-            {
-                case 'P':
-                    instance = Instantiate(player, new Vector3(Convert.ToInt32(jugadores[pl + 1].Split(' ')[1]), Convert.ToInt32(jugadores[pl + 1].Split(' ')[2]), 0f), Quaternion.identity);
-                    break;
+          for (int pl = 0; pl < ptotal; pl++)
+         {
+             char ch = jugadores[pl + 1][0];
+             GameObject instance = null;
+             switch (ch)
+             {
+                 case 'P':
+                     instance = Instantiate(player, new Vector3(Convert.ToInt32(jugadores[pl + 1].Split(' ')[1]), Convert.ToInt32(jugadores[pl + 1].Split(' ')[2]), 0f), Quaternion.identity);
+                     break;
 
-                case '0':
-                    instance = Instantiate(coches[0], new Vector3(Convert.ToInt32(jugadores[pl + 1].Split(' ')[1]), Convert.ToInt32(jugadores[pl + 1].Split(' ')[2]), 0f), Quaternion.identity);
-                    Coche cochecontrol0 = instance.GetComponent<Coche>();
-                    cochecontrol0.hormax = Int32.Parse(jugadores[pl + 1].Split(' ')[3]);
-                    cochecontrol0.vermax = Int32.Parse(jugadores[pl + 1].Split(' ')[4]);
-                    cochecontrol0.move = Int32.Parse(jugadores[pl + 1].Split(' ')[5]);
-                    cochecontrol0.ordenmovimiento = Int32.Parse(jugadores[pl + 1].Split(' ')[6]);
-                    break;
+                 case '0':
+                     instance = Instantiate(coches[0], new Vector3(Convert.ToInt32(jugadores[pl + 1].Split(' ')[1]), Convert.ToInt32(jugadores[pl + 1].Split(' ')[2]), 0f), Quaternion.identity);
+                     Coche cochecontrol0 = instance.GetComponent<Coche>();
+                     cochecontrol0.hormax = Int32.Parse(jugadores[pl + 1].Split(' ')[3]);
+                     cochecontrol0.vermax = Int32.Parse(jugadores[pl + 1].Split(' ')[4]);
+                     cochecontrol0.move = Int32.Parse(jugadores[pl + 1].Split(' ')[5]);
+                     cochecontrol0.ordenmovimiento = Int32.Parse(jugadores[pl + 1].Split(' ')[6]);
+                     break;
 
-                case '1':
-                    instance = Instantiate(coches[1], new Vector3(Convert.ToInt32(jugadores[pl + 1].Split(' ')[1]), Convert.ToInt32(jugadores[pl + 1].Split(' ')[2]), 0f), Quaternion.identity);
-                    Coche cochecontrol1 = instance.GetComponent<Coche>();
-                    cochecontrol1.hormax = Int32.Parse(jugadores[pl + 1].Split(' ')[3]);
-                    cochecontrol1.vermax = Int32.Parse(jugadores[pl + 1].Split(' ')[4]);
-                    cochecontrol1.move = Int32.Parse(jugadores[pl + 1].Split(' ')[5]);
-                    cochecontrol1.ordenmovimiento = Int32.Parse(jugadores[pl + 1].Split(' ')[6]);
-                    break;
+                 case '1':
+                     instance = Instantiate(coches[1], new Vector3(Convert.ToInt32(jugadores[pl + 1].Split(' ')[1]), Convert.ToInt32(jugadores[pl + 1].Split(' ')[2]), 0f), Quaternion.identity);
+                     Coche cochecontrol1 = instance.GetComponent<Coche>();
+                     cochecontrol1.hormax = Int32.Parse(jugadores[pl + 1].Split(' ')[3]);
+                     cochecontrol1.vermax = Int32.Parse(jugadores[pl + 1].Split(' ')[4]);
+                     cochecontrol1.move = Int32.Parse(jugadores[pl + 1].Split(' ')[5]);
+                     cochecontrol1.ordenmovimiento = Int32.Parse(jugadores[pl + 1].Split(' ')[6]);
+                     break;
 
-                case '2':
-                    instance = Instantiate(coches[2], new Vector3(Convert.ToInt32(jugadores[pl + 1].Split(' ')[1]), Convert.ToInt32(jugadores[pl + 1].Split(' ')[2]), 0f), Quaternion.identity);
-                    Coche cochecontrol2 = instance.GetComponent<Coche>();
-                    cochecontrol2.hormax = Int32.Parse(jugadores[pl + 1].Split(' ')[3]);
-                    cochecontrol2.vermax = Int32.Parse(jugadores[pl + 1].Split(' ')[4]);
-                    cochecontrol2.move = Int32.Parse(jugadores[pl + 1].Split(' ')[5]);
-                    cochecontrol2.ordenmovimiento = Int32.Parse(jugadores[pl + 1].Split(' ')[6]);
-                    break;
+                 case '2':
+                     instance = Instantiate(coches[2], new Vector3(Convert.ToInt32(jugadores[pl + 1].Split(' ')[1]), Convert.ToInt32(jugadores[pl + 1].Split(' ')[2]), 0f), Quaternion.identity);
+                     Coche cochecontrol2 = instance.GetComponent<Coche>();
+                     cochecontrol2.hormax = Int32.Parse(jugadores[pl + 1].Split(' ')[3]);
+                     cochecontrol2.vermax = Int32.Parse(jugadores[pl + 1].Split(' ')[4]);
+                     cochecontrol2.move = Int32.Parse(jugadores[pl + 1].Split(' ')[5]);
+                     cochecontrol2.ordenmovimiento = Int32.Parse(jugadores[pl + 1].Split(' ')[6]);
+                     break;
 
-                case '3':
-                    instance = Instantiate(coches[3], new Vector3(Convert.ToInt32(jugadores[pl + 1].Split(' ')[1]), Convert.ToInt32(jugadores[pl + 1].Split(' ')[2]), 0f), Quaternion.identity);
-                    Coche cochecontrol3 = instance.GetComponent<Coche>();
-                    cochecontrol3.hormax = Int32.Parse(jugadores[pl + 1].Split(' ')[3]);
-                    cochecontrol3.vermax = Int32.Parse(jugadores[pl + 1].Split(' ')[4]);
-                    cochecontrol3.move = Int32.Parse(jugadores[pl + 1].Split(' ')[5]);
-                    cochecontrol3.ordenmovimiento = Int32.Parse(jugadores[pl + 1].Split(' ')[6]);
-                    break;
+                 case '3':
+                     instance = Instantiate(coches[3], new Vector3(Convert.ToInt32(jugadores[pl + 1].Split(' ')[1]), Convert.ToInt32(jugadores[pl + 1].Split(' ')[2]), 0f), Quaternion.identity);
+                     Coche cochecontrol3 = instance.GetComponent<Coche>();
+                     cochecontrol3.hormax = Int32.Parse(jugadores[pl + 1].Split(' ')[3]);
+                     cochecontrol3.vermax = Int32.Parse(jugadores[pl + 1].Split(' ')[4]);
+                     cochecontrol3.move = Int32.Parse(jugadores[pl + 1].Split(' ')[5]);
+                     cochecontrol3.ordenmovimiento = Int32.Parse(jugadores[pl + 1].Split(' ')[6]);
+                     break;
 
-                case '4':
-                    instance = Instantiate(coches[4], new Vector3(Convert.ToInt32(jugadores[pl + 1].Split(' ')[1]), Convert.ToInt32(jugadores[pl + 1].Split(' ')[2]), 0f), Quaternion.identity);
-                    Coche cochecontrol4 = instance.GetComponent<Coche>();
-                    cochecontrol4.hormax = Int32.Parse(jugadores[pl + 1].Split(' ')[3]);
-                    cochecontrol4.vermax = Int32.Parse(jugadores[pl + 1].Split(' ')[4]);
-                    cochecontrol4.move = Int32.Parse(jugadores[pl + 1].Split(' ')[5]);
-                    cochecontrol4.ordenmovimiento = Int32.Parse(jugadores[pl + 1].Split(' ')[6]);
-                    break;
+                 case '4':
+                     instance = Instantiate(coches[4], new Vector3(Convert.ToInt32(jugadores[pl + 1].Split(' ')[1]), Convert.ToInt32(jugadores[pl + 1].Split(' ')[2]), 0f), Quaternion.identity);
+                     Coche cochecontrol4 = instance.GetComponent<Coche>();
+                     cochecontrol4.hormax = Int32.Parse(jugadores[pl + 1].Split(' ')[3]);
+                     cochecontrol4.vermax = Int32.Parse(jugadores[pl + 1].Split(' ')[4]);
+                     cochecontrol4.move = Int32.Parse(jugadores[pl + 1].Split(' ')[5]);
+                     cochecontrol4.ordenmovimiento = Int32.Parse(jugadores[pl + 1].Split(' ')[6]);
+                     break;
 
-                case 'V':
-                    instance = Instantiate(enemigov, new Vector3(Convert.ToInt32(jugadores[pl + 1].Split(' ')[1]), Convert.ToInt32(jugadores[pl + 1].Split(' ')[2]), 0f), Quaternion.identity);
-                    break;
+                 case 'V':
+                     instance = Instantiate(enemigov, new Vector3(Convert.ToInt32(jugadores[pl + 1].Split(' ')[1]), Convert.ToInt32(jugadores[pl + 1].Split(' ')[2]), 0f), Quaternion.identity);
+                     break;
 
-                case 'H':
-                    instance = Instantiate(enemigoh, new Vector3(Convert.ToInt32(jugadores[pl + 1].Split(' ')[1]), Convert.ToInt32(jugadores[pl + 1].Split(' ')[2]), 0f), Quaternion.identity);
-                    break;
-            }
+                 case 'H':
+                     instance = Instantiate(enemigoh, new Vector3(Convert.ToInt32(jugadores[pl + 1].Split(' ')[1]), Convert.ToInt32(jugadores[pl + 1].Split(' ')[2]), 0f), Quaternion.identity);
+                     break;
+             }
 
-            if (instance != null)
-                instance.transform.SetParent(boardHolder4);
+             if (instance != null)
+                 instance.transform.SetParent(boardHolder4);
+    
         }
     }
 }
