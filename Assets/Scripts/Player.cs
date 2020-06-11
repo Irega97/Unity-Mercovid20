@@ -17,6 +17,8 @@ public class Player : MovingObject
     int horizontal;
     int vertical;
 
+    private Vector2 touchOrigin = -Vector2.one;
+
 
     private Animator animator;
     public int health; //puntos de vida 
@@ -53,14 +55,48 @@ public class Player : MovingObject
     // Update is called once per frame
     void Update()
     {
+#if UNITY_STANDALONE || UNITY_WEBPLAYER || UNITY_EDITOR
         horizontal = (int)Input.GetAxisRaw("Horizontal"); //-1 si es la izquierda, 1 si es derecha, 0 si no pulsa ninguna tecla
         vertical = (int)Input.GetAxisRaw("Vertical"); //-1 si abajo, 1 si arriba y 0 si no pulsamos
 
 
             if (horizontal != 0) vertical = 0;
-            else if (vertical != 0) horizontal = 0;
 
-            if (!moving)
+            else if (vertical != 0) horizontal = 0;
+#else
+        if (Input.touchCount > 0)
+        {
+            Touch myTouch = Input.touches[0];
+            if (myTouch.phase == TouchPhase.Began)
+            {
+                touchOrigin = myTouch.position;
+            }
+            else if(myTouch.phase == TouchPhase.Ended && touchOrigin !=-Vector2.one)
+            {
+                Vector2 touchEnd = myTouch.position;
+                float x = touchEnd.x - touchOrigin.x;
+                float y = touchEnd.y - touchOrigin.y;
+                if (x!= 0 || y != 0)
+                {
+                    countr = 20;
+                    countl = 20;
+                    countb = 20;
+                    countf = 20;
+                    if (Mathf.Abs(x) >= Mathf.Abs(y))
+                    {
+                        horizontal = x > 0 ? 1 : -1;
+                    }
+
+                    else
+                    {
+                        vertical = y > 0 ? 1 : -1;
+                    }
+                }
+            }
+        }
+#endif
+
+        if (!moving)
             {
                 if (horizontal == 1)
                 {
