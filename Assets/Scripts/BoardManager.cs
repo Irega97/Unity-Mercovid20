@@ -169,13 +169,11 @@ public class BoardManager : MonoBehaviour
         for (int y = 0; y < ytotal; y++)
         {
             ymapa = -y + 29;
-            //ymapa = y;
             string linea = lineas[y + 1];
 
             for (int x = 0; x < xtotal; x++)
             {
                 xmapa = x - 29;
-                //xmapa = x;
                 char ch = linea[x];
 
                 GameObject instance;
