@@ -435,6 +435,8 @@ MonoBehaviour:
   - {fileID: 3492103552968477580, guid: 55af5ba6103abd44dba5fc6d5e4518b4, type: 3}
   sueloMercadona: {fileID: 140824912520052970, guid: fcf3921e1ea8fe84fb0811654e0d6ccf,
     type: 3}
+  guardiaLlave: {fileID: 3044731969479969209, guid: 5f2d53df8fbb9bd49af0ae72e1aff071,
+    type: 3}
 --- !u!114 &1431000569802020838
 MonoBehaviour:
   m_ObjectHideFlags: 0
