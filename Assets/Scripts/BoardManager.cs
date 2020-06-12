@@ -2,7 +2,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Xml.Serialization;
-using UnityEditorInternal;
 using UnityEngine;
 
 public class BoardManager : MonoBehaviour
@@ -48,7 +47,7 @@ public class BoardManager : MonoBehaviour
                            "EF                    EF            EF                    EF\n" +
                            "EF   Ábbbbá  Áaaaaá   EF    eee     EF   Áccccá  ddddd    EF\n" +
                            "EF   Ébbbbé  Éaaaaé   EF    eee     EF   Éccccé  ddddd    EF\n" +
-                           "EF   Íbbbbí  Íaaaaí   IJ    eee     EF   Íccccí  ddddd    EF\n" +
+                           "EF   Íbbbbí  Íaaaaí   IJ    eee     IJ   Íccccí  ddddd    EF\n" +
                            "EF   Óbbbbó  Óaaaaó   EF    eee     EF   Óccccó  ddddd    EF\n" +
                            "EF                    EF            EF                    EF\n" +
                            "EF                    EF            EF                    EF\n" +
@@ -118,33 +117,34 @@ public class BoardManager : MonoBehaviour
 
 
 
-
-        string personajes = "23       \n" +
-                             "P -22 -27\n" +
-                             "0 -29 -30 23 11 0 0\n" +
-                             "1 7 -30 23 11 0 0  \n" +
-                             "2 -29 18 23 11 0 0 \n" +
-                             "3 7 18 23 11 0 0   \n" +
-                             "4 -7 -29 21 9 2 1  \n" +
-                             "2 -15 -20 31 11 0 0 \n" +
-                             "H -5 -21 \n" +
-                             "H -13 -11\n" +
-                             "H -5 20  \n" +
-                             "H -13 10 \n" +
-                             "H -27 0  \n" +
-                             "H 28 0   \n" +
-                             "H -27 -8 \n" +
-                             "H -16 7  \n" +
-                             "V -8 -21 \n" +
-                             "V 9 -21  \n" +
-                             "V -16 -11\n" +
-                             "V 17 -11 \n" +
-                             "V -16 17 \n" +
-                             "V 17 17  \n" +
-                             "V -8 27  \n" +
-                             "V -6 -8  \n" +
-                             "V 5 -8   \n" +
-                             "V 9 27   \n";
+        //Coches: tipo de coche, x inicial, y inicial, movimiento x, movimient y, direccion inicial, tipo de movimiento
+        string personajes = "26       \n" +
+                             "P 7 3   \n" +
+                             "0 0 0 23 11 0 0    \n" +
+                             "1 0 48 23 11 0 0   \n" +
+                             "2 36 48 23 11 0 0  \n" +
+                             "3 36 0 23 11 0 0   \n" +
+                             "4 22 1 21 9 2 1    \n" +
+                             "H 24 9   \n" +
+                             "H 2 22   \n" +
+                             "H 2 30   \n" +
+                             "H 57 30  \n" +
+                             "H 16 40  \n" +
+                             "H 24 50  \n" +
+                             "H 40 37  \n" +
+                             "H 16 19  \n" +
+                             "H 43 12  \n" +
+                             "H 43 47  \n" +
+                             "V 21 2   \n" +
+                             "V 38 9   \n" +
+                             "V 13 12  \n" +
+                             "V 46 19  \n" +
+                             "V 23 37  \n" +
+                             "V 34 22  \n" +
+                             "V 13 47  \n" +
+                             "V 21 50  \n" +
+                             "V 46 40  \n" +
+                             "V 38 57  \n";
 
         string[] lineas = escenario.Split('\n');
         int xtotal = Convert.ToInt32(lineas[0].Split(' ')[0]);
@@ -168,12 +168,12 @@ public class BoardManager : MonoBehaviour
 
         for (int y = 0; y < ytotal; y++)
         {
-            ymapa = -y + 29;
+            ymapa = -y + ytotal-1;
             string linea = lineas[y + 1];
 
             for (int x = 0; x < xtotal; x++)
             {
-                xmapa = x - 29;
+                xmapa = x;
                 char ch = linea[x];
 
                 GameObject instance;
