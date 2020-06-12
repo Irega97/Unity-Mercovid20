@@ -27,8 +27,10 @@ public class BoardManager : MonoBehaviour
     public GameObject[] parque;
     public GameObject[] coches;
     public GameObject player;
-    public GameObject enemigov;
-    public GameObject enemigoh;
+    public GameObject[] horizontal;
+    public GameObject[] vertical;
+    //public GameObject enemigov;
+    //public GameObject enemigoh;
     public GameObject sueloMercadona;
 
     public void SetupScene()
@@ -447,6 +449,8 @@ public class BoardManager : MonoBehaviour
             }
         }
 
+        m = 0;
+        h = 0;
           for (int pl = 0; pl < ptotal; pl++)
          {
              char ch = jugadores[pl + 1][0];
@@ -503,11 +507,17 @@ public class BoardManager : MonoBehaviour
                      break;
 
                  case 'V':
-                     instance = Instantiate(enemigov, new Vector3(Convert.ToInt32(jugadores[pl + 1].Split(' ')[1]), Convert.ToInt32(jugadores[pl + 1].Split(' ')[2]), 0f), Quaternion.identity);
-                     break;
+                     instance = Instantiate(vertical[m], new Vector3(Convert.ToInt32(jugadores[pl + 1].Split(' ')[1]), Convert.ToInt32(jugadores[pl + 1].Split(' ')[2]), 0f), Quaternion.identity);
+                    m++;
+                    if (m == 10)
+                        m = 0;
+                    break;
 
                  case 'H':
-                     instance = Instantiate(enemigoh, new Vector3(Convert.ToInt32(jugadores[pl + 1].Split(' ')[1]), Convert.ToInt32(jugadores[pl + 1].Split(' ')[2]), 0f), Quaternion.identity);
+                     instance = Instantiate(horizontal[h], new Vector3(Convert.ToInt32(jugadores[pl + 1].Split(' ')[1]), Convert.ToInt32(jugadores[pl + 1].Split(' ')[2]), 0f), Quaternion.identity);
+                    h++;
+                    if (h == 10)
+                        h = 0;
                      break;
              }
 
