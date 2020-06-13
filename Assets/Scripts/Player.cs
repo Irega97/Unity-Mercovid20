@@ -16,6 +16,8 @@ public class Player : MovingObject
     int estado;
     int horizontal;
     int vertical;
+    bool llave = true;
+    bool animacion = false;
 
     private Vector2 touchOrigin = -Vector2.one;
 
@@ -96,7 +98,7 @@ public class Player : MovingObject
         }
 #endif
 
-        if (!moving)
+        if (!moving && !animacion)
             {
                 if (horizontal == 1)
                 {
@@ -233,9 +235,22 @@ public class Player : MovingObject
 
     }
 
+    IEnumerator esperar()
+    {
+        yield return new WaitForSeconds(1);
+        Vector2 start = transform.position;
+        Vector2 end = start + new Vector2(0, 1);
+        StartCoroutine(SmoothMovement(end));
+    }
     protected override void OnCantMove(GameObject go)
     {
-        //falta codigo
+        if (go.tag == "PuertaMercadona" && llave)
+        {
+            animacion = true;
+            Animator animacionpuerta = go.GetComponent<Animator>();
+            animacionpuerta.SetTrigger("AbrirMercadona");
+            StartCoroutine(esperar());
+        }
     }
 
   void Restart()
