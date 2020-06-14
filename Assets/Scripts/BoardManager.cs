@@ -35,8 +35,10 @@ public class BoardManager : MonoBehaviour
     public GameObject[] cesta;
     public GameObject[] cajaregistradora;
     public GameObject[] estanterias;
+    public GameObject[] estanteriavacia;
     public GameObject sueloMercadona;
     public GameObject guardiaLlave;
+    public GameObject carro;
 
     public void SetupScene()
     {
@@ -110,19 +112,23 @@ public class BoardManager : MonoBehaviour
                            "026666666666666666666622666666666666226666666666666666666623\n";*/
 
 
-        string escenario =   "20 12               \n" +
+        string escenario =   "20 16               \n" +
+                             "00 1 00             \n" +
                              "                    \n" +
                              "                    \n" +
+                             "    222222222233    \n" +
+                             "    222222222233    \n" +
                              "                    \n" +
-                             "         2222222222 \n" +
+                             "                    \n" +
                              "    MMM  2222222222 \n" +
-                             "    MMM             \n" +
+                             "    MMM  2222222222 \n" +
+                             "                    \n" +
                              "                    \n" +
                              "    MMM  2222222222 \n" +
                              "    MMM  2222222222 \n" +
                              "                    \n" +
                              "                    \n" +
-                             "                    \n";
+                             "         44444444444\n";
 
 
 
@@ -174,7 +180,7 @@ public class BoardManager : MonoBehaviour
                             "G 46 37  \n";*/
 
         string personajes = "1        \n" + 
-                            "P 0 0    \n";
+                            "P 1 0    \n";
 
         string[] lineas = escenario.Split('\n');
         int xtotal = Convert.ToInt32(lineas[0].Split(' ')[0]);
@@ -195,6 +201,7 @@ public class BoardManager : MonoBehaviour
         int p = 0;
         int n = 0;
         int e = 0;
+        int v = 0;
         float xmapa;
         float ymapa;
 
@@ -225,7 +232,7 @@ public class BoardManager : MonoBehaviour
                             instancemercadona.transform.SetParent(boardHolder2);
                         }
 
-                        else if (ytotal == 12)
+                        else if (ytotal == 16)
                         {
                             GameObject caja = Instantiate(cajaregistradora[m], new Vector3(xmapa, ymapa, 0f), Quaternion.identity);
                             instance = Instantiate(sueloMercadona, new Vector3(xmapa, ymapa, 0f), Quaternion.identity);
@@ -243,7 +250,7 @@ public class BoardManager : MonoBehaviour
                         if (ytotal == 60)
                             instance = Instantiate(carretera[Int32.Parse(ch.ToString())], new Vector3(xmapa, ymapa, 0f), Quaternion.identity);
 
-                        else if (ytotal == 12)
+                        else if (ytotal == 16)
                         {
                             instance = Instantiate(nevera1[n], new Vector3(xmapa, ymapa, 0f), Quaternion.identity);
                             n++;
@@ -257,7 +264,7 @@ public class BoardManager : MonoBehaviour
                         if (ytotal == 60)
                             instance = Instantiate(carretera[Int32.Parse(ch.ToString())], new Vector3(xmapa, ymapa, 0f), Quaternion.identity);
 
-                        else if (ytotal == 20)
+                        else if (ytotal == 16)
                         {
                             instance = Instantiate(nevera2, new Vector3(xmapa, ymapa, 0f), Quaternion.identity);
 
@@ -268,7 +275,7 @@ public class BoardManager : MonoBehaviour
                         if (ytotal == 60)
                             instance = Instantiate(carretera[Int32.Parse(ch.ToString())], new Vector3(xmapa, ymapa, 0f), Quaternion.identity);
 
-                        else if (ytotal == 12)
+                        else if (ytotal == 16)
                         {
                             GameObject estanteria = Instantiate(estanterias[e], new Vector3(xmapa, ymapa, 0f), Quaternion.identity);
                             instance = Instantiate(sueloMercadona, new Vector3(xmapa, ymapa, 0f), Quaternion.identity);
@@ -282,11 +289,39 @@ public class BoardManager : MonoBehaviour
                         break;
 
                     case '3':
-                        instance = Instantiate(carretera[Int32.Parse(ch.ToString())], new Vector3(xmapa, ymapa, 0f), Quaternion.identity);
+                        if (ytotal == 60)
+                        {
+                            instance = Instantiate(carretera[Int32.Parse(ch.ToString())], new Vector3(xmapa, ymapa, 0f), Quaternion.identity);
+                        }
+
+                        else if (ytotal == 16)
+                        {
+                            GameObject estanteria = Instantiate(estanteriavacia[v], new Vector3(xmapa, ymapa, 0f), Quaternion.identity);
+                            instance = Instantiate(sueloMercadona, new Vector3(xmapa, ymapa, 0f), Quaternion.identity);
+                            v++;
+
+                            if (v == 4)
+                                v = 0;
+
+                            estanteria.transform.SetParent(boardHolder2);
+                        }
+                        
                         break;
 
                     case '4':
-                        instance = Instantiate(carretera[Int32.Parse(ch.ToString())], new Vector3(xmapa, ymapa, 0f), Quaternion.identity);
+                        if (ytotal == 60)
+                        {
+                            instance = Instantiate(carretera[Int32.Parse(ch.ToString())], new Vector3(xmapa, ymapa, 0f), Quaternion.identity);
+                        }
+
+                        else if (ytotal == 16)
+                        {
+                            GameObject carromercadona = Instantiate(carro, new Vector3(xmapa, ymapa, 0f), Quaternion.identity);
+                            instance = Instantiate(sueloMercadona, new Vector3(xmapa, ymapa, 0f), Quaternion.identity);
+
+                            carromercadona.transform.SetParent(boardHolder2);
+                        }
+                        
                         break;
 
                     case '5':
