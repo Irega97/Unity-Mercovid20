@@ -114,9 +114,9 @@ public class BoardManager : MonoBehaviour
                              "                    \n" +
                              "                    \n" +
                              "                    \n" +
-                             "                    \n" +
+                             "         2222222222 \n" +
                              "    MMM  2222222222 \n" +
-                             "    MMM  2222222222 \n" +
+                             "    MMM             \n" +
                              "                    \n" +
                              "    MMM  2222222222 \n" +
                              "    MMM  2222222222 \n" +
