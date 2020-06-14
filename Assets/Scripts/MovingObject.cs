@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Xml.Linq;
 using UnityEditor.Experimental;
 using UnityEngine;
+using UnityEngine.UIElements;
 
 public abstract class MovingObject : MonoBehaviour
 {
@@ -12,6 +13,7 @@ public abstract class MovingObject : MonoBehaviour
     public LayerMask carretera;
     public LayerMask player;
     public LayerMask enemigo;
+    protected bool contagio = false;
 
 
     private float movementSpeed; //velocidad de movimiento
@@ -57,6 +59,7 @@ public abstract class MovingObject : MonoBehaviour
         {
             if(objectname == "player")
             {
+
                 boxCollider.enabled = false;
                 hit = Physics2D.Linecast(start, end, carretera);
                 boxCollider.enabled = true;
@@ -96,6 +99,10 @@ public abstract class MovingObject : MonoBehaviour
 
                     }
 
+                    if(hit.transform != null)
+                    {
+                        contagio = true;
+                    }
 
                 } 
                 
@@ -139,6 +146,4 @@ public abstract class MovingObject : MonoBehaviour
         OnCantMove(hit.transform.gameObject);
         
     }
-
-    //protected IEnumerator Contagio { }
 }

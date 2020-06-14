@@ -58,6 +58,7 @@ public class EnemigoVertical : MovingObject
         if (hitPlayer != null)
         {
             hitPlayer.LoseHealth(playerDamage);
+            contagio = true;
         }
 
         /*if(eh != null)

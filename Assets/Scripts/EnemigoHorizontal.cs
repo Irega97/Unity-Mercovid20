@@ -56,6 +56,7 @@ public class EnemigoHorizontal : MovingObject
         if (hitPlayer != null)
         {
             hitPlayer.LoseHealth(playerDamage);
+            contagio = true;
         }
 
         /*

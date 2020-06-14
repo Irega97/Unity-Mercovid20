@@ -57,6 +57,8 @@ public class Player : MovingObject
     // Update is called once per frame
     void Update()
     {
+        StartCoroutine(Contagio());
+
 #if UNITY_STANDALONE || UNITY_WEBPLAYER || UNITY_EDITOR
         horizontal = (int)Input.GetAxisRaw("Horizontal"); //-1 si es la izquierda, 1 si es derecha, 0 si no pulsa ninguna tecla
         vertical = (int)Input.GetAxisRaw("Vertical"); //-1 si abajo, 1 si arriba y 0 si no pulsamos
@@ -187,6 +189,7 @@ public class Player : MovingObject
             }
 
     }
+ 
 
     public void ResetEstados(string dir)
     {
@@ -267,5 +270,14 @@ public class Player : MovingObject
         health -= loss;
         CheckIfGameOver();
         Debug.Log(health);
+    }
+
+    IEnumerator Contagio()
+    {
+        while(contagio==true)
+        {
+            health--;
+            yield return null;
+        }
     }
 }
