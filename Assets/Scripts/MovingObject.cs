@@ -13,7 +13,7 @@ public abstract class MovingObject : MonoBehaviour
     public LayerMask carretera;
     public LayerMask player;
     public LayerMask enemigo;
-    protected bool contagio = false;
+    //protected bool contagio;
 
 
     private float movementSpeed; //velocidad de movimiento
@@ -30,6 +30,7 @@ public abstract class MovingObject : MonoBehaviour
     protected virtual void Start()
     {
         movementSpeed = 1f / moveTime;
+        //contagio = false;
 
     }
 
@@ -97,11 +98,6 @@ public abstract class MovingObject : MonoBehaviour
                             return true;
                         }
 
-                    }
-
-                    if(hit.transform != null)
-                    {
-                        contagio = true;
                     }
 
                 } 

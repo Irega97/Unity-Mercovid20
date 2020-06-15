@@ -6,6 +6,9 @@ using UnityEngine;
 public class EnemigoVertical : MovingObject
 {
     public int playerDamage;
+    public int cont2 = 1;
+    public bool cont1 = true;
+    public float cont3 = 0.5f;
 
     private Animator animator;
 
@@ -58,7 +61,7 @@ public class EnemigoVertical : MovingObject
         if (hitPlayer != null)
         {
             hitPlayer.LoseHealth(playerDamage);
-            contagio = true;
+            hitPlayer.Contagio(cont1, cont2,cont3);
         }
 
         /*if(eh != null)

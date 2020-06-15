@@ -8,6 +8,7 @@ public class GameManager : MonoBehaviour
     public BoardManager boardScript;
     public static GameManager instance = null;
     public int healthPoints = 100;
+    public bool contagio = false;
 
 
     void Awake()

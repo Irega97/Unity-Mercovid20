@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Runtime.CompilerServices;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -24,6 +25,7 @@ public class Player : MovingObject
 
     private Animator animator;
     public int health; //puntos de vida 
+    public bool contagiado;
 
 
     protected override void Awake()
@@ -35,6 +37,7 @@ public class Player : MovingObject
     protected override void Start()
     {
         health = GameManager.instance.healthPoints;
+        contagiado = GameManager.instance.contagio;
         base.Start();
     }
 
@@ -57,7 +60,6 @@ public class Player : MovingObject
     // Update is called once per frame
     void Update()
     {
-        StartCoroutine(Contagio());
 
 #if UNITY_STANDALONE || UNITY_WEBPLAYER || UNITY_EDITOR
         horizontal = (int)Input.GetAxisRaw("Horizontal"); //-1 si es la izquierda, 1 si es derecha, 0 si no pulsa ninguna tecla
@@ -270,14 +272,18 @@ public class Player : MovingObject
         health -= loss;
         CheckIfGameOver();
         Debug.Log(health);
+
     }
 
-    IEnumerator Contagio()
+   public void Contagio(bool contagio, int perdida, float duracion)
     {
-        while(contagio==true)
+        float i = 0;
+
+        while(contagio == true && i<duracion-1)
         {
-            health--;
-            yield return null;
+            LoseHealth(perdida);
+            i = i + (Time.realtimeSinceStartup/Time.realtimeSinceStartup);
         }
+        
     }
 }
