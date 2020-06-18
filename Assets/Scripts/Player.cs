@@ -53,7 +53,6 @@ public class Player : MovingObject
 
     protected override void AttemptMove(string objectname, int xDir, int yDir)
     {
-        contagiado = false;
         base.AttemptMove(objectname, xDir, yDir);
     }
 
