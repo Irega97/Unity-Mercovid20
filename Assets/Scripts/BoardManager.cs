@@ -112,7 +112,7 @@ public class BoardManager : MonoBehaviour
                            "026666666666666666666622666666666666226666666666666666666623\n";
 
 
-        /*string escenario =   "20 16               \n" +
+        string escenario2 =   "20 16               \n" +
                              "00 1 00             \n" +
                              "                    \n" +
                              "                    \n" +
@@ -128,7 +128,7 @@ public class BoardManager : MonoBehaviour
                              "    MMM  2222222222 \n" +
                              "                    \n" +
                              "                    \n" +
-                             "         44444444444\n";*/
+                             "         44444444444\n";
 
 
 
@@ -179,8 +179,8 @@ public class BoardManager : MonoBehaviour
                             "V 38 57  \n" +
                             "G 46 37  \n";
 
-        /*string personajes = "1        \n" + 
-                            "P 1 0    \n";*/
+        string personajes2 = "1        \n" + 
+                            "P 1 0    \n";
 
         string[] lineas = escenario.Split('\n');
         int xtotal = Convert.ToInt32(lineas[0].Split(' ')[0]);

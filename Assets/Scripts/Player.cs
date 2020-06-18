@@ -53,6 +53,7 @@ public class Player : MovingObject
 
     protected override void AttemptMove(string objectname, int xDir, int yDir)
     {
+        contagiado = false;
         base.AttemptMove(objectname, xDir, yDir);
     }
 
@@ -271,15 +272,15 @@ public class Player : MovingObject
     public void LoseHealth(int loss)
     {
         health -= loss;
-        StartCoroutine(Contagio(true, 5));
+        contagiado = true;
+        StartCoroutine(Contagio(5));
         CheckIfGameOver();
         Debug.Log(health);
 
     }
 
-   IEnumerator Contagio(bool contagio, int perdida)
+   IEnumerator Contagio(int perdida)
     {
-        contagiado = contagio;
 
         while(contagiado)
         {
