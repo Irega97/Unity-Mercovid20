@@ -25,7 +25,7 @@ public class Player : MovingObject
 
     private Animator animator;
     public int health; //puntos de vida 
-    public bool contagiado;
+    public bool contagiado = false;
 
 
     protected override void Awake()
@@ -262,6 +262,7 @@ public class Player : MovingObject
     {
        // SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
+
     private void OnTriggerEnter2D(Collider2D other)
     {
 
@@ -270,19 +271,28 @@ public class Player : MovingObject
     public void LoseHealth(int loss)
     {
         health -= loss;
+        contagiado = true;
+        StartCoroutine(Contagio(5));
         CheckIfGameOver();
         Debug.Log(health);
 
     }
 
-   public void Contagio(bool contagio, int perdida, float duracion)
+   IEnumerator Contagio(int perdida)
     {
-        float i = 0;
 
-        while(contagio == true && i<duracion-1)
+        while(contagiado)
         {
-            LoseHealth(perdida);
-            i = i + (Time.realtimeSinceStartup/Time.realtimeSinceStartup);
+            if (health > 0)
+                health = health - perdida;
+
+            else
+                health = 0;
+
+            CheckIfGameOver();
+            Debug.Log(health);
+            perdida++;
+            yield return new WaitForSeconds(1);
         }
         
     }
