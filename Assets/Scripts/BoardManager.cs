@@ -49,7 +49,7 @@ public class BoardManager : MonoBehaviour
         boardHolder5 = new GameObject("Cestas").transform;
 
 
-        string escenario = "60 60                                                       \n" +
+        string escenario2 = "60 60                                                       \n" +
                            "A9555555555555555555559955555555599599555555555555555555559C\n" +
                            "7B66666666666666666666DB666666666666DB66666666666666666666D8\n" +
                            "EF                    EF            EF                    EF\n" +
@@ -112,7 +112,7 @@ public class BoardManager : MonoBehaviour
                            "026666666666666666666622666666666666226666666666666666666623\n";
 
 
-        string escenario2 =   "20 16               \n" +
+        string escenario =   "20 16               \n" +
                              "00 1 00             \n" +
                              "                    \n" +
                              "                    \n" +
@@ -133,7 +133,7 @@ public class BoardManager : MonoBehaviour
 
 
         //Coches: tipo de coche, x inicial, y inicial, movimiento x, movimient y, direccion inicial, tipo de movimiento
-        string personajes = "44      \n" +
+        string personajes2 = "44      \n" +
                             "P 49 33 \n" +
                             "0 0 0 23 11 0 0    \n" +
                             "1 0 48 23 11 0 0   \n" +
@@ -179,7 +179,7 @@ public class BoardManager : MonoBehaviour
                             "V 38 57  \n" +
                             "G 46 37  \n";
 
-        string personajes2 = "1        \n" + 
+        string personajes = "1        \n" + 
                             "P 1 0    \n";
 
         string[] lineas = escenario.Split('\n');

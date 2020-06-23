@@ -14,6 +14,8 @@ TagManager:
   - Casa
   - SueloMercadona
   - GuardiaLlave
+  - Papel
+  - Codigo
   layers:
   - Default
   - TransparentFX
