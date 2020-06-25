@@ -38,7 +38,10 @@ public class GameManager : MonoBehaviour
         encargado2 = GameObject.Find("Encargado2");
         encargado3 = GameObject.Find("Encargado3");
 
-        AcabarConversa();
+        encargado1.SetActive(false);
+        encargado2.SetActive(false);
+        encargado3.SetActive(false);
+
         presentacion.SetActive(true);
 
         boardScript.SetupScene();
