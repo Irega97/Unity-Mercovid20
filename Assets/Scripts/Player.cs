@@ -65,7 +65,7 @@ public class Player : MovingObject
 #if UNITY_STANDALONE || UNITY_WEBPLAYER || UNITY_EDITOR
         horizontal = (int)Input.GetAxisRaw("Horizontal"); //-1 si es la izquierda, 1 si es derecha, 0 si no pulsa ninguna tecla
         vertical = (int)Input.GetAxisRaw("Vertical"); //-1 si abajo, 1 si arriba y 0 si no pulsamos
-        inter = (bool)Input.GetKey(KeyCode.A);
+        inter = (bool)Input.GetKey(KeyCode.Space);
 
 
             if (horizontal != 0) vertical = 0;
