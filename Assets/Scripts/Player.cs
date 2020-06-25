@@ -14,14 +14,16 @@ public class Player : MovingObject
     int estado;
     int horizontal;
     int vertical;
+    bool inter = false;
     bool llave = false;
+    bool papel = false;
+
     bool animacion = false;
     public GameObject llaveobject;
     private Vector2 touchOrigin = -Vector2.one;
     private Animator animator;
     public int health; //puntos de vida 
     public bool contagiado = false;
-    public bool guardiahablado;
     public Vector2 startPos;
     public Vector2 direction;
 
@@ -59,9 +61,10 @@ public class Player : MovingObject
     void Update()
     {
 
-        #if UNITY_STANDALONE || UNITY_WEBPLAYER || UNITY_EDITOR
-                horizontal = (int)Input.GetAxisRaw("Horizontal"); //-1 si es la izquierda, 1 si es derecha, 0 si no pulsa ninguna tecla
-                vertical = (int)Input.GetAxisRaw("Vertical"); //-1 si abajo, 1 si arriba y 0 si no pulsamos
+#if UNITY_STANDALONE || UNITY_WEBPLAYER || UNITY_EDITOR
+        horizontal = (int)Input.GetAxisRaw("Horizontal"); //-1 si es la izquierda, 1 si es derecha, 0 si no pulsa ninguna tecla
+        vertical = (int)Input.GetAxisRaw("Vertical"); //-1 si abajo, 1 si arriba y 0 si no pulsamos
+        inter = (bool)Input.GetKey(KeyCode.C);
 
 #else
         if (Input.touchCount > 0)
@@ -125,7 +128,7 @@ public class Player : MovingObject
 
         else if (vertical != 0) horizontal = 0;
 
-        if (!moving && !animacion)
+        if (!moving && !animacion || GameManager.instance.doingSetup)
             {
                 if (horizontal == 1)
                 {
@@ -213,6 +216,61 @@ public class Player : MovingObject
                 ResetEstados("y");
             }
 
+
+        if (inter)
+        {
+            if (estado == 0)
+            {
+                ComprovarDialogo(0, 1);
+              
+            } else if (estado == 1)
+            {
+                ComprovarDialogo(0, -1);
+                
+            } else if (estado == 2)
+            {
+                ComprovarDialogo(-1, 0);
+            } else if (estado == 3)
+            {
+                ComprovarDialogo(1, 0);
+            }
+
+        }
+
+    }
+
+    private void ComprovarDialogo(int xDir, int yDir)
+    {
+        Vector2 final = new Vector2(transform.position.x + xDir, transform.position.y + yDir);
+        RaycastHit2D hit = Physics2D.Linecast(transform.position, final, blockingLayer);
+
+        if (hit.transform != null)
+        {
+            if (hit.transform.gameObject.tag == "GuardiaLlave" )
+            {
+                GameManager.instance.InteractuarEncargado(1);
+
+                if (GameObject.Find("Llave(Clone)") == null && !llave)
+                    llaveobject = Instantiate(llaveobject, new Vector3(51, 31, 0f), Quaternion.identity);
+            }
+
+            else if (hit.transform.gameObject.tag == "Llave")
+            {
+                llave = true;
+                Destroy(GameObject.Find("Llave(Clone)"));
+            }
+
+            else if (hit.transform.gameObject.tag == "Encargado" || !papel)
+            {
+                GameManager.instance.InteractuarEncargado(2);
+
+            }
+
+            else if (hit.transform.gameObject.tag == "Encargado" || papel)
+            {
+                GameManager.instance.InteractuarEncargado(3);
+            }
+        }
     }
  
 
@@ -278,19 +336,6 @@ public class Player : MovingObject
             Animator animacionpuerta = go.GetComponent<Animator>();
             animacionpuerta.SetTrigger("AbrirMercadona");
             StartCoroutine(esperar());
-        }
-
-        if (go.tag == "GuardiaLlave")
-            guardiahablado = true;
-            
-
-        if (go.tag == "PropietarioMercadona" && GameObject.Find("Llave(Clone)") == null && !llave && guardiahablado)
-                llaveobject = Instantiate(llaveobject, new Vector3(51, 31, 0f), Quaternion.identity);
-
-        if (go.tag == "Llave")
-        {
-            llave = true;
-            Destroy(GameObject.Find("Llave(Clone)"));
         }
     }
 

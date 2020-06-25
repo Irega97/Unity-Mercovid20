@@ -130,7 +130,7 @@ public class BoardManager : MonoBehaviour
 
 
         //Coches: tipo de coche, x inicial, y inicial, movimiento x, movimient y, direccion inicial, tipo de movimiento
-        string personajes = "45      \n" +
+        string personajes = "44      \n" +
                             "P 49 33 \n" +
                             "0 0 0 23 11 0 0    \n" +
                             "1 0 48 23 11 0 0   \n" +
@@ -174,7 +174,6 @@ public class BoardManager : MonoBehaviour
                             "V 21 50  \n" +
                             "V 46 40  \n" +
                             "V 38 57  \n" +
-                            "M 52 33  \n" +
                             "G 46 37  \n";
 
         string personajes2 = "1        \n" + 
