@@ -19,6 +19,7 @@ public class Player : MovingObject
     int vertical;
     bool llave = true;
     bool animacion = false;
+    public GameObject llaveobject;
 
     private Vector2 touchOrigin = -Vector2.one;
 

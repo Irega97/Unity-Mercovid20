@@ -16,6 +16,8 @@ TagManager:
   - GuardiaLlave
   - Papel
   - Codigo
+  - PuertaAlmacen
+  - Llave
   layers:
   - Default
   - TransparentFX

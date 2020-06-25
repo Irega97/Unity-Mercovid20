@@ -39,17 +39,12 @@ public class BoardManager : MonoBehaviour
     public GameObject sueloMercadona;
     public GameObject guardiaLlave;
     public GameObject carro;
+    public GameObject invisible;
 
     public void SetupScene()
     {
-        boardHolder = new GameObject("Suelo").transform;
-        boardHolder2 = new GameObject("Mercadona").transform;
-        boardHolder3 = new GameObject("Casas").transform;
-        boardHolder4 = new GameObject("Personajes").transform;
-        boardHolder5 = new GameObject("Cestas").transform;
-
-
-        string escenario2 = "60 60                                                       \n" +
+        
+        string escenario2 = "60 60 1                                                    \n" +
                            "A9555555555555555555559955555555599599555555555555555555559C\n" +
                            "7B66666666666666666666DB666666666666DB66666666666666666666D8\n" +
                            "EF                    EF            EF                    EF\n" +
@@ -112,7 +107,7 @@ public class BoardManager : MonoBehaviour
                            "026666666666666666666622666666666666226666666666666666666623\n";
 
 
-        string escenario =   "20 16               \n" +
+        string escenario =   "20 16 2             \n" +
                              "00 1 00             \n" +
                              "                    \n" +
                              "                    \n" +
@@ -185,6 +180,7 @@ public class BoardManager : MonoBehaviour
         string[] lineas = escenario.Split('\n');
         int xtotal = Convert.ToInt32(lineas[0].Split(' ')[0]);
         int ytotal = Convert.ToInt32(lineas[0].Split(' ')[1]);
+        int mapa = Convert.ToInt32(lineas[0].Split(' ')[2]);
         string[] jugadores = personajes.Split('\n');
         int ptotal = Convert.ToInt32(jugadores[0]);
         int m = 0;
@@ -205,12 +201,55 @@ public class BoardManager : MonoBehaviour
         float xmapa;
         float ymapa;
 
-        for (int y = 0; y < ytotal; y++)
+        boardHolder = new GameObject("Suelo").transform;
+        boardHolder2 = new GameObject("Personajes").transform;
+        boardHolder3 = new GameObject("Bordes").transform;
+
+        if (mapa == 1)
+        {
+            boardHolder4 = new GameObject("Mercadona").transform;
+            boardHolder5 = new GameObject("Casas").transform;
+        }
+
+        else if (mapa == 2)
+        {
+
+        }
+
+        int x;
+        int y;
+
+        for (x = -1; x < xtotal + 1; x++)
+        {
+            GameObject borde = Instantiate(invisible, new Vector3(x, -1f, 0f), Quaternion.identity);
+            borde.transform.SetParent(boardHolder3);
+        }
+
+        for (x = -1; x < xtotal + 1; x++)
+        {
+            GameObject borde = Instantiate(invisible, new Vector3(x, ytotal, 0f), Quaternion.identity);
+            borde.transform.SetParent(boardHolder3);
+        }
+
+        for (y = -1; y< ytotal +1; y++)
+        {
+            GameObject borde = Instantiate(invisible, new Vector3(-1, y, 0f), Quaternion.identity);
+            borde.transform.SetParent(boardHolder3);
+        }
+
+        for (y = -1; y < ytotal + 1; y++)
+        {
+            GameObject borde = Instantiate(invisible, new Vector3(xtotal, y, 0f), Quaternion.identity);
+            borde.transform.SetParent(boardHolder3);
+        }
+
+
+        for (y = 0; y < ytotal; y++)
         {
             ymapa = -y + ytotal-1;
             string linea = lineas[y + 1];
 
-            for (int x = 0; x < xtotal; x++)
+            for (x = 0; x < xtotal; x++)
             {
                 xmapa = x;
                 char ch = linea[x];
@@ -220,7 +259,7 @@ public class BoardManager : MonoBehaviour
                 switch (ch)
                 {
                     case 'M':
-                        if (ytotal == 60)
+                        if (mapa == 1)
                         {
                             GameObject instancemercadona = Instantiate(mercadona[m], new Vector3(xmapa, ymapa, 0f), Quaternion.identity);
                             instance = Instantiate(acera, new Vector3(xmapa, ymapa, 0f), Quaternion.identity);
@@ -232,7 +271,7 @@ public class BoardManager : MonoBehaviour
                             instancemercadona.transform.SetParent(boardHolder2);
                         }
 
-                        else if (ytotal == 16)
+                        else if (mapa == 2)
                         {
                             GameObject caja = Instantiate(cajaregistradora[m], new Vector3(xmapa, ymapa, 0f), Quaternion.identity);
                             instance = Instantiate(sueloMercadona, new Vector3(xmapa, ymapa, 0f), Quaternion.identity);
