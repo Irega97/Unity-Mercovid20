@@ -16,10 +16,11 @@ TagManager:
   - GuardiaLlave
   - Papel
   - Codigo
-  - PuertaAlmacen
   - Llave
-  - Alfombra
   - PropietarioMercadona
+  - Objeto
+  - Alfombra
+  - PuertaAlmacen
   layers:
   - Default
   - TransparentFX
