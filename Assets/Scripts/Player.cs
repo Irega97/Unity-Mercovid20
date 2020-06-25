@@ -70,7 +70,7 @@ public class Player : MovingObject
 
             else if (vertical != 0) horizontal = 0;
 #else
-        if (Input.touchCount > 0)
+        /*if (Input.touchCount > 0)
         {
             Touch myTouch = Input.touches[0];
             if (myTouch.phase == TouchPhase.Began)
@@ -99,7 +99,7 @@ public class Player : MovingObject
                     }
                 }
             }
-        }
+        }*/
 #endif
 
         if (!moving && !animacion)
