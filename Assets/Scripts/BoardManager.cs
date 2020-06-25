@@ -41,7 +41,6 @@ public class BoardManager : MonoBehaviour
     public GameObject guardiaLlave;
     public GameObject carro;
     public GameObject invisible;
-    public GameObject propietarioMercadona;
 
     public void SetupScene()
     {
@@ -683,10 +682,6 @@ public class BoardManager : MonoBehaviour
 
                 case 'G':
                     instance = Instantiate(guardiaLlave, new Vector3(Convert.ToInt32(jugadores[pl + 1].Split(' ')[1]), Convert.ToInt32(jugadores[pl + 1].Split(' ')[2]), 0f), Quaternion.identity);
-                    break;
-
-                case 'M':
-                    instance = Instantiate(propietarioMercadona, new Vector3(Convert.ToInt32(jugadores[pl + 1].Split(' ')[1]), Convert.ToInt32(jugadores[pl + 1].Split(' ')[2]), 0f), Quaternion.identity);
                     break;
             }
 
