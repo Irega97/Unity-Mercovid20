@@ -17,6 +17,7 @@ public class Player : MovingObject
     int estado;
     int horizontal;
     int vertical;
+    bool inter = false;
     bool llave = true;
     bool animacion = false;
 
@@ -64,6 +65,7 @@ public class Player : MovingObject
 #if UNITY_STANDALONE || UNITY_WEBPLAYER || UNITY_EDITOR
         horizontal = (int)Input.GetAxisRaw("Horizontal"); //-1 si es la izquierda, 1 si es derecha, 0 si no pulsa ninguna tecla
         vertical = (int)Input.GetAxisRaw("Vertical"); //-1 si abajo, 1 si arriba y 0 si no pulsamos
+        inter = (bool)Input.GetKey(KeyCode.A);
 
 
             if (horizontal != 0) vertical = 0;
@@ -102,7 +104,7 @@ public class Player : MovingObject
         }
 #endif
 
-        if (!moving && !animacion)
+        if (!moving && !animacion || GameManager.instance.doingSetup)
             {
                 if (horizontal == 1)
                 {
@@ -190,6 +192,15 @@ public class Player : MovingObject
                 ResetEstados("y");
             }
 
+
+        if (inter)
+        {
+
+            //RaycastHit2D hit = Physics2D.Linecast(transform.position, , blockingLayer);
+
+
+        }
+
     }
  
 
@@ -256,6 +267,8 @@ public class Player : MovingObject
             animacionpuerta.SetTrigger("AbrirMercadona");
             StartCoroutine(esperar());
         }
+
+
     }
 
   void Restart()
