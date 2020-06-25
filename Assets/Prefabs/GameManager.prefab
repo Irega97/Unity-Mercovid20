@@ -494,6 +494,8 @@ MonoBehaviour:
   carro: {fileID: 3016388447624573687, guid: ff7a03267b154a64c80fac2fd543ad05, type: 3}
   invisible: {fileID: 6865793603783208386, guid: 92042d639b612ed4e961455ea9664c0f,
     type: 3}
+  propietarioMercadona: {fileID: 2748043876781551725, guid: d1029bbb02b71ef4b8dfe9f767adf192,
+    type: 3}
 --- !u!114 &1431000569802020838
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -41,6 +41,7 @@ public class BoardManager : MonoBehaviour
     public GameObject guardiaLlave;
     public GameObject carro;
     public GameObject invisible;
+    public GameObject propietarioMercadona;
 
     public void SetupScene()
     {
@@ -129,7 +130,7 @@ public class BoardManager : MonoBehaviour
 
 
         //Coches: tipo de coche, x inicial, y inicial, movimiento x, movimient y, direccion inicial, tipo de movimiento
-        string personajes = "44      \n" +
+        string personajes = "45      \n" +
                             "P 49 33 \n" +
                             "0 0 0 23 11 0 0    \n" +
                             "1 0 48 23 11 0 0   \n" +
@@ -173,6 +174,7 @@ public class BoardManager : MonoBehaviour
                             "V 21 50  \n" +
                             "V 46 40  \n" +
                             "V 38 57  \n" +
+                            "M 52 33  \n" +
                             "G 46 37  \n";
 
         string personajes2 = "1        \n" + 
@@ -682,6 +684,10 @@ public class BoardManager : MonoBehaviour
 
                 case 'G':
                     instance = Instantiate(guardiaLlave, new Vector3(Convert.ToInt32(jugadores[pl + 1].Split(' ')[1]), Convert.ToInt32(jugadores[pl + 1].Split(' ')[2]), 0f), Quaternion.identity);
+                    break;
+
+                case 'M':
+                    instance = Instantiate(propietarioMercadona, new Vector3(Convert.ToInt32(jugadores[pl + 1].Split(' ')[1]), Convert.ToInt32(jugadores[pl + 1].Split(' ')[2]), 0f), Quaternion.identity);
                     break;
             }
 

@@ -18,6 +18,8 @@ TagManager:
   - Codigo
   - PuertaAlmacen
   - Llave
+  - Alfombra
+  - PropietarioMercadona
   layers:
   - Default
   - TransparentFX
