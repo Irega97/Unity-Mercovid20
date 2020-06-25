@@ -17,9 +17,10 @@ public class Player : MovingObject
     int estado;
     int horizontal;
     int vertical;
-    bool llave = true;
+    bool llave = false;
     bool animacion = false;
     public GameObject llaveobject;
+    //bool inter = (bool) Input.GetKey(KeyCode.A);
 
     private Vector2 touchOrigin = -Vector2.one;
 
@@ -256,6 +257,15 @@ public class Player : MovingObject
             Animator animacionpuerta = go.GetComponent<Animator>();
             animacionpuerta.SetTrigger("AbrirMercadona");
             StartCoroutine(esperar());
+        }
+
+        if (go.tag == "GuardiaLlave" && GameObject.Find("Llave(Clone)") == null && !llave)
+            llaveobject = Instantiate(llaveobject, new Vector3(51, 31, 0f), Quaternion.identity);
+
+        if (go.tag == "Llave")
+        {
+            llave = true;
+            Destroy(GameObject.Find("Llave(Clone)"));
         }
     }
 
