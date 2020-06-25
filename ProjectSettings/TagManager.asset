@@ -16,6 +16,10 @@ TagManager:
   - GuardiaLlave
   - Papel
   - Codigo
+  - PuertaAlmacen
+  - Llave
+  - Alfombra
+  - PropietarioMercadona
   - Alfombra
   - PuertaAlmacen
   - Objeto
