@@ -18,15 +18,15 @@ public class Player : MovingObject
     int horizontal;
     int vertical;
     bool inter = false;
-    bool llave = true;
+    bool llave = false;
+
     bool animacion = false;
-
+    public GameObject llaveobject;
     private Vector2 touchOrigin = -Vector2.one;
-
-
     private Animator animator;
     public int health; //puntos de vida 
     public bool contagiado = false;
+    public bool guardiahablado;
 
 
     protected override void Awake()
@@ -72,7 +72,7 @@ public class Player : MovingObject
 
             else if (vertical != 0) horizontal = 0;
 #else
-        if (Input.touchCount > 0)
+        /*if (Input.touchCount > 0)
         {
             Touch myTouch = Input.touches[0];
             if (myTouch.phase == TouchPhase.Began)
@@ -101,7 +101,7 @@ public class Player : MovingObject
                     }
                 }
             }
-        }
+        }*/
 #endif
 
         if (!moving && !animacion || GameManager.instance.doingSetup)
@@ -268,7 +268,18 @@ public class Player : MovingObject
             StartCoroutine(esperar());
         }
 
+        if (go.tag == "GuardiaLlave")
+            guardiahablado = true;
+            
 
+        if (go.tag == "PropietarioMercadona" && GameObject.Find("Llave(Clone)") == null && !llave && guardiahablado)
+                llaveobject = Instantiate(llaveobject, new Vector3(51, 31, 0f), Quaternion.identity);
+
+        if (go.tag == "Llave")
+        {
+            llave = true;
+            Destroy(GameObject.Find("Llave(Clone)"));
+        }
     }
 
   void Restart()
