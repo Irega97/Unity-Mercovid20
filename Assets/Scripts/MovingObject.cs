@@ -52,10 +52,9 @@ public abstract class MovingObject : MonoBehaviour
         boxCollider.enabled = false;
         hit = Physics2D.Linecast(start, end, blockingLayer);
         boxCollider.enabled = true;
-        
         if (hit.transform == null)
         {
-            if(objectname == "player")
+            if(objectname == "player" || objectname == "guardia")
             {
 
                 boxCollider.enabled = false;

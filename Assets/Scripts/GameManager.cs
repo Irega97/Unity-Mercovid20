@@ -39,11 +39,12 @@ public class GameManager : MonoBehaviour
 
         AcabarConversa();
 
-        presentacion.SetActive(true);
+        presentacion.SetActive(false);
+        doingSetup = false;
 
         boardScript.SetupScene();
 
-        Invoke("HidePresentacion", levelStartDelay);
+        //Invoke("HidePresentacion", levelStartDelay);
     }
 
     private void HidePresentacion()

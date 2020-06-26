@@ -181,7 +181,7 @@ public class BoardManager : MonoBehaviour
 
         string personajes = "2                 \n" +
                             "P 14 14           \n" +
-                            "G 18 14 16 4 0 0 4\n";
+                            "G 18 10 16 4 0 0\n";
 
         string[] lineas = escenario.Split('\n');
         int xtotal = Convert.ToInt32(lineas[0].Split(' ')[0]);
@@ -736,7 +736,6 @@ public class BoardManager : MonoBehaviour
                         scriptguardia.vermax = Int32.Parse(jugadores[pl + 1].Split(' ')[4]);
                         scriptguardia.move = Int32.Parse(jugadores[pl + 1].Split(' ')[5]);
                         scriptguardia.ordenmovimiento = Int32.Parse(jugadores[pl + 1].Split(' ')[6]);
-                        scriptguardia.contador = Int32.Parse(jugadores[pl + 1].Split(' ')[7]);
                     }
                     
                     break;

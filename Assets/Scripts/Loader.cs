@@ -9,7 +9,7 @@ public class Loader : MonoBehaviour
 
     void Start()
     {
-        Application.targetFrameRate = 60;
+        Application.targetFrameRate = 300;
     }
     void Awake()
     {
