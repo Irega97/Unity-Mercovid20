@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class Player : MovingObject
 {
@@ -376,6 +377,7 @@ public class Player : MovingObject
             Vector2 start = transform.position;
             Vector2 end = start + new Vector2(0, 1);
             StartCoroutine(SmoothMovement(end));
+            Invoke("Restart", restartLevelDelay);
         }
 
         else if (i == 0)
@@ -390,20 +392,22 @@ public class Player : MovingObject
             Animator animacionpuerta = go.GetComponent<Animator>();
             animacionpuerta.SetTrigger("AbrirMercadona");
             StartCoroutine(esperar(1));
-            
         }
+
         if (go.tag == "PuertaAlmacen" && codigo)
         {
             animacion = true;
             Vector2 start = transform.position;
             Vector2 end = start + new Vector2(0, 1);
             StartCoroutine(SmoothMovement(end));
+            Invoke("Restart", restartLevelDelay);
         }
     }
 
   void Restart()
     {
-       // SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+        GameManager.instance.healthPoints = health;
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 
     private void OnTriggerEnter2D(Collider2D other)
