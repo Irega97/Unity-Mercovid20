@@ -45,6 +45,7 @@ public class BoardManager : MonoBehaviour
     public GameObject alfombra;
     public GameObject puertaalmacen;
     public GameObject codigo;
+    public int mapa;
 
     public void SetupScene()
     {
@@ -133,8 +134,8 @@ public class BoardManager : MonoBehaviour
 
 
         //Coches: tipo de coche, x inicial, y inicial, movimiento x, movimient y, direccion inicial, tipo de movimiento
-        string personajes2= "44      \n" +
-                            "P 49 33 \n" +
+        string personajes2 = "44      \n" +
+                            "P 4 4   \n" +
                             "0 0 0 23 11 0 0    \n" +
                             "1 0 48 23 11 0 0   \n" +
                             "2 36 48 23 11 0 0  \n" +
@@ -186,7 +187,7 @@ public class BoardManager : MonoBehaviour
         string[] lineas = escenario.Split('\n');
         int xtotal = Convert.ToInt32(lineas[0].Split(' ')[0]);
         int ytotal = Convert.ToInt32(lineas[0].Split(' ')[1]);
-        int mapa = Convert.ToInt32(lineas[0].Split(' ')[2]);
+        mapa = Convert.ToInt32(lineas[0].Split(' ')[2]);
         string[] jugadores = personajes.Split('\n');
         int ptotal = Convert.ToInt32(jugadores[0]);
         int m = 0;
