@@ -91,7 +91,7 @@ public class Coche : MovingObject
     }
     private void Comprobarposicion()
     {
-        if (ordenmovimiento ==0)
+        if (ordenmovimiento == 0)
         {
             if (horizontal == hormax)
             {

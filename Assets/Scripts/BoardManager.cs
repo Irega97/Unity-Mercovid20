@@ -38,6 +38,7 @@ public class BoardManager : MonoBehaviour
     public GameObject[] estanterias;
     public GameObject sueloMercadona;
     public GameObject guardiaLlave;
+    public GameObject guardia;
     public GameObject carro;
     public GameObject invisible;
     public GameObject alarma;
@@ -178,8 +179,9 @@ public class BoardManager : MonoBehaviour
                             "V 38 57  \n" +
                             "G 46 37  \n";
 
-        string personajes = "1        \n" + 
-                            "P 18 14  \n";
+        string personajes = "2                 \n" +
+                            "P 14 14           \n" +
+                            "G 18 14 16 4 0 0 4\n";
 
         string[] lineas = escenario.Split('\n');
         int xtotal = Convert.ToInt32(lineas[0].Split(' ')[0]);
@@ -650,7 +652,15 @@ public class BoardManager : MonoBehaviour
              switch (ch)
              {
                  case 'P':
-                     instance = Instantiate(player, new Vector3(Convert.ToInt32(jugadores[pl + 1].Split(' ')[1]), Convert.ToInt32(jugadores[pl + 1].Split(' ')[2]), 0f), Quaternion.identity);
+                    if (GameObject.Find("Jugador(Clone)") == null)
+                        instance = Instantiate(player, new Vector3(Convert.ToInt32(jugadores[pl + 1].Split(' ')[1]), Convert.ToInt32(jugadores[pl + 1].Split(' ')[2]), 0f), Quaternion.identity);
+                    else
+                    {
+                        GameObject jugador = GameObject.Find("Jugador(Clone)");
+                        //jugador.transform.position.x = Convert.ToInt32(jugadores[pl + 1].Split(' ')[1]);
+                        //jugador.transform.position.y = Convert.ToInt32(jugadores[pl + 1].Split(' ')[1]);
+
+                    }
                      break;
 
                  case '0':
@@ -713,7 +723,22 @@ public class BoardManager : MonoBehaviour
                      break;
 
                 case 'G':
-                    instance = Instantiate(guardiaLlave, new Vector3(Convert.ToInt32(jugadores[pl + 1].Split(' ')[1]), Convert.ToInt32(jugadores[pl + 1].Split(' ')[2]), 0f), Quaternion.identity);
+                    if (mapa == 1)
+                    {
+                        instance = Instantiate(guardiaLlave, new Vector3(Convert.ToInt32(jugadores[pl + 1].Split(' ')[1]), Convert.ToInt32(jugadores[pl + 1].Split(' ')[2]), 0f), Quaternion.identity);
+                    }
+
+                    else if (mapa == 2)
+                    {
+                        instance = Instantiate(guardia, new Vector3(Convert.ToInt32(jugadores[pl + 1].Split(' ')[1]), Convert.ToInt32(jugadores[pl + 1].Split(' ')[2]), 0f), Quaternion.identity);
+                        Guardia scriptguardia = instance.GetComponent<Guardia>();
+                        scriptguardia.hormax = Int32.Parse(jugadores[pl + 1].Split(' ')[3]);
+                        scriptguardia.vermax = Int32.Parse(jugadores[pl + 1].Split(' ')[4]);
+                        scriptguardia.move = Int32.Parse(jugadores[pl + 1].Split(' ')[5]);
+                        scriptguardia.ordenmovimiento = Int32.Parse(jugadores[pl + 1].Split(' ')[6]);
+                        scriptguardia.contador = Int32.Parse(jugadores[pl + 1].Split(' ')[7]);
+                    }
+                    
                     break;
             }
 

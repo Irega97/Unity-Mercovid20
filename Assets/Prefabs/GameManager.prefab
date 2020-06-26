@@ -486,6 +486,7 @@ MonoBehaviour:
     type: 3}
   guardiaLlave: {fileID: 3044731969479969209, guid: 5f2d53df8fbb9bd49af0ae72e1aff071,
     type: 3}
+  guardia: {fileID: 3643769512771757905, guid: 9fa8e259bf8ff18409a657e1a673d363, type: 3}
   carro: {fileID: 3016388447624573687, guid: ff7a03267b154a64c80fac2fd543ad05, type: 3}
   invisible: {fileID: 6865793603783208386, guid: 92042d639b612ed4e961455ea9664c0f,
     type: 3}
