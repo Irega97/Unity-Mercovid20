@@ -20,7 +20,6 @@ public class Player : MovingObject
 
     bool animacion = false;
     public GameObject llaveobject;
-    private Vector2 touchOrigin = -Vector2.one;
     private Animator animator;
     public int health; //puntos de vida 
     public bool contagiado = false;
@@ -82,14 +81,49 @@ public class Player : MovingObject
                     break;
 
                 case TouchPhase.Ended:
-                    direction.x = 0;
-                    direction.y = 0;
+                    if (Mathf.Abs(direction.x) < 50 && Mathf.Abs(direction.y) < 50)
+                    {
+                        inter = true;
+                        //GameManager.instance.Sensibilidad(direction);
+                        if (Mathf.Abs(direction.x) > Mathf.Abs(direction.y))
+                        {
+                            if (direction.x > 0)
+                            {
+                                estado = 3;
+                                CambiarIdle(estado);
+                            }
+
+                            else
+                            {
+                                estado = 2;
+                                CambiarIdle(estado);
+                            }
+                        }
+                    }
+
+                    else if (Mathf.Abs(direction.y) > Mathf.Abs(direction.x))
+                    {
+                        if (direction.y > 0)
+                        {
+                            estado = 0;
+                            CambiarIdle(estado);
+                        }
+
+
+                        else
+                        {
+                            estado = 1;
+                            CambiarIdle(estado);
+                        }
+                    }
                     horizontal = 0;
                     vertical = 0;
+                    direction.x = 0;
+                    direction.y = 0;
                     break;
             }
 
-            if (Mathf.Abs(direction.x) > Mathf.Abs(direction.y))
+            if (Mathf.Abs(direction.x) > Mathf.Abs(direction.y) && Mathf.Abs(direction.x) > 50)
             {
                 if (direction.x > 0)
                 {
@@ -105,7 +139,7 @@ public class Player : MovingObject
                     
             }
 
-            else if (Mathf.Abs(direction.y) > Mathf.Abs(direction.x))
+            else if (Mathf.Abs(direction.y) > Mathf.Abs(direction.x) && Mathf.Abs(direction.y) > 50)
             {
                 if (direction.y > 0)
                 {
@@ -234,7 +268,8 @@ public class Player : MovingObject
             {
                 ComprovarDialogo(1, 0);
             }
-
+            if (inter)
+                inter = false;
         }
 
     }
