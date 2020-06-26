@@ -11,7 +11,7 @@ public class Player : MovingObject
     int countl = 0;
     int countr = 0;
     int tiempoupdate = 15;
-    int estado;
+    public int estado;
     int horizontal;
     int vertical;
     bool inter = false;
@@ -19,7 +19,7 @@ public class Player : MovingObject
     bool papel = false;
     bool codigo = false;
 
-    bool animacion = false;
+    public bool animacion = false;
     public GameObject llaveobject;
     private Animator animator;
     public int health; //puntos de vida 
@@ -38,6 +38,7 @@ public class Player : MovingObject
     {
         health = GameManager.instance.healthPoints;
         contagiado = GameManager.instance.contagio;
+        CambiarIdle(estado);
         base.Start();
     }
 
@@ -163,7 +164,7 @@ public class Player : MovingObject
 
         else if (vertical != 0) horizontal = 0;
 
-        if (!moving && !animacion || GameManager.instance.doingSetup)
+        if (!moving && !animacion && !GameManager.instance.doingSetup)
             {
                 if (horizontal == 1)
                 {

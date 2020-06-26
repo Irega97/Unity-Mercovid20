@@ -135,7 +135,7 @@ public class BoardManager : MonoBehaviour
 
         //Coches: tipo de coche, x inicial, y inicial, movimiento x, movimient y, direccion inicial, tipo de movimiento
         string personajes2 = "44      \n" +
-                            "P 4 4   \n" +
+                            "P 4 4 1  \n" +
                             "0 0 0 23 11 0 0    \n" +
                             "1 0 48 23 11 0 0   \n" +
                             "2 36 48 23 11 0 0  \n" +
@@ -181,7 +181,7 @@ public class BoardManager : MonoBehaviour
                             "G 46 37  \n";
 
         string personajes = "2                 \n" +
-                            "P 14 14           \n" +
+                            "P 1 0 0           \n" +
                             "G 18 10 16 4 0 0\n";
 
         string[] lineas = escenario.Split('\n');
@@ -653,15 +653,10 @@ public class BoardManager : MonoBehaviour
              switch (ch)
              {
                  case 'P':
-                    if (GameObject.Find("Jugador(Clone)") == null)
-                        instance = Instantiate(player, new Vector3(Convert.ToInt32(jugadores[pl + 1].Split(' ')[1]), Convert.ToInt32(jugadores[pl + 1].Split(' ')[2]), 0f), Quaternion.identity);
-                    else
-                    {
-                        GameObject jugador = GameObject.Find("Jugador(Clone)");
-                        //jugador.transform.position.x = Convert.ToInt32(jugadores[pl + 1].Split(' ')[1]);
-                        //jugador.transform.position.y = Convert.ToInt32(jugadores[pl + 1].Split(' ')[1]);
+                    instance = Instantiate(player, new Vector3(Convert.ToInt32(jugadores[pl + 1].Split(' ')[1]), Convert.ToInt32(jugadores[pl + 1].Split(' ')[2]), 0f), Quaternion.identity);
+                    Player jugador = instance.GetComponent<Player>();
+                    jugador.estado = Convert.ToInt32(jugadores[pl + 1].Split(' ')[3]);
 
-                    }
                      break;
 
                  case '0':
