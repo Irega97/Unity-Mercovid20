@@ -11,6 +11,8 @@ public class Buttons : MonoBehaviour
     public int cantidadDesinfectantePlus = 3;
     public int cantidadDesinfectantePro = 3;
     public int cantidadJabon = 3;
+    public int cantidadMascarilla = 1;
+    public int cantidadMegaMascarilla = 1;
 
     public Text estadoVida;
     private Text desinfectante;
@@ -33,6 +35,23 @@ public class Buttons : MonoBehaviour
         desinfectanteplus.text = "x" + cantidadDesinfectantePlus;
         desinfectantepro.text = "x" + cantidadDesinfectantePro;
         jabon.text = "x" + cantidadJabon;
+
+        if(cantidadMascarilla > 0 || cantidadMegaMascarilla > 0)
+        {
+            if(cantidadMegaMascarilla > 0)
+            {
+                player.health = player.health + 50;
+                estadoVida.text = "Vida: " + player.health;
+                cantidadMascarilla--;
+            }
+            else
+            {
+                player.health = player.health + 25;
+                estadoVida.text = "Vida: " + player.health;
+                cantidadMascarilla--;
+            }
+        }
+
     }
 
     // Update is called once per frame
@@ -57,6 +76,7 @@ public class Buttons : MonoBehaviour
             estadoVida.text = "Vida: " + player.health;
         }
     }
+
     public void DesinfectantePlus()
     {
         if(cantidadDesinfectantePlus > 0)
@@ -70,10 +90,10 @@ public class Buttons : MonoBehaviour
         {
             estadoVida.text = " No te queda más Desinfectante Plus ";
             estadoVida.text = "Vida: " + player.health;
-
         }
 
     }
+
     public void DesinfectantePro()
     {
         if (cantidadDesinfectantePro > 0)
@@ -87,10 +107,10 @@ public class Buttons : MonoBehaviour
         {
             estadoVida.text = " No te queda más Desinfectante Pro ";
             estadoVida.text = "Vida: " + player.health;
-
         }
 
     }
+
     public void Jabon()
     {
         if (cantidadJabon > 0)
@@ -101,7 +121,6 @@ public class Buttons : MonoBehaviour
                 estadoVida.text = "Vida: " + player.health;
                 player.contagiado = false;
                 jabon.text = "x" + cantidadJabon--;
-
             }
             else
                 jabon.text = "x" + cantidadJabon--;
@@ -111,7 +130,6 @@ public class Buttons : MonoBehaviour
             estadoVida.text = " No te queda más Jabón ";
             estadoVida.text = "Vida: " + player.health;
         }
-       
        
     }
 }
