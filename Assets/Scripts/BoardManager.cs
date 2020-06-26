@@ -36,7 +36,6 @@ public class BoardManager : MonoBehaviour
     public GameObject[] cesta;
     public GameObject[] cajaregistradora;
     public GameObject[] estanterias;
-    public GameObject[] estanteriavacia;
     public GameObject sueloMercadona;
     public GameObject guardiaLlave;
     public GameObject carro;
@@ -113,19 +112,19 @@ public class BoardManager : MonoBehaviour
 
 
         string escenario =   "20 16 2             \n" +
-                             "00110011         7 8\n" +
+                             "33333333 001100117 8\n" +
+                             "3                   \n" +
+                             "3                   \n" +
+                             "3     2222222222    \n" +
+                             "3     2222222222    \n" +
+                             "3                   \n" +
+                             "                    \n" +
+                             "   MMM  2222222222  \n" +
+                             "   MMM  2222222222  \n" +
                              "                    \n" +
                              "                    \n" +
-                             "    222222222233    \n" +
-                             "    222222222233    \n" +
-                             "                    \n" +
-                             "                    \n" +
-                             "    MMM  2222222222 \n" +
-                             "    MMM  2222222222 \n" +
-                             "                    \n" +
-                             "                    \n" +
-                             "    MMM  2222222222 \n" +
-                             "    MMM  2222222222 \n" +
+                             "   MMM  2222222222  \n" +
+                             "   MMM  2222222222  \n" +
                              "                    \n" +
                              "                    \n" +
                              "565       44444444444\n";
@@ -133,7 +132,7 @@ public class BoardManager : MonoBehaviour
 
 
         //Coches: tipo de coche, x inicial, y inicial, movimiento x, movimient y, direccion inicial, tipo de movimiento
-        string personajes2 = "44      \n" +
+        string personajes2= "44      \n" +
                             "P 49 33 \n" +
                             "0 0 0 23 11 0 0    \n" +
                             "1 0 48 23 11 0 0   \n" +
@@ -180,7 +179,7 @@ public class BoardManager : MonoBehaviour
                             "G 46 37  \n";
 
         string personajes = "1        \n" + 
-                            "P 1 0    \n";
+                            "P 18 14  \n";
 
         string[] lineas = escenario.Split('\n');
         int xtotal = Convert.ToInt32(lineas[0].Split(' ')[0]);
@@ -202,7 +201,7 @@ public class BoardManager : MonoBehaviour
         int p = 0;
         int n = 0;
         int e = 0;
-        int v = 0;
+        int c = 0;
         float xmapa;
         float ymapa;
 
@@ -344,20 +343,18 @@ public class BoardManager : MonoBehaviour
                     case '3':
                         if (mapa == 1)
                             instance = Instantiate(carretera[Int32.Parse(ch.ToString())], new Vector3(xmapa, ymapa, 0f), Quaternion.identity);
-                        
 
                         else if (mapa == 2)
                         {
-                            GameObject estanteria = Instantiate(estanteriavacia[v], new Vector3(xmapa, ymapa, 0f), Quaternion.identity);
                             instance = Instantiate(sueloMercadona, new Vector3(xmapa, ymapa, 0f), Quaternion.identity);
-                            v++;
+                            GameObject cestaobject = Instantiate(cesta[c], new Vector3(xmapa, ymapa, 0f), Quaternion.identity);
+                            c++;
+                            if (c == 16)
+                                c = 0;
 
-                            if (v == 4)
-                                v = 0;
-
-                            estanteria.transform.SetParent(boardHolder5);
+                            cestaobject.transform.SetParent(boardHolder6);
                         }
-                        
+
                         break;
 
                     case '4':

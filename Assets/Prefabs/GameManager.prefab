@@ -438,8 +438,8 @@ MonoBehaviour:
   - {fileID: 2930982845287615535, guid: 5c1372d51eb00a747ad120f20cebc79b, type: 3}
   nevera2: {fileID: 6950730488709807932, guid: 030a8a0edd01e4f44b8f97fa374976ed, type: 3}
   cesta:
-  - {fileID: 863490684776992038, guid: 4081fb0aec421e7479664d763dfd64c3, type: 3}
   - {fileID: 5725763013248972540, guid: 3183c2767a5a6ad47aa3b09f2e46e8b4, type: 3}
+  - {fileID: 863490684776992038, guid: 4081fb0aec421e7479664d763dfd64c3, type: 3}
   - {fileID: 3501356956549553417, guid: 643d6ed96adfad04b88070464c798f7d, type: 3}
   - {fileID: 17294592710373055, guid: 7d4846e23a3f77744b606fd59c15c1d2, type: 3}
   - {fileID: 8926928355026908826, guid: a103b266b6ac9df4b975fbd4b46a4568, type: 3}
@@ -482,11 +482,6 @@ MonoBehaviour:
   - {fileID: 5007309163873593360, guid: e86e65bbf73cdcd4994d2f88e7145472, type: 3}
   - {fileID: 5884598653515907148, guid: 24b33c43c6725e342bcee59dfc9e0f25, type: 3}
   - {fileID: 32992252876777594, guid: b80f5023180b50b4eb535fd4a0cbb8bd, type: 3}
-  estanteriavacia:
-  - {fileID: 6775245046132394742, guid: ce508b304a680914a93edc412403838c, type: 3}
-  - {fileID: 173464566538484012, guid: ca5deb6863ad84048acb00d7d1953d14, type: 3}
-  - {fileID: 7839167831088685240, guid: 6f78c7074dac9df4dadb67f465b64450, type: 3}
-  - {fileID: 1504477551233192282, guid: 1a9e8c577bf74cc4b93d05fb727b24ae, type: 3}
   sueloMercadona: {fileID: 140824912520052970, guid: fcf3921e1ea8fe84fb0811654e0d6ccf,
     type: 3}
   guardiaLlave: {fileID: 3044731969479969209, guid: 5f2d53df8fbb9bd49af0ae72e1aff071,

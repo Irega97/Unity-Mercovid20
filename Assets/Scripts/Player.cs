@@ -17,6 +17,7 @@ public class Player : MovingObject
     bool inter = false;
     bool llave = false;
     bool papel = false;
+    bool codigo = false;
 
     bool animacion = false;
     public GameObject llaveobject;
@@ -281,7 +282,7 @@ public class Player : MovingObject
 
         if (hit.transform != null)
         {
-            if (hit.transform.gameObject.tag == "GuardiaLlave" )
+            if (hit.transform.gameObject.tag == "GuardiaLlave")
             {
                 GameManager.instance.InteractuarEncargado(1);
 
@@ -291,19 +292,29 @@ public class Player : MovingObject
 
             else if (hit.transform.gameObject.tag == "Llave")
             {
+                Debug.Log("Hecho");
                 llave = true;
                 Destroy(GameObject.Find("Llave(Clone)"));
             }
 
-            else if (hit.transform.gameObject.tag == "Encargado" || !papel)
+            else if (hit.transform.gameObject.tag == "Encargado" && !papel)
             {
                 GameManager.instance.InteractuarEncargado(2);
 
             }
 
-            else if (hit.transform.gameObject.tag == "Encargado" || papel)
+            else if (hit.transform.gameObject.tag == "Encargado" && papel)
             {
                 GameManager.instance.InteractuarEncargado(3);
+            }
+
+            else if (hit.transform.gameObject.tag == "Codigo")
+            {
+                animacion = true;
+                codigo = true;
+                Animator animacionpuerta = GameObject.Find("PuertaAlmacenLarge(Clone)").GetComponent<Animator>();
+                animacionpuerta.SetTrigger("AbrirMercadona");
+                StartCoroutine(esperar(0));
             }
         }
     }
@@ -356,13 +367,20 @@ public class Player : MovingObject
 
     }
 
-    IEnumerator esperar()
+    IEnumerator esperar(int i)
     {
         yield return new WaitForSeconds(1);
-        Vector2 start = transform.position;
-        Vector2 end = start + new Vector2(0, 1);
-        StartCoroutine(SmoothMovement(end));
+        if (i == 1)
+        {
+            Vector2 start = transform.position;
+            Vector2 end = start + new Vector2(0, 1);
+            StartCoroutine(SmoothMovement(end));
+        }
+
+        else if (i == 0)
+            animacion = false;
     }
+
     protected override void OnCantMove(GameObject go)
     {
         if (go.tag == "PuertaMercadona" && llave)
@@ -370,7 +388,15 @@ public class Player : MovingObject
             animacion = true;
             Animator animacionpuerta = go.GetComponent<Animator>();
             animacionpuerta.SetTrigger("AbrirMercadona");
-            StartCoroutine(esperar());
+            StartCoroutine(esperar(1));
+            
+        }
+        if (go.tag == "PuertaAlmacen" && codigo)
+        {
+            animacion = true;
+            Vector2 start = transform.position;
+            Vector2 end = start + new Vector2(0, 1);
+            StartCoroutine(SmoothMovement(end));
         }
     }
 
