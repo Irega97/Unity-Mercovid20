@@ -386,18 +386,4 @@ public class GameManager : MonoBehaviour
     {
         enabled = false;
     }
-
-    /*private void OnLevelFinshedLoading(Scene scene, LoadSceneMode mode)
-    {
-        InitGame();
-
-    }*/
-
-    public void Sensibilidad(Vector2 movimiento)
-    {
-        encargado1.SetActive(true);
-        Text texto = encargado1.GetComponent<Text>();
-        texto.text = "X: " + movimiento.x + " Y: " + movimiento.y;
-        Invoke("AcabarConversa", levelStartDelay);
-    }
 }
