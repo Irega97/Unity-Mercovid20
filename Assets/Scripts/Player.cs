@@ -11,7 +11,7 @@ public class Player : MovingObject
     int countl = 0;
     int countr = 0;
     int tiempoupdate = 15;
-    int estado;
+    public int estado;
     int horizontal;
     int vertical;
     bool inter = false;
@@ -19,7 +19,7 @@ public class Player : MovingObject
     bool papel = false;
     bool codigo = false;
 
-    bool animacion = false;
+    public bool animacion = false;
     public GameObject llaveobject;
     private Text estadoVida;
     private Animator animator;
@@ -41,6 +41,9 @@ public class Player : MovingObject
         contagiado = GameManager.instance.contagio;
         estadoVida = GameObject.Find("EstadoText").GetComponent<Text>();
         estadoVida.text = "Vida: " + health;
+
+        CambiarIdle(estado);
+
         base.Start();
     }
 
@@ -166,7 +169,7 @@ public class Player : MovingObject
 
         else if (vertical != 0) horizontal = 0;
 
-        if (!moving && !animacion || GameManager.instance.doingSetup)
+        if (!moving && !animacion && !GameManager.instance.doingSetup)
             {
                 if (horizontal == 1)
                 {
