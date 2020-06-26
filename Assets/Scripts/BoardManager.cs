@@ -41,11 +41,15 @@ public class BoardManager : MonoBehaviour
     public GameObject guardiaLlave;
     public GameObject carro;
     public GameObject invisible;
+    public GameObject alarma;
+    public GameObject alfombra;
+    public GameObject puertaalmacen;
+    public GameObject codigo;
 
     public void SetupScene()
     {
         
-        string escenario = "60 60 1                                                    \n" +
+        string escenario2 = "60 60 1                                                    \n" +
                            "A9555555555555555555559955555555599599555555555555555555559C\n" +
                            "7B66666666666666666666DB666666666666DB66666666666666666666D8\n" +
                            "EF                    EF            EF                    EF\n" +
@@ -108,8 +112,8 @@ public class BoardManager : MonoBehaviour
                            "026666666666666666666622666666666666226666666666666666666623\n";
 
 
-        string escenario2 =   "20 16 2             \n" +
-                             "00 1 00             \n" +
+        string escenario =   "20 16 2             \n" +
+                             "00110011         7 8\n" +
                              "                    \n" +
                              "                    \n" +
                              "    222222222233    \n" +
@@ -124,12 +128,12 @@ public class BoardManager : MonoBehaviour
                              "    MMM  2222222222 \n" +
                              "                    \n" +
                              "                    \n" +
-                             "         44444444444\n";
+                             "565       44444444444\n";
 
 
 
         //Coches: tipo de coche, x inicial, y inicial, movimiento x, movimient y, direccion inicial, tipo de movimiento
-        string personajes = "44      \n" +
+        string personajes2 = "44      \n" +
                             "P 49 33 \n" +
                             "0 0 0 23 11 0 0    \n" +
                             "1 0 48 23 11 0 0   \n" +
@@ -175,7 +179,7 @@ public class BoardManager : MonoBehaviour
                             "V 38 57  \n" +
                             "G 46 37  \n";
 
-        string personajes2 = "1        \n" + 
+        string personajes = "1        \n" + 
                             "P 1 0    \n";
 
         string[] lineas = escenario.Split('\n');
@@ -215,7 +219,7 @@ public class BoardManager : MonoBehaviour
         {
             boardHolder4 = new GameObject("Caja Registradora").transform;
             boardHolder5 = new GameObject("Estanterías").transform;
-            boardHolder6 = new GameObject("Carros").transform;
+            boardHolder6 = new GameObject("Objetos").transform;
         }
 
         else if (mapa == 3)
@@ -372,18 +376,49 @@ public class BoardManager : MonoBehaviour
                         break;
 
                     case '5':
+                        if (mapa == 1)
                         instance = Instantiate(carretera[Int32.Parse(ch.ToString())], new Vector3(xmapa, ymapa, 0f), Quaternion.identity);
+
+                        else if (mapa == 2)
+                        {
+                            instance = Instantiate(sueloMercadona, new Vector3(xmapa, ymapa, 0f), Quaternion.identity);
+                            GameObject alarmaobject = Instantiate(alarma, new Vector3(xmapa, ymapa, 0f), Quaternion.identity);
+
+                            alarmaobject.transform.SetParent(boardHolder6);
+                        }
                         break;
 
                     case '6':
-                        instance = Instantiate(carretera[Int32.Parse(ch.ToString())], new Vector3(xmapa, ymapa, 0f), Quaternion.identity);
+                        if (mapa == 1)
+                            instance = Instantiate(carretera[Int32.Parse(ch.ToString())], new Vector3(xmapa, ymapa, 0f), Quaternion.identity);
+
+                        else if (mapa == 2)
+                        {
+                            instance = Instantiate(alfombra, new Vector3(xmapa, ymapa, 0f), Quaternion.identity);
+                        }
                         break;
 
                     case '7':
-                        instance = Instantiate(carretera[Int32.Parse(ch.ToString())], new Vector3(xmapa, ymapa, 0f), Quaternion.identity);
+                        if (mapa == 1)
+                            instance = Instantiate(carretera[Int32.Parse(ch.ToString())], new Vector3(xmapa, ymapa, 0f), Quaternion.identity);
+
+                        else if (mapa == 2)
+                        {
+                            instance = Instantiate(puertaalmacen, new Vector3(xmapa+0.5f, ymapa, 0f), Quaternion.identity);
+                        }
                         break;
+
                     case '8':
-                        instance = Instantiate(carretera[Int32.Parse(ch.ToString())], new Vector3(xmapa, ymapa, 0f), Quaternion.identity);
+                        if (mapa == 1)
+                            instance = Instantiate(carretera[Int32.Parse(ch.ToString())], new Vector3(xmapa, ymapa, 0f), Quaternion.identity);
+
+                        else if (mapa == 2)
+                        {
+                            instance = Instantiate(sueloMercadona, new Vector3(xmapa, ymapa, 0f), Quaternion.identity);
+                            GameObject codigoobject = Instantiate(codigo, new Vector3(xmapa, ymapa, 0f), Quaternion.identity);
+
+                            codigoobject.transform.SetParent(boardHolder6);
+                        }
                         break;
 
                     case '9':

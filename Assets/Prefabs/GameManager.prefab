@@ -494,8 +494,12 @@ MonoBehaviour:
   carro: {fileID: 3016388447624573687, guid: ff7a03267b154a64c80fac2fd543ad05, type: 3}
   invisible: {fileID: 6865793603783208386, guid: 92042d639b612ed4e961455ea9664c0f,
     type: 3}
-  propietarioMercadona: {fileID: 2748043876781551725, guid: d1029bbb02b71ef4b8dfe9f767adf192,
+  alarma: {fileID: 3097214188506681643, guid: 7aaec1053df30a64ea54f6cd8b63accd, type: 3}
+  alfombra: {fileID: 4955476359958261705, guid: 1e3da5ab330b8a04489c1a832894a795,
     type: 3}
+  puertaalmacen: {fileID: 1774122218071125682, guid: 2e38bd4a1a757054b905db934fdad1dc,
+    type: 3}
+  codigo: {fileID: 8716581757863840711, guid: 929f3a1522fceea479224fe1948a4157, type: 3}
 --- !u!114 &1431000569802020838
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -511,3 +515,9 @@ MonoBehaviour:
   boardScript: {fileID: 0}
   healthPoints: 100
   contagio: 0
+  levelStartDelay: 5
+  presentacion: {fileID: 0}
+  encargado1: {fileID: 0}
+  encargado2: {fileID: 0}
+  encargado3: {fileID: 0}
+  doingSetup: 0
