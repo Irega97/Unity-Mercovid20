@@ -13,6 +13,9 @@ public class Guardia : MovingObject
     public int ordenmovimiento;
     private Animator animator;
     bool pillado = false;
+    bool pillado2 = false;
+    Vector2 start;
+    Vector2 end;
 
     protected override void Start()
     {
@@ -33,7 +36,7 @@ public class Guardia : MovingObject
 
     void Update()
     {
-        if (!moving && !pillado)
+        if (!moving && !pillado2 && !pillado)
         {
             if (move == 0)
             {
@@ -64,6 +67,34 @@ public class Guardia : MovingObject
             }
             ComprobarPosicion();
             ComprobarEstado();
+            pillar();
+        }
+
+        else if (pillado && !pillado2)
+        {
+            if (move == 0)
+            {
+                AttemptMove("guardia", 0, -1);
+                animator.SetTrigger("frontMove");
+            }
+
+            else if (move == 1)
+            {
+                AttemptMove("guardia", 0, 1);
+                animator.SetTrigger("backMove");
+            }
+
+            else if (move == 2)
+            {
+                AttemptMove("guardia", -1, 0);
+                animator.SetTrigger("leftMove");
+            }
+
+            else
+            {
+                AttemptMove("guardia", 1, 0);
+                animator.SetTrigger("rightMove");
+            }
         }
     }
 
@@ -146,6 +177,31 @@ public class Guardia : MovingObject
 
     protected override void OnCantMove(GameObject go)
     {
+        pillado2 = true;
+    }
 
+    public void pillar()
+    {
+        start = transform.position;
+        if (move == 0)
+            end = start + new Vector2(0, -5);
+
+        else if (move == 1)
+            end = start + new Vector2(0, 5);
+
+        else if (move == 2)
+            end = start + new Vector2(-5, 0);
+
+        else
+            end = start + new Vector2(5, 0);
+
+        RaycastHit2D hit = Physics2D.Linecast(start, end, player);
+
+        if (hit.transform != null)
+        {
+            GameObject.Find("Jugador(Clone)").GetComponent<Player>().animacion = true;
+            pillado = true;
+        }
+            
     }
 }

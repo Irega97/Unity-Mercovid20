@@ -54,9 +54,8 @@ public abstract class MovingObject : MonoBehaviour
         boxCollider.enabled = true;
         if (hit.transform == null)
         {
-            if(objectname == "player" || objectname == "guardia")
+            if(objectname == "player")
             {
-
                 boxCollider.enabled = false;
                 hit = Physics2D.Linecast(start, end, carretera);
                 boxCollider.enabled = true;
@@ -70,7 +69,7 @@ public abstract class MovingObject : MonoBehaviour
             
             }
 
-            else if (objectname == "enemigo" || objectname == "coche")
+            else if (objectname == "enemigo" || objectname == "coche" || objectname == "guardia")
             {
                 boxCollider.enabled = false;
                 hit = Physics2D.Linecast(start, end, enemigo);
