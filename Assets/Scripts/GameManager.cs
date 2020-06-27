@@ -13,8 +13,8 @@ public class GameManager : MonoBehaviour
     public float levelStartDelay = 5f;
     public GameObject presentacion;
     public GameObject encargado1;
-    public GameObject encargado2;
-    public GameObject encargado3;
+    public Text textoPersonajes;
+    public Text entreMapas;
     public bool doingSetup;
     public bool llave = false;
     public int nivel = 0;
@@ -40,7 +40,7 @@ public class GameManager : MonoBehaviour
 
 		boardScript = GetComponent<BoardManager>();
         //Se lee de Android
-                    mapa = "60 60 1                                                    \n" +
+        mapa = "60 60 1                                                    \n" +
                            "A9555555555555555555559955555555599599555555555555555555559C\n" +
                            "7B66666666666666666666DB666666666666DB66666666666666666666D8\n" +
                            "EF                    EF            EF                    EF\n" +
@@ -176,6 +176,8 @@ public class GameManager : MonoBehaviour
         doingSetup = true;
         presentacion = GameObject.Find("Presentacion");
         encargado1 = GameObject.Find("Encargado1");
+        textoPersonajes = GameObject.Find("Text").GetComponent<Text>();
+        entreMapas = GameObject.Find("EntreMapasText").GetComponent<Text>();
 
         AcabarConversa();
 
@@ -506,20 +508,74 @@ public class GameManager : MonoBehaviour
 
     public void InteractuarEncargado(int inter)
     {
+        encargado1.SetActive(true);
+
         if (inter == 1)
         {
-            encargado1.SetActive(true);
-        }   
-        /*else if (inter == 2)
+            textoPersonajes.text = "Vigilate: ¡Hola! Lamentablemente nuestro establecimiento está cerrado debido a la pandemia. Solo yo tengo la llave… \n" +
+                                   "¡¡Ostras!! Dónde está?? !! \n" +
+                                   "Si consigues encontrarla haré ver como si no te he visto entrar...";
+
+        }
+        else if (inter == 2)
         {
-            encargado2.SetActive(true);
-            Invoke("AcabarConversa", levelStartDelay);
-        } 
+            textoPersonajes.text = "Recién Graduado EETAC: Vaya primer día trabajando aquí... Uy! Hola, bienvenido a Mercadona! \n" +
+                                   "Pongase la mascarilla y los guantes porfavor. Ya que ha conseguido entrar, coja lo qu enecesite. \n" +
+                                   "Sobretodo cuidado con los guardas, que no están de humor! Cualquier cosa que necesite no dude en preguntarme!";
+
+        }
         else if (inter == 3)
         {
-            encargado3.SetActive(true);
-            Invoke("AcabarConversa", levelStartDelay);
-        }*/
+            textoPersonajes.text = "Mi conciencia: Joder con el señor Mercadona, mucho Hacendado y no hay papel...mi novia me va a matar...  \n" +
+                                   "Preguntaré al encargado si tienen más...";
+        }
+        else if (inter == 4)
+        {
+            textoPersonajes.text = "Recién Graduado EETAC: El papel de váter? Si no queda en la estantería estará en el almacén. Pero para entrar necesitaras el código de TRES dígitos.  \n" +
+                                   "Yo tenia una Post-it con cada dígito, pero ordenando por las estanterías se me debe de haver caído. Búscalos para acceder al almacén.";
+        }
+        else if (inter == 5)
+        {
+            textoPersonajes.text = "Mi conciencia: Ostia! Aqui hay un Post-it con un número: 6 ";
+        }
+        else if (inter == 6)
+        {
+            textoPersonajes.text = "Mi conciencia: Ostia! Aqui hay un Post-it con un número: 6 ";
+        }
+        else if (inter == 7)
+        {
+            textoPersonajes.text = "Mi conciencia: Ostia! Aqui hay un Post-it con un número: 6 ";
+        }
+        else if (inter == 8)
+        {
+            textoPersonajes.text = "Mi conciencia: Ahora que ya tengo los códigos voy a buscar el PANEL DE CONTROL. Debería estar al lado de la puerta del almacén...  ";
+
+        }
+        else if (inter == 9)
+        {
+            textoPersonajes.text = " Código Correcto! ";
+        }
+        else if (inter == 10)
+        {
+            textoPersonajes.text = " Código Incorrecto! ";
+        }
+        else if (inter == 11)
+        {
+            textoPersonajes.text = "Señor Mercadona: EH! ¡¿Tú que haces aquí?! Menudos inútiles he contratado...  \n" +
+                                   "Estamos cerrados. Ni se te ocurra coger nada!";
+        }
+        else if (inter == 12)
+        {
+            textoPersonajes.text = "Señor Mercadona: NO! El papel no!   \n" +
+                                   "Voy a llamar a la policía.. \n" +
+                                   "... ... Si? La Policía? Aquí hay un chorizo que nos està robando! Envíen refuerzos! Y si hace falta el ejército! \n" +
+                                   " Jejejeje TE VAS A CAGAR!";
+        }
+        else if (inter == 13)
+        {
+            textoPersonajes.text = "Recién Graduado EETAC: Cuidado! Hay mucha pasma fuera...  \n" +
+                                   "Ya me da igual este trabajo! ESTOY HARTO! Te abro la puerta e intenta llegar a casa cagando leches!";
+        }
     }
 
     public void AcabarConversa()

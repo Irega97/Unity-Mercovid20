@@ -316,7 +316,7 @@ public class Player : MovingObject
            if (transform.position.x == 1 && transform.position.y == 1 && !accion1)
             {
                 animacion = true;
-                GameManager.instance.InteractuarEncargado(1);
+                GameManager.instance.InteractuarEncargado(2);
                 accion1 = true;
                 CambiarIdle(3);
             }
@@ -325,7 +325,7 @@ public class Player : MovingObject
             {
                 CambiarIdle(0);
                 cesta = true;
-                GameManager.instance.InteractuarEncargado(1);
+                GameManager.instance.InteractuarEncargado(3);
                 animacion = true;
                 CambiarIdle(0);
             }
@@ -337,7 +337,7 @@ public class Player : MovingObject
                     posicion1 = true;
                     animacion = true;
                     CambiarIdle(0);
-                    GameManager.instance.InteractuarEncargado(1);
+                    GameManager.instance.InteractuarEncargado(5);
                 }
 
                 else if (transform.position.x == posicionRandom2.x && transform.position.y == posicionRandom2.y && !posicion2)
@@ -345,7 +345,7 @@ public class Player : MovingObject
                     posicion2 = true;
                     animacion = true;
                     CambiarIdle(0);
-                    GameManager.instance.InteractuarEncargado(1);
+                    GameManager.instance.InteractuarEncargado(6);
                 }
 
                 else if (transform.position.x == posicionRandom3.x && transform.position.y == posicionRandom3.y && !posicion3)
@@ -353,7 +353,7 @@ public class Player : MovingObject
                     posicion3 = true;
                     animacion = true;
                     CambiarIdle(0);
-                    GameManager.instance.InteractuarEncargado(1);
+                    GameManager.instance.InteractuarEncargado(7);
                 }
 
                 if (posicion1 && posicion2 && posicion3)
@@ -361,12 +361,10 @@ public class Player : MovingObject
                     codigo = true;
                     animacion = true;
                     CambiarIdle(0);
-                    GameManager.instance.InteractuarEncargado(1);
+                    GameManager.instance.InteractuarEncargado(8);
                 }
             }
         }
-
-
     }
 
     private void ComprovarDialogo(int xDir, int yDir)
@@ -426,11 +424,11 @@ public class Player : MovingObject
 
                 animacion = true;
                 if (!cesta)
-                    GameManager.instance.InteractuarEncargado(1);
+                    GameManager.instance.InteractuarEncargado(2);
 
                 else if (!papel)
                 {
-                    GameManager.instance.InteractuarEncargado(1);
+                    GameManager.instance.InteractuarEncargado(4);
                     if (posicionrandom.Count == 0)
                     {
                         for (int i = 0; i < 10; i++)
