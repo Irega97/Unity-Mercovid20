@@ -45,6 +45,7 @@ public class BoardManager : MonoBehaviour
     public GameObject alfombra;
     public GameObject puertaalmacen;
     public GameObject codigo;
+    public GameObject propietarioMercadona;
     public int mapa;
 
     public void SetupScene(string escenario, string personajes)
@@ -577,17 +578,22 @@ public class BoardManager : MonoBehaviour
                     break;
 
                  case 'H':
-                     instance = Instantiate(horizontal[h], new Vector3(Convert.ToInt32(jugadores[pl + 1].Split(' ')[1]), Convert.ToInt32(jugadores[pl + 1].Split(' ')[2]), 0f), Quaternion.identity);
-                    h++;
-                    if (h == 10)
-                        h = 0;
-                     break;
+                    if (mapa == 1)
+                    {
+                        instance = Instantiate(horizontal[h], new Vector3(Convert.ToInt32(jugadores[pl + 1].Split(' ')[1]), Convert.ToInt32(jugadores[pl + 1].Split(' ')[2]), 0f), Quaternion.identity);
+                        h++;
+                        if (h == 10)
+                            h = 0;
+                    }
+                    
+                    else if (mapa == 2)
+                        instance = Instantiate(propietarioMercadona, new Vector3(Convert.ToInt32(jugadores[pl + 1].Split(' ')[1]), Convert.ToInt32(jugadores[pl + 1].Split(' ')[2]), 0f), Quaternion.identity);
+                     
+                    break;
 
                 case 'G':
                     if (mapa == 1)
-                    {
                         instance = Instantiate(guardiaLlave, new Vector3(Convert.ToInt32(jugadores[pl + 1].Split(' ')[1]), Convert.ToInt32(jugadores[pl + 1].Split(' ')[2]), 0f), Quaternion.identity);
-                    }
 
                     else if (mapa == 2)
                     {

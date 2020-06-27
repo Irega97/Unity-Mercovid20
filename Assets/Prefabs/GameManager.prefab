@@ -496,6 +496,9 @@ MonoBehaviour:
   puertaalmacen: {fileID: 1774122218071125682, guid: 2e38bd4a1a757054b905db934fdad1dc,
     type: 3}
   codigo: {fileID: 8716581757863840711, guid: 929f3a1522fceea479224fe1948a4157, type: 3}
+  propietarioMercadona: {fileID: 7888827511330627545, guid: d1029bbb02b71ef4b8dfe9f767adf192,
+    type: 3}
+  mapa: 0
 --- !u!114 &1431000569802020838
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -517,3 +520,11 @@ MonoBehaviour:
   encargado2: {fileID: 0}
   encargado3: {fileID: 0}
   doingSetup: 0
+  llave: 0
+  nivel: 0
+  cantidadDesinfectante: 0
+  cantidadDesinfectantePlus: 0
+  cantidadDesinfectantePro: 0
+  cantidadJabon: 0
+  cantidadMascarilla: 0
+  cantidadMegaMascarilla: 0

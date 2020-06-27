@@ -7,13 +7,12 @@ public class Buttons : MonoBehaviour
 {
     Player player = new Player();
 
-    public int cantidadDesinfectante = 3;
-    public int cantidadDesinfectantePlus = 3;
-    public int cantidadDesinfectantePro = 3;
-    public int cantidadJabon = 3;
-    public int cantidadMascarilla = 1;
-    public int cantidadMegaMascarilla = 1;
-
+    public int cantidadDesinfectante;
+    public int cantidadDesinfectantePlus;
+    public int cantidadDesinfectantePro;
+    public int cantidadJabon;
+    public int cantidadMascarilla;
+    public int cantidadMegaMascarilla;
     public Text estadoVida;
     private Text desinfectante;
     private Text desinfectanteplus;
@@ -23,6 +22,12 @@ public class Buttons : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        cantidadDesinfectante = GameManager.instance.cantidadDesinfectante;
+        cantidadDesinfectantePlus = GameManager.instance.cantidadDesinfectantePlus;
+        cantidadDesinfectantePro = GameManager.instance.cantidadDesinfectantePro;
+        cantidadMascarilla = GameManager.instance.cantidadMascarilla;
+        cantidadMegaMascarilla = GameManager.instance.cantidadMegaMascarilla;
+        cantidadJabon = GameManager.instance.cantidadJabon;
         player = GameObject.Find("Jugador(Clone)").GetComponent<Player>();
 
         estadoVida = GameObject.Find("EstadoText").GetComponent<Text>();
@@ -35,40 +40,23 @@ public class Buttons : MonoBehaviour
         desinfectanteplus.text = "x" + cantidadDesinfectantePlus;
         desinfectantepro.text = "x" + cantidadDesinfectantePro;
         jabon.text = "x" + cantidadJabon;
-
-        if(cantidadMascarilla > 0 || cantidadMegaMascarilla > 0)
-        {
-            if(cantidadMegaMascarilla > 0)
-            {
-                player.health = player.health + 50;
-                estadoVida.text = "Vida: " + player.health;
-                cantidadMascarilla--;
-            }
-            else
-            {
-                player.health = player.health + 25;
-                estadoVida.text = "Vida: " + player.health;
-                cantidadMascarilla--;
-            }
-        }
-
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-
-
     }
 
     public void Desinfectante ()
     {
         if( cantidadDesinfectante > 0)
         {
-            estadoVida.text = " + 10 de vida! ";
-            player.health = player.health + 10;
-            estadoVida.text = "Vida: " + player.health;
+            if (player.health < 100)
+            {
+                estadoVida.text = " + 10 de vida! ";
+                player.health = player.health + 10;
+                if (player.health > 100)
+                    player.health = 100;
+                estadoVida.text = "Vida: " + player.health;
+            }
+            
             cantidadDesinfectante--;
+            GameManager.instance.cantidadDesinfectante--;
             desinfectante.text = "x" + cantidadDesinfectante;
         }
         else
@@ -82,9 +70,16 @@ public class Buttons : MonoBehaviour
     {
         if(cantidadDesinfectantePlus > 0)
         {
-            estadoVida.text = " + 25 de vida! ";
-            player.health = player.health + 25;
-            estadoVida.text = "Vida: " + player.health;
+            if (player.health < 100)
+            {
+                estadoVida.text = " + 25 de vida! ";
+                player.health = player.health + 25;
+                if (player.health > 100)
+                    player.health = 100;
+                estadoVida.text = "Vida: " + player.health;
+            }
+
+            GameManager.instance.cantidadDesinfectantePlus--;
             cantidadDesinfectantePlus--;
             desinfectanteplus.text = "x" + cantidadDesinfectantePlus;
         }
@@ -100,9 +95,15 @@ public class Buttons : MonoBehaviour
     {
         if (cantidadDesinfectantePro > 0)
         {
-            estadoVida.text = " + 50 de vida! ";
-            player.health = player.health + 50;
-            estadoVida.text = "Vida: " + player.health;
+            if (player.health < 100)
+            {
+                estadoVida.text = " + 50 de vida! ";
+                player.health = player.health + 50;
+                if (player.health > 100)
+                    player.health = 100;
+                estadoVida.text = "Vida: " + player.health;
+            }
+            GameManager.instance.cantidadDesinfectantePro--;
             cantidadDesinfectantePro--;
             desinfectantepro.text = "x" + cantidadDesinfectantePro;
         }
@@ -116,7 +117,6 @@ public class Buttons : MonoBehaviour
 
     public void Jabon()
     {
-        Debug.Log(cantidadJabon);
         if (cantidadJabon > 0)
         {
             if (player.contagiado == true)
@@ -124,8 +124,9 @@ public class Buttons : MonoBehaviour
                 estadoVida.text = " Te has curado del contagio! ";
                 estadoVida.text = "Vida: " + player.health;
                 player.contagiado = false;
-                
             }
+
+            GameManager.instance.cantidadJabon--;
             cantidadJabon--;
             jabon.text = "x" + cantidadJabon;
         }

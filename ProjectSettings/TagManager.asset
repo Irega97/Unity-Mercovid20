@@ -22,6 +22,7 @@ TagManager:
   - PuertaAlmacen
   - Codigo
   - GuardiaMercadona
+  - Cesta
   layers:
   - Default
   - TransparentFX

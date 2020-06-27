@@ -98,7 +98,6 @@ public class Guardia : MovingObject
         }
     }
 
-
     private void ComprobarEstado()
     {
         if (move == 0)
@@ -178,6 +177,7 @@ public class Guardia : MovingObject
     protected override void OnCantMove(GameObject go)
     {
         pillado2 = true;
+        GameObject.Find("Jugador(Clone)").GetComponent<Player>().pillado();
     }
 
     public void pillar()
@@ -199,8 +199,18 @@ public class Guardia : MovingObject
 
         if (hit.transform != null)
         {
-            GameObject.Find("Jugador(Clone)").GetComponent<Player>().animacion = true;
+            Player vistaplayer = hit.transform.gameObject.GetComponent<Player>();
             pillado = true;
+            if (move == 0)
+                vistaplayer.CambiarIdle(0);
+            else if (move == 1)
+                vistaplayer.CambiarIdle(1);
+            else if (move == 2)
+                vistaplayer.CambiarIdle(3);
+            else if (move == 3)
+                vistaplayer.CambiarIdle(2);
+
+            vistaplayer.animacion = true;
         }
             
     }

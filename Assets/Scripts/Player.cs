@@ -2,10 +2,11 @@
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
+using System.Collections.Generic;
+using TreeEditor;
 
 public class Player : MovingObject
 {
-
     public float restartLevelDelay = 1f;
     int countf = 0;
     int countb = 0;
@@ -15,11 +16,15 @@ public class Player : MovingObject
     public int estado;
     int horizontal;
     int vertical;
+    bool accion1;
     bool inter = false;
-    bool llave = false;
+    bool llave;
     bool papel = false;
+    bool cesta = false;
     bool codigo = false;
-
+    public Sprite propietarioarriba;
+    public Sprite propietarioderecha;
+    public Sprite propietarioizquierda;
     public bool animacion = false;
     public GameObject llaveobject;
     private Text estadoVida;
@@ -28,7 +33,13 @@ public class Player : MovingObject
     public bool contagiado = false;
     public Vector2 startPos;
     public Vector2 direction;
-
+    List<Vector3> posicionrandom = new List<Vector3>();
+    Vector3 posicionRandom1;
+    Vector3 posicionRandom2;
+    Vector3 posicionRandom3;
+    private bool posicion1;
+    private bool posicion2;
+    private bool posicion3;
 
     protected override void Awake()
     {
@@ -42,6 +53,9 @@ public class Player : MovingObject
         contagiado = GameManager.instance.contagio;
         estadoVida = GameObject.Find("EstadoText").GetComponent<Text>();
         estadoVida.text = "Vida: " + health;
+        llave = true;
+        accion1 = false;
+        //llave = GameManager.instance.llave;
 
         CambiarIdle(estado);
 
@@ -261,24 +275,93 @@ public class Player : MovingObject
 
         if (inter)
         {
-            if (estado == 0)
+            if (GameObject.Find("Encargado1"))
             {
-                ComprovarDialogo(0, 1);
-              
-            } else if (estado == 1)
-            {
-                ComprovarDialogo(0, -1);
-                
-            } else if (estado == 2)
-            {
-                ComprovarDialogo(-1, 0);
-            } else if (estado == 3)
-            {
-                ComprovarDialogo(1, 0);
+                GameManager.instance.AcabarConversa();
+                animacion = false;
             }
+
+            else
+            {
+                if (estado == 0)
+                {
+                    ComprovarDialogo(0, 1);
+
+                }
+                else if (estado == 1)
+                {
+                    ComprovarDialogo(0, -1);
+
+                }
+                else if (estado == 2)
+                {
+                    ComprovarDialogo(-1, 0);
+                }
+                else if (estado == 3)
+                {
+                    ComprovarDialogo(1, 0);
+                }
+            }
+
             if (inter)
                 inter = false;
         }
+        ComprobarPosicion();
+    }
+
+    private void ComprobarPosicion()
+    {
+        if (GameManager.instance.nivel == 2)
+        {
+           if (transform.position.x == 1 && transform.position.y == 1 && !accion1)
+            {
+                animacion = true;
+                GameManager.instance.InteractuarEncargado(1);
+                accion1 = true;
+                CambiarIdle(3);
+            }
+
+           else if (transform.position.x == 1 && transform.position.y == 14 && !cesta)
+            {
+                CambiarIdle(0);
+                cesta = true;
+                GameManager.instance.InteractuarEncargado(1);
+                animacion = true;
+                CambiarIdle(0);
+            }
+
+           if (posicionRandom1 != null && !codigo)
+            {
+                if (transform.position.x == posicionRandom1.x && transform.position.y == posicionRandom1.y && !posicion1)
+                {
+                    posicion1 = true;
+                    animacion = true;
+                    GameManager.instance.InteractuarEncargado(1);
+                }
+
+                else if (transform.position.x == posicionRandom2.x && transform.position.y == posicionRandom2.y && !posicion2)
+                {
+                    posicion2 = true;
+                    animacion = true;
+                    GameManager.instance.InteractuarEncargado(1);
+                }
+
+                else if (transform.position.x == posicionRandom3.x && transform.position.y == posicionRandom3.y && !posicion3)
+                {
+                    posicion3 = true;
+                    animacion = true;
+                    GameManager.instance.InteractuarEncargado(1);
+                }
+
+                if (posicion1 && posicion2 && posicion3)
+                {
+                    codigo = true;
+                    animacion = true;
+                    GameManager.instance.InteractuarEncargado(1);
+                }
+            }
+        }
+
 
     }
 
@@ -292,30 +375,31 @@ public class Player : MovingObject
             if (hit.transform.gameObject.tag == "GuardiaLlave")
             {
                 GameManager.instance.InteractuarEncargado(1);
+                animacion = true;
 
                 if (GameObject.Find("Llave(Clone)") == null && !llave)
-                    llaveobject = Instantiate(llaveobject, new Vector3(51, 31, 0f), Quaternion.identity);
+                {
+                    posicionrandom.Add(new Vector3(2f, 2f, 0f));
+                    posicionrandom.Add(new Vector3(2f, 57f, 0f));
+                    posicionrandom.Add(new Vector3(57f, 2f, 0f));
+                    posicionrandom.Add(new Vector3(57f, 57f, 0f));
+                    int randomIndex = Random.Range(0, posicionrandom.Count);
+                    Vector3 randomPosition = posicionrandom[randomIndex];
+                    llaveobject = Instantiate(llaveobject, randomPosition, Quaternion.identity);
+                    posicionrandom.Clear();
+                }
+                    
             }
 
             else if (hit.transform.gameObject.tag == "Llave")
             {
-                Debug.Log("Hecho");
                 llave = true;
                 Destroy(GameObject.Find("Llave(Clone)"));
+                GameManager.instance.llave = true;
+                GameManager.instance.puntos = GameManager.instance.puntos + 100;
             }
 
-            else if (hit.transform.gameObject.tag == "Encargado" && !papel)
-            {
-                GameManager.instance.InteractuarEncargado(2);
-
-            }
-
-            else if (hit.transform.gameObject.tag == "Encargado" && papel)
-            {
-                GameManager.instance.InteractuarEncargado(3);
-            }
-
-            else if (hit.transform.gameObject.tag == "Codigo")
+            else if (hit.transform.gameObject.tag == "Codigo" && codigo)
             {
                 animacion = true;
                 codigo = true;
@@ -323,10 +407,56 @@ public class Player : MovingObject
                 animacionpuerta.SetTrigger("AbrirMercadona");
                 StartCoroutine(esperar(0));
             }
+
+            else if (hit.transform.gameObject.tag == "PropietarioMercadona")
+            {
+                SpriteRenderer propietario = hit.transform.gameObject.GetComponent<SpriteRenderer>();
+                if (estado == 1)
+                    propietario.sprite = propietarioarriba;
+
+                else if (estado == 2)
+                    propietario.sprite = propietarioderecha;
+
+                else if (estado == 3)
+                    propietario.sprite = propietarioizquierda;
+
+                animacion = true;
+                if (!cesta)
+                    GameManager.instance.InteractuarEncargado(1);
+
+                else if (!papel)
+                {
+                    GameManager.instance.InteractuarEncargado(1);
+                    if (posicionrandom.Count == 0)
+                    {
+                        for (int i = 0; i < 10; i++)
+                        {
+                            posicionrandom.Add(new Vector3(8 + i, 2f, 0f));
+                        }
+                        for (int i = 0; i < 10; i++)
+                        {
+                            posicionrandom.Add(new Vector3(8 + i, 6f, 0f));
+                        }
+                        for (int i = 0; i < 10; i++)
+                        {
+                            posicionrandom.Add(new Vector3(6 + i, 10f, 0f));
+                        }
+
+                        int randomIndex = Random.Range(0, posicionrandom.Count);
+                        posicionRandom1 = posicionrandom[randomIndex];
+                        posicionrandom.RemoveAt(randomIndex);
+                        randomIndex = Random.Range(0, posicionrandom.Count);
+                        posicionRandom2 = posicionrandom[randomIndex];
+                        posicionrandom.RemoveAt(randomIndex);
+                        randomIndex = Random.Range(0, posicionrandom.Count);
+                        posicionRandom3 = posicionrandom[randomIndex];
+                        posicionrandom.RemoveAt(randomIndex);
+                    }
+                }    
+            }
         }
     }
  
-
     public void ResetEstados(string dir)
     {
         if (dir == "x")
@@ -341,9 +471,10 @@ public class Player : MovingObject
             countb = 0;
         }
     }
+
     public void CambiarIdle(int estado)
     {
-        if ( estado == 0)
+        if (estado == 0)
         {
             animator.SetBool("frontIdle", false);
             animator.SetBool("backIdle", true);
@@ -397,6 +528,7 @@ public class Player : MovingObject
             Animator animacionpuerta = go.GetComponent<Animator>();
             animacionpuerta.SetTrigger("AbrirMercadona");
             StartCoroutine(esperar(1));
+            GameManager.instance.puntos = GameManager.instance.puntos + 100;
         }
 
         if (go.tag == "PuertaAlmacen" && codigo)
@@ -447,5 +579,13 @@ public class Player : MovingObject
             yield return new WaitForSeconds(1);
         }
         
+    }
+
+    public void pillado()
+    {
+        GameManager.instance.llave = llave;
+        GameManager.instance.nivel = 5;
+        Invoke("Restart", restartLevelDelay);
+        posicionrandom.Clear();
     }
 }
