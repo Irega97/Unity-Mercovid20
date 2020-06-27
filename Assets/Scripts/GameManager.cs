@@ -13,7 +13,7 @@ public class GameManager : MonoBehaviour
     public float levelStartDelay = 5f;
     public GameObject presentacion;
     public GameObject encargado1;
-    public GameObject objectentremapas;
+    public GameObject entremapas;
     public Text textoPersonajes;
     public Text entreMapas;
     public bool doingSetup;
@@ -177,13 +177,29 @@ public class GameManager : MonoBehaviour
         doingSetup = true;
         presentacion = GameObject.Find("Presentacion");
         encargado1 = GameObject.Find("Encargado1");
-        objectentremapas = GameObject.Find("EntreMapas");
+        entremapas = GameObject.Find("EntreMapas");
         textoPersonajes = GameObject.Find("Text").GetComponent<Text>();
         entreMapas = GameObject.Find("EntreMapasText").GetComponent<Text>();
-        objectentremapas.SetActive(false);
+        presentacion.SetActive(false);
+        entremapas.SetActive(false);
         encargado1.SetActive(false);
-        presentacion.SetActive(true);
+
+        if (instance.nivel == 0)
+        {
+            presentacion.SetActive(true);
+        }
+        else if (instance.nivel == 1)
+        {
+            entremapas.SetActive(true);
+        }
+        else if (instance.nivel == 2)
+        {
+            entreMapas.text = " Por fin consigo dar con la maldita clave. No sé que problemas más me puedo encontrar. ¡Esto es surrealista! No vuelvo a venir a Mercadona fijo.";
+            entremapas.SetActive(true);
+        }
+
         boardScript.SetupScene(mapa, personajes);
+
         Invoke("HidePresentacion", levelStartDelay);
     }
 
@@ -500,7 +516,14 @@ public class GameManager : MonoBehaviour
 
     private void HidePresentacion()
     {
-        presentacion.SetActive(false);
+        if(instance.nivel == 0)
+        {
+           presentacion.SetActive(false);
+        }
+        else
+        {
+            entremapas.SetActive(false);
+        }
         doingSetup = false;
     }
 
@@ -510,7 +533,7 @@ public class GameManager : MonoBehaviour
 
         if (inter == 1)
         {
-            textoPersonajes.text = "Vigilate: ¡Hola! Lamentablemente nuestro establecimiento está cerrado debido a la pandemia. Solo yo tengo la llave… \n" +
+            textoPersonajes.text = "Vigilante: ¡Hola! Lamentablemente nuestro establecimiento está cerrado debido a la pandemia. Solo yo tengo la llave… \n" +
                                    "¡¡Ostras!! Dónde está?? !! \n" +
                                    "Si consigues encontrarla haré ver como si no te he visto entrar...";
 
@@ -518,7 +541,7 @@ public class GameManager : MonoBehaviour
         else if (inter == 2)
         {
             textoPersonajes.text = "Recién Graduado EETAC: Vaya primer día trabajando aquí... Uy! Hola, bienvenido a Mercadona! \n" +
-                                   "Pongase la mascarilla y los guantes porfavor. Ya que ha conseguido entrar, coja lo qu enecesite. \n" +
+                                   "Póngase la mascarilla y los guantes por favor. Ya que ha conseguido entrar, coja lo que necesite. \n" +
                                    "Sobretodo cuidado con los guardas, que no están de humor! Cualquier cosa que necesite no dude en preguntarme!";
 
         }
@@ -529,20 +552,20 @@ public class GameManager : MonoBehaviour
         }
         else if (inter == 4)
         {
-            textoPersonajes.text = "Recién Graduado EETAC: El papel de váter? Si no queda en la estantería estará en el almacén. Pero para entrar necesitaras el código de TRES dígitos.  \n" +
-                                   "Yo tenia una Post-it con cada dígito, pero ordenando por las estanterías se me debe de haver caído. Búscalos para acceder al almacén.";
+            textoPersonajes.text = "Recién Graduado EETAC: El papel de váter? Si no queda en la estantería estará en el almacén. Pero para entrar necesitarás el código de TRES dígitos.  \n" +
+                                   "Yo tenía un Post-it con cada dígito, pero ordenando por las estanterías se me debe de haber caído. Búscalos para acceder al almacén.";
         }
         else if (inter == 5)
         {
-            textoPersonajes.text = "Mi conciencia: Ostia! Aqui hay un Post-it con un número: 6 ";
+            textoPersonajes.text = "Mi conciencia: Ostia! Aquí hay un Post-it con un número: 6 ";
         }
         else if (inter == 6)
         {
-            textoPersonajes.text = "Mi conciencia: Ostia! Aqui hay un Post-it con un número: 6 ";
+            textoPersonajes.text = "Mi conciencia: Ostia! Aquí hay un Post-it con un número: 6 ";
         }
         else if (inter == 7)
         {
-            textoPersonajes.text = "Mi conciencia: Ostia! Aqui hay un Post-it con un número: 6 ";
+            textoPersonajes.text = "Mi conciencia: Ostia! Aquí hay un Post-it con un número: 6 ";
         }
         else if (inter == 8)
         {
@@ -551,28 +574,28 @@ public class GameManager : MonoBehaviour
         }
         else if (inter == 9)
         {
-            textoPersonajes.text = " Código Correcto! ";
+            textoPersonajes.text = " ¡Código Correcto! ";
         }
         else if (inter == 10)
         {
-            textoPersonajes.text = " Código Incorrecto! ";
+            textoPersonajes.text = " ¡Código Incorrecto! ";
         }
         else if (inter == 11)
         {
             textoPersonajes.text = "Señor Mercadona: EH! ¡¿Tú que haces aquí?! Menudos inútiles he contratado...  \n" +
-                                   "Estamos cerrados. Ni se te ocurra coger nada!";
+                                   "Estamos cerrados. ¡Ni se te ocurra coger nada!";
         }
         else if (inter == 12)
         {
             textoPersonajes.text = "Señor Mercadona: NO! El papel no!   \n" +
-                                   "Voy a llamar a la policía.. \n" +
-                                   "... ... Si? La Policía? Aquí hay un chorizo que nos està robando! Envíen refuerzos! Y si hace falta el ejército! \n" +
+                                   "Voy a llamar a la policía... \n" +
+                                   "... ... ¿Si? La Policía? ¡Aquí hay un chorizo que nos está robando! ¡Envíen refuerzos! ¡Y si hace falta el ejército! \n" +
                                    " Jejejeje TE VAS A CAGAR!";
         }
         else if (inter == 13)
         {
             textoPersonajes.text = "Recién Graduado EETAC: Cuidado! Hay mucha pasma fuera...  \n" +
-                                   "Ya me da igual este trabajo! ESTOY HARTO! Te abro la puerta e intenta llegar a casa cagando leches!";
+                                   "Ya me da igual este trabajo! ¡ESTOY HARTO! ¡Te abro la puerta e intenta llegar a casa cagando leches!";
         }
     }
 

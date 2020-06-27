@@ -1729,8 +1729,9 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: "Despu\xE9s de estar buscando la llave media me dispongo a buscar mi objectivo:
-    EL PAPEL DE VATER. \nEspero que no sea tan jodido esta vez..."
+  m_Text: "Despu\xE9s de estar buscando la llave con mucho esfuerzo, me dispongo
+    a buscar mi objectivo: EL PAPEL DE VATER. \nEspero que no sea tan jodido esta
+    vez..."
 --- !u!222 &1904446005
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -1904,7 +1905,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0.0012207031, y: 0}
+  m_AnchoredPosition: {x: 0.0009765625, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2096130724

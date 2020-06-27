@@ -121,7 +121,7 @@ public class Buttons : MonoBehaviour
         {
             if (player.contagiado == true)
             {
-                estadoVida.text = " Te has curado del contagio! ";
+                estadoVida.text = " ¡Te has curado del contagio! ";
                 estadoVida.text = "Vida: " + player.health;
                 player.contagiado = false;
             }
