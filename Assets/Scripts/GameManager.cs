@@ -44,7 +44,7 @@ public class GameManager : MonoBehaviour
         boardScript = GetComponent<BoardManager>();
         InicializarObjetos();
 
-        AndroidJavaClass UnityPlayer = new AndroidJavaClass("com.unity3d.player.UnityPlayer");
+        /*AndroidJavaClass UnityPlayer = new AndroidJavaClass("com.unity3d.player.UnityPlayer");
         AndroidJavaObject currentActivity = UnityPlayer.GetStatic<AndroidJavaObject>("currentActivity");
 
         AndroidJavaObject intent = currentActivity.Call<AndroidJavaObject>("getIntent");
@@ -100,7 +100,7 @@ public class GameManager : MonoBehaviour
                     i++;
                 }
             }
-        }
+        }*/
         
         //Se lee de Android
                     mapa = "60 60 1                                                    \n" +
