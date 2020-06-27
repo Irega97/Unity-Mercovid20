@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -22,6 +23,7 @@ public class GameManager : MonoBehaviour
     public int puntos;
     string mapa;
     string personajes;
+    string objetos2;
     public int cantidadDesinfectante;
     public int cantidadDesinfectantePlus;
     public int cantidadDesinfectantePro;
@@ -40,6 +42,66 @@ public class GameManager : MonoBehaviour
         DontDestroyOnLoad(gameObject);
 
         boardScript = GetComponent<BoardManager>();
+        InicializarObjetos();
+
+        AndroidJavaClass UnityPlayer = new AndroidJavaClass("com.unity3d.player.UnityPlayer");
+        AndroidJavaObject currentActivity = UnityPlayer.GetStatic<AndroidJavaObject>("currentActivity");
+
+        AndroidJavaObject intent = currentActivity.Call<AndroidJavaObject>("getIntent");
+        bool hasExtra = intent.Call<bool>("hasExtra", "objetos");
+
+        if (hasExtra)
+        {
+            AndroidJavaObject extras = intent.Call<AndroidJavaObject>("getExtras");
+            objetos2 = extras.Call<string>("getString", "objetos");
+            string[] objetos1 = objetos2.Split('/');
+            List<int> objetos = new List<int>();
+            for (int i = 0; i < objetos1.Length; i++)
+            {
+                objetos.Add(Convert.ToInt32(objetos1[i]));
+            }
+
+
+            for (int i = 0; i < objetos.Count; i++)
+            {
+                if (objetos[i] == 1)
+                {
+                    cantidadDesinfectante = objetos[i + 1];
+                    i++;
+                }
+
+                else if (objetos[i] == 2)
+                {
+                    cantidadDesinfectantePlus = objetos[i + 1];
+                    i++;
+                }
+
+                else if (objetos[i] == 3)
+                {
+                    cantidadDesinfectantePro = objetos[i + 1];
+                    i++;
+                }
+
+                else if (objetos[i] == 4)
+                {
+                    cantidadMascarilla = objetos[i + 1];
+                    i++;
+                }
+
+                else if (objetos[i] == 5)
+                {
+                    cantidadMegaMascarilla = objetos[i + 1];
+                    i++;
+                }
+
+                else
+                {
+                    cantidadJabon = objetos[i + 1];
+                    i++;
+                }
+            }
+        }
+        
         //Se lee de Android
                     mapa = "60 60 1                                                    \n" +
                            "A9555555555555555555559955555555599599555555555555555555559C\n" +
@@ -148,12 +210,7 @@ public class GameManager : MonoBehaviour
                             "V 46 40  \n" +
                             "V 38 57  \n" +
                             "G 46 37  \n";
-        cantidadDesinfectante = 3;
-        cantidadDesinfectantePlus = 3;
-        cantidadDesinfectantePro = 3;
-        cantidadJabon = 3;
-        cantidadMascarilla = 1;
-        cantidadMegaMascarilla = 1;
+        
 
         if (cantidadMascarilla > 0 || cantidadMegaMascarilla > 0)
         {
@@ -180,6 +237,7 @@ public class GameManager : MonoBehaviour
         objectentremapas = GameObject.Find("EntreMapas");
         textoPersonajes = GameObject.Find("Text").GetComponent<Text>();
         entreMapas = GameObject.Find("EntreMapasText").GetComponent<Text>();
+
         objectentremapas.SetActive(false);
         encargado1.SetActive(false);
         presentacion.SetActive(true);
@@ -585,4 +643,14 @@ public class GameManager : MonoBehaviour
     {
         enabled = false;
     }
+
+    private void InicializarObjetos()
+    {
+        cantidadDesinfectante = 0;
+        cantidadDesinfectantePlus = 0;
+        cantidadDesinfectantePro = 0;
+        cantidadJabon = 0;
+        cantidadMascarilla = 0;
+        cantidadMegaMascarilla = 0;
+}
 }
