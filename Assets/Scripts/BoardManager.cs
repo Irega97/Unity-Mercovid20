@@ -46,6 +46,10 @@ public class BoardManager : MonoBehaviour
     public GameObject puertaalmacen;
     public GameObject codigo;
     public GameObject propietarioMercadona;
+    public GameObject sueloAlmacen;
+    public GameObject papel;
+    public GameObject conjuntopapel;
+    public GameObject[] cajas;
     public int mapa;
 
     public void SetupScene(string escenario, string personajes)
@@ -92,7 +96,7 @@ public class BoardManager : MonoBehaviour
 
         else if (mapa == 3)
         {
-
+            boardHolder4 = new GameObject("Cajas").transform;
         }
 
         int x;
@@ -159,6 +163,15 @@ public class BoardManager : MonoBehaviour
                                 m = 0;
                         }
 
+                        else if (mapa == 3)
+                        {
+                            instance = Instantiate(sueloAlmacen, new Vector3(xmapa, ymapa, 0f), Quaternion.identity);
+                            extra = Instantiate(cajas[c], new Vector3(xmapa, ymapa, 0f), Quaternion.identity);
+                            c++;
+                            if (c == 14)
+                                c = 0;
+                        }
+
                         extra.transform.SetParent(boardHolder4);
                         
                         break;
@@ -177,6 +190,14 @@ public class BoardManager : MonoBehaviour
                             nevera.transform.SetParent(boardHolder5);
                         }
 
+                        else if (mapa == 3)
+                        {
+                            instance = Instantiate(sueloAlmacen, new Vector3(xmapa, ymapa, 0f), Quaternion.identity);
+                            GameObject conjuntopapeles = Instantiate(conjuntopapel, new Vector3(xmapa, ymapa, 0f), Quaternion.identity);
+
+                            conjuntopapeles.transform.SetParent(boardHolder4);
+                        }
+
                         break;
 
                     case '1':
@@ -187,6 +208,13 @@ public class BoardManager : MonoBehaviour
                         {
                             GameObject nevera = Instantiate(nevera2, new Vector3(xmapa, ymapa, 0f), Quaternion.identity);
                             nevera.transform.SetParent(boardHolder5);
+                        }
+
+                        else if (mapa == 3)
+                        {
+                            instance = Instantiate(sueloAlmacen, new Vector3(xmapa, ymapa, 0f), Quaternion.identity);
+                            GameObject papelvater = Instantiate(papel, new Vector3(xmapa, ymapa, 0f), Quaternion.identity);
+                            papelvater.transform.SetParent(boardHolder4);
                         }
 
                         break;
@@ -258,7 +286,7 @@ public class BoardManager : MonoBehaviour
                         if (mapa == 1)
                             instance = Instantiate(carretera[Int32.Parse(ch.ToString())], new Vector3(xmapa, ymapa, 0f), Quaternion.identity);
 
-                        else if (mapa == 2)
+                        else if (mapa == 2 || mapa == 3)
                         {
                             instance = Instantiate(alfombra, new Vector3(xmapa, ymapa, 0f), Quaternion.identity);
                         }
@@ -497,11 +525,13 @@ public class BoardManager : MonoBehaviour
                         break;
 
                     default:
-                        if (ytotal == 60)
+                        if (mapa == 1)
                             instance = Instantiate(acera, new Vector3(xmapa, ymapa, 0f), Quaternion.identity);
 
-                        else
+                        else if (mapa == 2)
                             instance = Instantiate(sueloMercadona, new Vector3(xmapa, ymapa, 0f), Quaternion.identity);
+                        else if (mapa == 3)
+                            instance = Instantiate(sueloAlmacen, new Vector3(xmapa, ymapa, 0f), Quaternion.identity);
                         break;
                 }
 
@@ -586,7 +616,7 @@ public class BoardManager : MonoBehaviour
                             h = 0;
                     }
                     
-                    else if (mapa == 2)
+                    else if (mapa == 2 || mapa == 3)
                         instance = Instantiate(propietarioMercadona, new Vector3(Convert.ToInt32(jugadores[pl + 1].Split(' ')[1]), Convert.ToInt32(jugadores[pl + 1].Split(' ')[2]), 0f), Quaternion.identity);
                      
                     break;
@@ -595,7 +625,7 @@ public class BoardManager : MonoBehaviour
                     if (mapa == 1)
                         instance = Instantiate(guardiaLlave, new Vector3(Convert.ToInt32(jugadores[pl + 1].Split(' ')[1]), Convert.ToInt32(jugadores[pl + 1].Split(' ')[2]), 0f), Quaternion.identity);
 
-                    else if (mapa == 2)
+                    else if (mapa == 2 || mapa == 3)
                     {
                         instance = Instantiate(guardia, new Vector3(Convert.ToInt32(jugadores[pl + 1].Split(' ')[1]), Convert.ToInt32(jugadores[pl + 1].Split(' ')[2]), 0f), Quaternion.identity);
                         Guardia scriptguardia = instance.GetComponent<Guardia>();

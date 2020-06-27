@@ -498,6 +498,26 @@ MonoBehaviour:
   codigo: {fileID: 8716581757863840711, guid: 929f3a1522fceea479224fe1948a4157, type: 3}
   propietarioMercadona: {fileID: 7888827511330627545, guid: d1029bbb02b71ef4b8dfe9f767adf192,
     type: 3}
+  sueloAlmacen: {fileID: 5282693270789260567, guid: 5837768954643794881228f6600c8a2e,
+    type: 3}
+  papel: {fileID: 7219417042932482433, guid: 50fefbdc964a7e54983bb29951333f38, type: 3}
+  conjuntopapel: {fileID: 7831140194515728733, guid: d10911cccd2c6f04681d64a23d638381,
+    type: 3}
+  cajas:
+  - {fileID: 1339095335727687323, guid: ee6e26575f34df34da97fabcd572b737, type: 3}
+  - {fileID: 5029664268571486804, guid: 1175192e8137f094687b3c3a212b13dc, type: 3}
+  - {fileID: 7203557359775782005, guid: b8eab1985ed9a264297effd0bfb7b99f, type: 3}
+  - {fileID: 8074941639681900789, guid: 1d01fcd7a68d067469db4a5f1d656c28, type: 3}
+  - {fileID: 2419000455877636237, guid: be0f661b781298a488290bfb57111e99, type: 3}
+  - {fileID: 8261386439475438333, guid: 7438877404475d844ab61bdd5563f545, type: 3}
+  - {fileID: 5546746191273657787, guid: edcb6eecd178c5c49a8e13afe6dab9e6, type: 3}
+  - {fileID: 576155751890388590, guid: ef3a3e90544344f42b71bf817a102a4a, type: 3}
+  - {fileID: 6629733149558348445, guid: bce71ce6414c38f49a2ba31db1b3daca, type: 3}
+  - {fileID: 258542323379020747, guid: 8334f987911bd1342a39811f14b8d462, type: 3}
+  - {fileID: 3300668330044695520, guid: 4e98935fec85c1a4e94105a2dc8a4ef1, type: 3}
+  - {fileID: 495004446436123558, guid: d025ec23b14562542a6839d0d9ce7177, type: 3}
+  - {fileID: 2367539281732901297, guid: a1ebe980a2976df4e9c56ab2c3309d0d, type: 3}
+  - {fileID: 9145547251600640911, guid: 8e06cfeb9bf06d34499b2b7993b440d0, type: 3}
   mapa: 0
 --- !u!114 &1431000569802020838
 MonoBehaviour:
@@ -522,6 +542,7 @@ MonoBehaviour:
   doingSetup: 0
   llave: 0
   nivel: 0
+  puntos: 0
   cantidadDesinfectante: 0
   cantidadDesinfectantePlus: 0
   cantidadDesinfectantePro: 0

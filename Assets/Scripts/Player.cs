@@ -21,7 +21,7 @@ public class Player : MovingObject
     bool llave;
     bool papel = false;
     bool cesta = false;
-    bool codigo = false;
+    bool codigo = true;
     public Sprite propietarioarriba;
     public Sprite propietarioderecha;
     public Sprite propietarioizquierda;
@@ -336,6 +336,7 @@ public class Player : MovingObject
                 {
                     posicion1 = true;
                     animacion = true;
+                    CambiarIdle(0);
                     GameManager.instance.InteractuarEncargado(1);
                 }
 
@@ -343,6 +344,7 @@ public class Player : MovingObject
                 {
                     posicion2 = true;
                     animacion = true;
+                    CambiarIdle(0);
                     GameManager.instance.InteractuarEncargado(1);
                 }
 
@@ -350,6 +352,7 @@ public class Player : MovingObject
                 {
                     posicion3 = true;
                     animacion = true;
+                    CambiarIdle(0);
                     GameManager.instance.InteractuarEncargado(1);
                 }
 
@@ -357,6 +360,7 @@ public class Player : MovingObject
                 {
                     codigo = true;
                     animacion = true;
+                    CambiarIdle(0);
                     GameManager.instance.InteractuarEncargado(1);
                 }
             }
@@ -453,6 +457,12 @@ public class Player : MovingObject
                         posicionrandom.RemoveAt(randomIndex);
                     }
                 }    
+            }
+
+            else if (hit.transform.gameObject.tag == "Papel")
+            {
+                Destroy(hit.transform.gameObject);
+                papel = true;
             }
         }
     }

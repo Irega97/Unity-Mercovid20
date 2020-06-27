@@ -176,16 +176,15 @@ public class GameManager : MonoBehaviour
         doingSetup = true;
         presentacion = GameObject.Find("Presentacion");
         encargado1 = GameObject.Find("Encargado1");
-        encargado2 = GameObject.Find("Encargado2");
-        encargado3 = GameObject.Find("Encargado3");
 
         AcabarConversa();
 
-        presentacion.SetActive(true);
+        presentacion.SetActive(false);
+        doingSetup = false;
 
         boardScript.SetupScene(mapa, personajes);
 
-        Invoke("HidePresentacion", levelStartDelay);
+        //Invoke("HidePresentacion", levelStartDelay);
     }
 
     [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.AfterSceneLoad)]
@@ -218,20 +217,39 @@ public class GameManager : MonoBehaviour
                              "565       44444444444\n";
 
             instance.personajes = "3                 \n" +
-                                  "P 1 0 0           \n" +
+                                  "P 19 14 0         \n" +
                                   "H 2 1             \n" +
-                                  "G 18 10 16 4 0 0\n";
+                                  "G 18 10 16 4 0 0  \n";
 
         }
 
         else if (instance.nivel == 2)
         {
+            instance.mapa = "19 11 3            \n" +
+                            "                   \n" +
+                            " MMMMM       MMMMM \n" +
+                            " MMMMM       MMMMM \n" +
+                            " MMMMM       MMMMM \n" +
+                            " MMMMMM00100MMMMMM \n" +
+                            " MMMMMMMMMMMMMMMMM \n" +
+                            " MMMMMMMMMMMMMMMMM \n" +
+                            "                   \n" +
+                            "                   \n" +
+                            "                   \n" +
+                            "                 6 \n";
 
+            instance.personajes = "4               \n" +
+                                  "H 18 0          \n" +
+                                  "P 17 0 0        \n" +
+                                  "G 0 3 19 7 1 0  \n" +
+                                  "G 0 0 15 2 3 1  \n";
+                                  
+                                  
         }
 
         else if (instance.nivel == 3)
         {
-            instance.mapa = "20 16 2             \n" +
+            instance.mapa = "20 16 2              \n" +
                              "33333333 001100117 8\n" +
                              "3                   \n" +
                              "3                   \n" +
@@ -247,11 +265,11 @@ public class GameManager : MonoBehaviour
                              "   MMM  2222222222  \n" +
                              "                    \n" +
                              "                    \n" +
-                             "565       44444444444\n";
+                             "565      44444444444\n";
 
             instance.personajes = "2                 \n" +
                                   "P 1 0 0           \n" +
-                                  "G 18 10 16 4 0 0\n";
+                                  "G 18 10 16 4 0 0  \n";
         }
 
         else if (instance.nivel == 4)
@@ -507,8 +525,6 @@ public class GameManager : MonoBehaviour
     public void AcabarConversa()
     {
         encargado1.SetActive(false);
-        encargado2.SetActive(false);
-        encargado3.SetActive(false);
     }
 
     public void GameOver()
