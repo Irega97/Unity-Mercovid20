@@ -28,7 +28,7 @@ public abstract class MovingObject : MonoBehaviour
 
     protected virtual void Start()
     {
-        movementSpeed = 0.2f / moveTime;
+        movementSpeed = 0.5f / moveTime;
     }
 
     protected IEnumerator SmoothMovement(Vector2 end) //corutina para movimiento

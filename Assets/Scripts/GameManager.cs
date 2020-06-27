@@ -13,6 +13,7 @@ public class GameManager : MonoBehaviour
     public float levelStartDelay = 5f;
     public GameObject presentacion;
     public GameObject encargado1;
+    public GameObject objectentremapas;
     public Text textoPersonajes;
     public Text entreMapas;
     public bool doingSetup;
@@ -38,9 +39,9 @@ public class GameManager : MonoBehaviour
 
         DontDestroyOnLoad(gameObject);
 
-		boardScript = GetComponent<BoardManager>();
+        boardScript = GetComponent<BoardManager>();
         //Se lee de Android
-        mapa = "60 60 1                                                    \n" +
+                    mapa = "60 60 1                                                    \n" +
                            "A9555555555555555555559955555555599599555555555555555555559C\n" +
                            "7B66666666666666666666DB666666666666DB66666666666666666666D8\n" +
                            "EF                    EF            EF                    EF\n" +
@@ -103,7 +104,7 @@ public class GameManager : MonoBehaviour
                            "026666666666666666666622666666666666226666666666666666666623\n";
 
                personajes = "44      \n" +
-                            "P 49 33 1          \n" +
+                            "P 7 3 1            \n" +
                             "0 0 0 23 11 0 0    \n" +
                             "1 0 48 23 11 0 0   \n" +
                             "2 36 48 23 11 0 0  \n" +
@@ -176,17 +177,14 @@ public class GameManager : MonoBehaviour
         doingSetup = true;
         presentacion = GameObject.Find("Presentacion");
         encargado1 = GameObject.Find("Encargado1");
+        objectentremapas = GameObject.Find("EntreMapas");
         textoPersonajes = GameObject.Find("Text").GetComponent<Text>();
         entreMapas = GameObject.Find("EntreMapasText").GetComponent<Text>();
-
-        AcabarConversa();
-
-        presentacion.SetActive(false);
-        doingSetup = false;
-
+        objectentremapas.SetActive(false);
+        encargado1.SetActive(false);
+        presentacion.SetActive(true);
         boardScript.SetupScene(mapa, personajes);
-
-        //Invoke("HidePresentacion", levelStartDelay);
+        Invoke("HidePresentacion", levelStartDelay);
     }
 
     [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.AfterSceneLoad)]
@@ -219,7 +217,7 @@ public class GameManager : MonoBehaviour
                              "565       44444444444\n";
 
             instance.personajes = "3                 \n" +
-                                  "P 19 14 0         \n" +
+                                  "P 1 0 0           \n" +
                                   "H 2 1             \n" +
                                   "G 18 10 16 4 0 0  \n";
 
@@ -585,7 +583,6 @@ public class GameManager : MonoBehaviour
 
     public void GameOver()
     {
-        presentacion.SetActive(true);
         enabled = false;
     }
 }

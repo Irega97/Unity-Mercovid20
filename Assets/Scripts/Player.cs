@@ -3,7 +3,6 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 using System.Collections.Generic;
-using TreeEditor;
 
 public class Player : MovingObject
 {
@@ -12,7 +11,7 @@ public class Player : MovingObject
     int countb = 0;
     int countl = 0;
     int countr = 0;
-    int tiempoupdate = 15;
+    int tiempoupdate = 0;
     public int estado;
     int horizontal;
     int vertical;
@@ -21,7 +20,7 @@ public class Player : MovingObject
     bool llave;
     bool papel = false;
     bool cesta = false;
-    bool codigo = true;
+    bool codigo = false;
     public Sprite propietarioarriba;
     public Sprite propietarioderecha;
     public Sprite propietarioizquierda;
@@ -53,9 +52,8 @@ public class Player : MovingObject
         contagiado = GameManager.instance.contagio;
         estadoVida = GameObject.Find("EstadoText").GetComponent<Text>();
         estadoVida.text = "Vida: " + health;
-        llave = true;
         accion1 = false;
-        //llave = GameManager.instance.llave;
+        llave = GameManager.instance.llave;
 
         CambiarIdle(estado);
 

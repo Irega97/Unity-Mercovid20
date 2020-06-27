@@ -8,7 +8,7 @@ AnimatorState:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: JugadorMoveF
-  m_Speed: 0.6
+  m_Speed: 1.3
   m_CycleOffset: 0
   m_Transitions:
   - {fileID: 205106203066649871}
@@ -85,7 +85,7 @@ AnimatorState:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: JugadorMoveB
-  m_Speed: 0.6
+  m_Speed: 1.3
   m_CycleOffset: 0
   m_Transitions:
   - {fileID: -6304463713513708749}
@@ -289,7 +289,7 @@ AnimatorState:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: JugadorMoveL
-  m_Speed: 0.6
+  m_Speed: 1.3
   m_CycleOffset: 0
   m_Transitions:
   - {fileID: 7605223385880653917}
@@ -738,7 +738,7 @@ AnimatorState:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: JugadorMoveR
-  m_Speed: 0.6
+  m_Speed: 1.3
   m_CycleOffset: 0
   m_Transitions:
   - {fileID: -337478156993739894}
