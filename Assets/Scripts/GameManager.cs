@@ -237,20 +237,20 @@ public class GameManager : MonoBehaviour
         entremapas = GameObject.Find("EntreMapas");
         textoPersonajes = GameObject.Find("Text").GetComponent<Text>();
         entreMapas = GameObject.Find("EntreMapasText").GetComponent<Text>();
+
         presentacion.SetActive(false);
         entremapas.SetActive(false);
-
         encargado1.SetActive(false);
 
-        if (instance.nivel == 0)
+        if (instance.nivel == 1)
         {
             presentacion.SetActive(true);
         }
-        else if (instance.nivel == 1)
+        else if (instance.nivel == 2)
         {
             entremapas.SetActive(true);
         }
-        else if (instance.nivel == 2)
+        else if (instance.nivel == 3)
         {
             entreMapas.text = " Por fin consigo dar con la maldita clave. No sé que problemas más me puedo encontrar. ¡Esto es surrealista! No vuelvo a venir a Mercadona fijo.";
             entremapas.SetActive(true);
@@ -574,7 +574,7 @@ public class GameManager : MonoBehaviour
 
     private void HidePresentacion()
     {
-        if(instance.nivel == 0)
+        if(instance.nivel == 1)
         {
            presentacion.SetActive(false);
         }
@@ -654,6 +654,11 @@ public class GameManager : MonoBehaviour
         {
             textoPersonajes.text = "Recién Graduado EETAC: Cuidado! Hay mucha pasma fuera...  \n" +
                                    "Ya me da igual este trabajo! ¡ESTOY HARTO! ¡Te abro la puerta e intenta llegar a casa cagando leches!";
+        }
+        else if (inter == 14)
+        {
+            textoPersonajes.text = "Guardia: ¡Oye tú! ¡¿Qué haces aquí?!  \n" +
+                                   "Derechito pa'l cuartel que te vas";
         }
     }
 
