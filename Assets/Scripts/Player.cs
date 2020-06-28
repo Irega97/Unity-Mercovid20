@@ -16,6 +16,7 @@ public class Player : MovingObject
     int horizontal;
     int vertical;
     bool accion1;
+    bool accion2;
     bool inter = false;
     bool llave;
     bool papel = false;
@@ -53,6 +54,8 @@ public class Player : MovingObject
         estadoVida = GameObject.Find("EstadoText").GetComponent<Text>();
         estadoVida.text = "Vida: " + health;
         accion1 = false;
+        accion2 = false;
+        codigo = false;
         llave = GameManager.instance.llave;
 
         CambiarIdle(estado);
@@ -311,7 +314,7 @@ public class Player : MovingObject
     {
         if (GameManager.instance.nivel == 2)
         {
-           if (transform.position.x == 1 && transform.position.y == 1 && !accion1)
+            if (transform.position.x == 1 && transform.position.y == 1 && !accion1)
             {
                 animacion = true;
                 GameManager.instance.InteractuarEncargado(2);
@@ -319,7 +322,7 @@ public class Player : MovingObject
                 CambiarIdle(3);
             }
 
-           else if (transform.position.x == 1 && transform.position.y == 14 && !cesta)
+            else if (transform.position.x == 1 && transform.position.y == 14 && !cesta)
             {
                 CambiarIdle(0);
                 cesta = true;
@@ -328,7 +331,7 @@ public class Player : MovingObject
                 CambiarIdle(0);
             }
 
-           if (posicionRandom1 != null && !codigo)
+            if (posicionRandom1 != null && !codigo)
             {
                 if (transform.position.x == posicionRandom1.x && transform.position.y == posicionRandom1.y && !posicion1)
                 {
@@ -361,6 +364,36 @@ public class Player : MovingObject
                     CambiarIdle(0);
                     GameManager.instance.InteractuarEncargado(8);
                 }
+            }
+        }
+
+        else if (GameManager.instance.nivel == 3)
+        {
+            if (transform.position.x == 17 && transform.position.y == 0 && !accion1)
+            {
+                animacion = true;
+                GameManager.instance.InteractuarEncargado(11);
+                accion1 = true;
+                CambiarIdle(3);
+            }
+
+            else if (transform.position.x == 17 && transform.position.y == 0 && papel && !accion2)
+            {
+                animacion = true;
+                GameManager.instance.InteractuarEncargado(12);
+                CambiarIdle(3);
+                accion2 = true;
+            }
+        }
+
+        else if (GameManager.instance.nivel == 4)
+        {
+            if (transform.position.x == 1 && transform.position.y == 1 && !accion1)
+            {
+                animacion = true;
+                GameManager.instance.InteractuarEncargado(13);
+                accion1 = true;
+                CambiarIdle(3);
             }
         }
     }
@@ -403,9 +436,16 @@ public class Player : MovingObject
             {
                 animacion = true;
                 codigo = true;
+                GameManager.instance.InteractuarEncargado(9);
                 Animator animacionpuerta = GameObject.Find("PuertaAlmacenLarge(Clone)").GetComponent<Animator>();
                 animacionpuerta.SetTrigger("AbrirMercadona");
                 StartCoroutine(esperar(0));
+            }
+
+            else if (hit.transform.gameObject.tag == "Codigo" && !codigo)
+            {
+                animacion = true;
+                GameManager.instance.InteractuarEncargado(10);
             }
 
             else if (hit.transform.gameObject.tag == "PropietarioMercadona")
@@ -421,44 +461,76 @@ public class Player : MovingObject
                     propietario.sprite = propietarioizquierda;
 
                 animacion = true;
-                if (!cesta)
-                    GameManager.instance.InteractuarEncargado(2);
-
-                else if (!papel)
+                if (GameManager.instance.nivel == 2)
                 {
-                    GameManager.instance.InteractuarEncargado(4);
-                    if (posicionrandom.Count == 0)
-                    {
-                        for (int i = 0; i < 10; i++)
-                        {
-                            posicionrandom.Add(new Vector3(8 + i, 2f, 0f));
-                        }
-                        for (int i = 0; i < 10; i++)
-                        {
-                            posicionrandom.Add(new Vector3(8 + i, 6f, 0f));
-                        }
-                        for (int i = 0; i < 10; i++)
-                        {
-                            posicionrandom.Add(new Vector3(6 + i, 10f, 0f));
-                        }
+                    if (!cesta)
+                        GameManager.instance.InteractuarEncargado(2);
 
-                        int randomIndex = Random.Range(0, posicionrandom.Count);
-                        posicionRandom1 = posicionrandom[randomIndex];
-                        posicionrandom.RemoveAt(randomIndex);
-                        randomIndex = Random.Range(0, posicionrandom.Count);
-                        posicionRandom2 = posicionrandom[randomIndex];
-                        posicionrandom.RemoveAt(randomIndex);
-                        randomIndex = Random.Range(0, posicionrandom.Count);
-                        posicionRandom3 = posicionrandom[randomIndex];
-                        posicionrandom.RemoveAt(randomIndex);
+                    else if (!codigo && !papel)
+                    {
+                        GameManager.instance.InteractuarEncargado(4);
+                        if (posicionrandom.Count == 0)
+                        {
+                            for (int i = 0; i < 10; i++)
+                            {
+                                posicionrandom.Add(new Vector3(8 + i, 2f, 0f));
+                            }
+                            for (int i = 0; i < 10; i++)
+                            {
+                                posicionrandom.Add(new Vector3(8 + i, 6f, 0f));
+                            }
+                            for (int i = 0; i < 10; i++)
+                            {
+                                posicionrandom.Add(new Vector3(6 + i, 10f, 0f));
+                            }
+
+                            int randomIndex = Random.Range(0, posicionrandom.Count);
+                            posicionRandom1 = posicionrandom[randomIndex];
+                            posicionrandom.RemoveAt(randomIndex);
+                            randomIndex = Random.Range(0, posicionrandom.Count);
+                            posicionRandom2 = posicionrandom[randomIndex];
+                            posicionrandom.RemoveAt(randomIndex);
+                            randomIndex = Random.Range(0, posicionrandom.Count);
+                            posicionRandom3 = posicionrandom[randomIndex];
+                            posicionrandom.RemoveAt(randomIndex);
+                        }
                     }
-                }    
+
+                    else if (!papel)
+                    {
+                        animacion = true;
+                        GameManager.instance.InteractuarEncargado(15);
+                    }
+                }
+                
+                else if (GameManager.instance.nivel == 3)
+                {
+                    if (!papel)
+                    {
+                        animacion = true;
+                        GameManager.instance.InteractuarEncargado(11);
+                    }
+
+                    else if (papel)
+                    {
+                        animacion = true;
+                        GameManager.instance.InteractuarEncargado(12);
+                    }
+                }
             }
 
             else if (hit.transform.gameObject.tag == "Papel")
             {
                 Destroy(hit.transform.gameObject);
+                animacion = true;
+                GameManager.instance.InteractuarEncargado(16);
                 papel = true;
+            }
+
+            else if (hit.transform.gameObject.tag == "ConjuntoPapel")
+            {
+                animacion = true;
+                GameManager.instance.InteractuarEncargado(17);
             }
         }
     }
@@ -523,7 +595,10 @@ public class Player : MovingObject
         }
 
         else if (i == 0)
-            animacion = false;
+        {
+            if (GameObject.Find("Encagardo1") == null)
+                animacion = false;
+        }
     }
 
     protected override void OnCantMove(GameObject go)
@@ -544,6 +619,17 @@ public class Player : MovingObject
             Vector2 end = start + new Vector2(0, 1);
             StartCoroutine(SmoothMovement(end));
             Invoke("Restart", restartLevelDelay);
+        }
+
+        if (go.tag == "Borde")
+        {
+            if (GameManager.instance.nivel == 3 && papel && transform.position.x == 17 && transform.position.y == 0)
+            {
+                Vector2 start = transform.position;
+                Vector2 end = start + new Vector2(0, -1);
+                StartCoroutine(SmoothMovement(end));
+                Invoke("Restart", restartLevelDelay);
+            }
         }
     }
 

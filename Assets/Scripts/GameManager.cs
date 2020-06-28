@@ -252,7 +252,19 @@ public class GameManager : MonoBehaviour
         }
         else if (instance.nivel == 3)
         {
-            entreMapas.text = " Por fin consigo dar con la maldita clave. No sé que problemas más me puedo encontrar. ¡Esto es surrealista! No vuelvo a venir a Mercadona fijo.";
+            entreMapas.text = "Por fin consigo dar con la maldita clave. No sé que problemas más me puedo encontrar. ¡Esto es surrealista! No vuelvo a venir a Mercadona fijo.";
+            entremapas.SetActive(true);
+        }
+
+        else if (instance.nivel == 4)
+        {
+            entreMapas.text = "La cosa se me complica. El amargado ese ha avisado a la policía. Baah!! Seguro que era un farol y no ha llamado a nadie.";
+            entremapas.SetActive(true);
+        }
+
+        else if (instance.nivel == 5)
+        {
+            entreMapas.text = "Puff he conseguido escapar por los pelos, pero a saber que me encuentro ahora en la calle.";
             entremapas.SetActive(true);
         }
 
@@ -342,7 +354,7 @@ public class GameManager : MonoBehaviour
                              "565      44444444444\n";
 
             instance.personajes = "2                 \n" +
-                                  "P 1 0 0           \n" +
+                                  "P 18 14 1         \n" +
                                   "G 18 10 16 4 0 0  \n";
         }
 
@@ -619,11 +631,11 @@ public class GameManager : MonoBehaviour
         }
         else if (inter == 6)
         {
-            textoPersonajes.text = "Mi conciencia: Ostia! Aquí hay un Post-it con un número: 6 ";
+            textoPersonajes.text = "Mi conciencia: Ostia! Aquí hay un Post-it con un número: 4 ";
         }
         else if (inter == 7)
         {
-            textoPersonajes.text = "Mi conciencia: Ostia! Aquí hay un Post-it con un número: 6 ";
+            textoPersonajes.text = "Mi conciencia: Ostia! Aquí hay un Post-it con un número: 7 ";
         }
         else if (inter == 8)
         {
@@ -659,6 +671,29 @@ public class GameManager : MonoBehaviour
         {
             textoPersonajes.text = "Guardia: ¡Oye tú! ¡¿Qué haces aquí?!  \n" +
                                    "Derechito pa'l cuartel que te vas";
+        }
+
+        else if (inter == 15)
+        {
+            textoPersonajes.text = "Recién Graduado EETAC: Vaya, ya tienes el código completo \n" +
+                                   "Tampoco puse uno muy difícil jejejeje, incluso sin los Pos-it lo habrías sabido";
+        }
+
+        else if (inter == 16)
+        {
+            textoPersonajes.text = "Mi conciencia: Síi!!!! Ya tengo el papel de vater, acabo de hacer mis sueños realidad!!!!";
+        }
+
+        else if (inter == 17)
+        {
+            textoPersonajes.text = "Mi conciencia: No puedo coger todos los rollos, si no me verán y me detendrán. \n" +
+                                   "No hay que ser avariciosos en esta vida";
+        }
+
+        else if (inter == 18)
+        {
+            textoPersonajes.text = "Guardia: Vaya vaya, tu eres el que ha robado el papel eeh!! \n" +
+                                   "Te vamos a enseñar como funcionan aquí las cosas";
         }
     }
 

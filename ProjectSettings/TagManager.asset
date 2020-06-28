@@ -23,6 +23,8 @@ TagManager:
   - Codigo
   - GuardiaMercadona
   - Cesta
+  - Borde
+  - ConjuntoPapel
   layers:
   - Default
   - TransparentFX
