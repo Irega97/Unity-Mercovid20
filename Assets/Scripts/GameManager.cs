@@ -340,7 +340,7 @@ public class GameManager : MonoBehaviour
             instance.personajes = "4               \n" +
                                   "H 18 0          \n" +
                                   "P 17 0 0        \n" +
-                                  "G 0 3 19 7 1 0  \n" +
+                                  "G 0 3 19 6 1 0  \n" +
                                   "G 16 2 15 2 2 1 \n";
                                   
                                   
@@ -367,7 +367,7 @@ public class GameManager : MonoBehaviour
                              "565      44444444444\n";
 
             instance.personajes = "6                 \n" +
-                                  "P 1 0 1           \n" +
+                                  "P 19 15 1           \n" +
                                   "H 2 1             \n" +
                                   "G 1 13 18 1 3 1   \n" +
                                   "G 19 2 12 3 1 1   \n" +
