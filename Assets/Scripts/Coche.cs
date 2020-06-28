@@ -89,6 +89,7 @@ public class Coche : MovingObject
         else
             spriterenderer.sprite = goabajo;
     }
+    
     private void Comprobarposicion()
     {
         if (ordenmovimiento == 0)
@@ -151,6 +152,7 @@ public class Coche : MovingObject
         }
         
     }
+    
     protected override void OnCantMove(GameObject go)
     {
         if (move == 0)

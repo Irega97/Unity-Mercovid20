@@ -466,7 +466,7 @@ public class Player : MovingObject
                     if (!cesta)
                         GameManager.instance.InteractuarEncargado(2);
 
-                    else if (!codigo && !papel)
+                    else if (!codigo)
                     {
                         GameManager.instance.InteractuarEncargado(4);
                         if (posicionrandom.Count == 0)
@@ -496,7 +496,7 @@ public class Player : MovingObject
                         }
                     }
 
-                    else if (!papel)
+                    else if (codigo)
                     {
                         animacion = true;
                         GameManager.instance.InteractuarEncargado(15);
@@ -624,6 +624,14 @@ public class Player : MovingObject
         if (go.tag == "Borde")
         {
             if (GameManager.instance.nivel == 3 && papel && transform.position.x == 17 && transform.position.y == 0)
+            {
+                Vector2 start = transform.position;
+                Vector2 end = start + new Vector2(0, -1);
+                StartCoroutine(SmoothMovement(end));
+                Invoke("Restart", restartLevelDelay);
+            }
+
+            else if (GameManager.instance.nivel == 4 && transform.position.x == 1 && transform.position.y == 0)
             {
                 Vector2 start = transform.position;
                 Vector2 end = start + new Vector2(0, -1);

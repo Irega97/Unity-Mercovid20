@@ -181,6 +181,20 @@ public class Guardia : MovingObject
             pillado2 = true;
             GameObject.Find("Jugador(Clone)").GetComponent<Player>().pillado();
         }
+        else
+        {
+            if (move == 0)
+                vertical++;
+
+            else if (move == 1)
+                vertical--;
+
+            else if (move == 2)
+                horizontal++;
+
+            else
+                vertical++;
+        }
     }
 
     public void pillar()

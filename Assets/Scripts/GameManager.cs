@@ -328,7 +328,7 @@ public class GameManager : MonoBehaviour
                                   "H 18 0          \n" +
                                   "P 17 0 0        \n" +
                                   "G 0 3 19 7 1 0  \n" +
-                                  "G 0 0 15 2 3 1  \n";
+                                  "G 16 2 15 2 2 1 \n";
                                   
                                   
         }
@@ -353,8 +353,12 @@ public class GameManager : MonoBehaviour
                              "                    \n" +
                              "565      44444444444\n";
 
-            instance.personajes = "2                 \n" +
+            instance.personajes = "6                 \n" +
                                   "P 18 14 1         \n" +
+                                  "H 2 1             \n" +
+                                  "G 1 13 18 1 3 1   \n" +
+                                  "G 18 2 17 3 1 1   \n" +
+                                  "G 0 9 7 7 0 1     \n" +
                                   "G 18 10 16 4 0 0  \n";
         }
 
@@ -704,6 +708,7 @@ public class GameManager : MonoBehaviour
 
     public void GameOver()
     {
+        presentacion.SetActive(true);
         enabled = false;
     }
 
