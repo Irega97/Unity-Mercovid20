@@ -22,6 +22,7 @@ public class Player : MovingObject
     bool papel = false;
     bool cesta = false;
     bool codigo = false;
+    bool puertaabierta = false;
     public Sprite propietarioarriba;
     public Sprite propietarioderecha;
     public Sprite propietarioizquierda;
@@ -58,7 +59,8 @@ public class Player : MovingObject
         accion2 = false;
         codigo = false;
         papel = false;
-        llave = GameManager.instance.llave;
+        llave = false;
+        //llave = GameManager.instance.llave;
 
         CambiarIdle(estado);
 
@@ -74,7 +76,6 @@ public class Player : MovingObject
     {
         if (health <= 0)
         {
-            SoundManager.instance.gameover();
             GameManager.instance.GameOver();
         }
     }
@@ -445,6 +446,7 @@ public class Player : MovingObject
                 GameManager.instance.InteractuarEncargado(9);
                 Animator animacionpuerta = GameObject.Find("PuertaAlmacenLarge(Clone)").GetComponent<Animator>();
                 animacionpuerta.SetTrigger("AbrirMercadona");
+                puertaabierta = true;
                 StartCoroutine(esperar(0));
             }
 
@@ -633,7 +635,7 @@ public class Player : MovingObject
             }
         } 
 
-        if (go.tag == "PuertaAlmacen" && codigo)
+        if (go.tag == "PuertaAlmacen" && codigo && puertaabierta)
         {
             animacion = true;
             Vector2 start = transform.position;
@@ -686,11 +688,9 @@ public class Player : MovingObject
     {
         health -= loss;
         contagiado = true;
-        SoundManager.instance.contagio();
         StartCoroutine(Contagio(5));
         CheckIfGameOver();
         estadoVida.text = "Vida: " + health;
-
     }
 
    IEnumerator Contagio(int perdida)
