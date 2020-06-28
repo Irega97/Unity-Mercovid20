@@ -74,7 +74,7 @@ public class Player : MovingObject
     {
         if (health <= 0)
         {
-            SoundManager.instance.gameover();
+            //SoundManager.instance.gameover();
             GameManager.instance.GameOver();
         }
     }
@@ -686,7 +686,7 @@ public class Player : MovingObject
     {
         health -= loss;
         contagiado = true;
-        SoundManager.instance.contagio();
+        //SoundManager.instance.contagio();
         StartCoroutine(Contagio(5));
         CheckIfGameOver();
         vidaText.text = "Vida: " + health;

@@ -13,6 +13,7 @@ public class GameManager : MonoBehaviour
     public bool contagio = false;
     public float levelStartDelay = 5f;
     public GameObject presentacion;
+    public GameObject presentacionFinal;
     public GameObject encargado1;
     public GameObject entremapas;
     public GameObject restart;
@@ -20,6 +21,7 @@ public class GameManager : MonoBehaviour
     public Text textoPersonajes;
     public Text entreMapas;
     public Text presentacionText;
+    public Text presentacionFinalText;
     public bool doingSetup;
     public bool llave = false;
     public int nivel = 0;
@@ -240,16 +242,20 @@ public class GameManager : MonoBehaviour
     {
         doingSetup = true;
         presentacion = GameObject.Find("Presentacion");
+        presentacionFinal = GameObject.Find("Final");
         encargado1 = GameObject.Find("Encargado1");
         entremapas = GameObject.Find("EntreMapas");
         textoPersonajes = GameObject.Find("Text").GetComponent<Text>();
         entreMapas = GameObject.Find("EntreMapasText").GetComponent<Text>();
         presentacionText = GameObject.Find("TextPresentacion").GetComponent<Text>();
+        presentacionFinalText = GameObject.Find("TextPresentacionFinal").GetComponent<Text>();
+
         restart = GameObject.Find("Restart");
         quit = GameObject.Find("Quit");
 
 
         presentacion.SetActive(false);
+        presentacionFinal.SetActive(false);
         entremapas.SetActive(false);
         encargado1.SetActive(false);
         restart.SetActive(false);
@@ -763,9 +769,9 @@ public class GameManager : MonoBehaviour
 
     public void GameOver()
     {
-        presentacionText.text = "GAME OVER";
-        presentacion.SetActive(true);
-        SoundManager.instance.gameover();
+        //presentacionFinalText.text = "GAME OVER";
+        presentacionFinal.SetActive(true);
+        //SoundManager.instance.gameover();
         quit.SetActive(true);
         restart.SetActive(true);
         enabled = false;
