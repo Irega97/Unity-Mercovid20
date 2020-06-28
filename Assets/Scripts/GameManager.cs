@@ -18,7 +18,7 @@ public class GameManager : MonoBehaviour
     public Text textoPersonajes;
     public Text entreMapas;
     public bool doingSetup;
-    public bool llave = true;
+    public bool llave = false;
     public int nivel = 0;
     public int puntos;
     string mapa;
@@ -165,7 +165,7 @@ public class GameManager : MonoBehaviour
                            "715555555555555555555541555555555555415555555555555555555548\n" +
                            "026666666666666666666622666666666666226666666666666666666623\n";
 
-               personajes = "44      \n" +
+               personajes = "48      \n" +
                             "P 7 3 1            \n" +
                             "0 0 0 23 11 0 0    \n" +
                             "1 0 48 23 11 0 0   \n" +
@@ -189,6 +189,10 @@ public class GameManager : MonoBehaviour
                             "4 14 39 13 9 2 1   \n" +
                             "0 36 49 13 9 2 1   \n" +
                             "1 58 21 57 17 2 1  \n" +
+                            "2 14 10 31 11 0 0  \n" +
+                            "3 44 11 29 9 2 1   \n" +
+                            "4 14 38 31 11 0 0  \n" +
+                            "0 44 39 29 9 2 1   \n" +
                             "H 24 9   \n" +
                             "H 2 22   \n" +
                             "H 2 30   \n" +
@@ -209,7 +213,7 @@ public class GameManager : MonoBehaviour
                             "V 21 50  \n" +
                             "V 46 40  \n" +
                             "V 38 57  \n" +
-                            "G 46 37  \n";
+                            "L 46 37  \n";
         
 
         if (cantidadMascarilla > 0 || cantidadMegaMascarilla > 0)
@@ -354,17 +358,17 @@ public class GameManager : MonoBehaviour
                              "565      44444444444\n";
 
             instance.personajes = "6                 \n" +
-                                  "P 18 14 1         \n" +
+                                  "P 1 0 1           \n" +
                                   "H 2 1             \n" +
                                   "G 1 13 18 1 3 1   \n" +
-                                  "G 18 2 17 3 1 1   \n" +
-                                  "G 0 9 7 7 0 1     \n" +
-                                  "G 18 10 16 4 0 0  \n";
+                                  "G 19 2 12 3 1 1   \n" +
+                                  "G 0 9 6 7 0 1     \n" +
+                                  "G 19 10 12 4 0 0  \n";
         }
 
         else if (instance.nivel == 4)
         {
-            instance.mapa = "60 60 1                                                    \n" +
+           instance.mapa = "60 60 1                                                    \n" +
                            "A9555555555555555555559955555555599599555555555555555555559C\n" +
                            "7B66666666666666666666DB666666666666DB66666666666666666666D8\n" +
                            "EF                    EF            EF                    EF\n" +
@@ -426,7 +430,7 @@ public class GameManager : MonoBehaviour
                            "715555555555555555555541555555555555415555555555555555555548\n" +
                            "026666666666666666666622666666666666226666666666666666666623\n";
 
-            instance.personajes = "44      \n" +
+            instance.personajes = "66      \n" +
                          "P 49 33 1          \n" +
                          "0 0 0 23 11 0 0    \n" +
                          "1 0 48 23 11 0 0   \n" +
@@ -450,6 +454,28 @@ public class GameManager : MonoBehaviour
                          "4 14 39 13 9 2 1   \n" +
                          "0 36 49 13 9 2 1   \n" +
                          "1 58 21 57 17 2 1  \n" +
+                         "2 14 10 31 11 0 0  \n" +
+                         "3 44 11 29 9 2 1   \n" +
+                         "4 14 38 31 11 0 0  \n" +
+                         "0 44 39 29 9 2 1   \n" +
+                         "G 2 9 17 7 3 0     \n" +
+                         "G 57 9 17 7 2 1    \n" +
+                         "G 57 57 17 7 2 1   \n" +
+                         "G 2 57 17 7 3 0    \n" +
+                         "G 26 17 6 3 3 0    \n" +
+                         "G 24 8 9 6 3 0     \n" +
+                         "G 37 32 19 3 3 0   \n" +
+                         "G 2 19 9 7 3 0     \n" +
+                         "G 57 19 9 7 2 1    \n" +
+                         "G 16 18 4 5 3 0    \n" +
+                         "G 43 18 5 5 2 1    \n" +
+                         "G 2 32 20 4 3 0    \n" +
+                         "G 2 47 9 7 3 0     \n" +
+                         "G 57 47 9 7 2 1    \n" +
+                         "G 16 46 2 5 3 0    \n" +
+                         "G 43 46 3 5 2 1    \n" +
+                         "G 24 45 7 5 2 1    \n" +
+                         "G 24 57 11 6 3 0   \n" +
                          "H 24 9   \n" +
                          "H 2 22   \n" +
                          "H 2 30   \n" +
@@ -470,10 +496,10 @@ public class GameManager : MonoBehaviour
                          "V 21 50  \n" +
                          "V 46 40  \n" +
                          "V 38 57  \n" +
-                         "G 46 37  \n";
+                         "L 46 37  \n";
         }
 
-        else if (instance.nivel == 5)
+        else if (instance.nivel == 6)
         {
             instance.mapa = "60 60 1                                                    \n" +
                            "A9555555555555555555559955555555599599555555555555555555559C\n" +
@@ -537,7 +563,7 @@ public class GameManager : MonoBehaviour
                            "715555555555555555555541555555555555415555555555555555555548\n" +
                            "026666666666666666666622666666666666226666666666666666666623\n";
 
-            instance.personajes = "44      \n" +
+            instance.personajes = "48      \n" +
                          "P 4 23 1           \n" +
                          "0 0 0 23 11 0 0    \n" +
                          "1 0 48 23 11 0 0   \n" +
@@ -561,6 +587,10 @@ public class GameManager : MonoBehaviour
                          "4 14 39 13 9 2 1   \n" +
                          "0 36 49 13 9 2 1   \n" +
                          "1 58 21 57 17 2 1  \n" +
+                         "2 14 10 31 11 0 0  \n" +
+                         "3 44 11 29 9 2 1   \n" +
+                         "4 14 38 31 11 0 0  \n" +
+                         "0 44 39 29 9 2 1   \n" +
                          "H 24 9   \n" +
                          "H 2 22   \n" +
                          "H 2 30   \n" +
@@ -581,7 +611,7 @@ public class GameManager : MonoBehaviour
                          "V 21 50  \n" +
                          "V 46 40  \n" +
                          "V 38 57  \n" +
-                         "G 46 37  \n";
+                         "L 46 37  \n";
             instance.nivel = 0;
         }
         instance.nivel++;
@@ -698,6 +728,22 @@ public class GameManager : MonoBehaviour
         {
             textoPersonajes.text = "Guardia: Vaya vaya, tu eres el que ha robado el papel eeh!! \n" +
                                    "Te vamos a enseñar como funcionan aquí las cosas";
+        }
+
+        else if (inter == 19)
+        {
+            textoPersonajes.text = "Mi conciencia: Vaya, parece que la puerta está cerrada. \n" +
+                                   "Empezamos bien. Tendré que buscar la llave, pero no se por donde";
+        }
+
+        else if (inter == 20)
+        {
+            textoPersonajes.text = "Mi conciencia: Ahora que ya tengo el papel no necesito entrar a este sitio de ....";
+        }
+
+        else if (inter == 21)
+        {
+            textoPersonajes.text = "Mi conciencia: No puedo volver a casa sin el papel, lo conseguiré aunque sea lo último que haga";
         }
     }
 

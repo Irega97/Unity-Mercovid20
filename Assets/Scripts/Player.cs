@@ -53,9 +53,11 @@ public class Player : MovingObject
         contagiado = GameManager.instance.contagio;
         estadoVida = GameObject.Find("EstadoText").GetComponent<Text>();
         estadoVida.text = "Vida: " + health;
+        //CAMBIAR TODO A FALSE
         accion1 = false;
         accion2 = false;
         codigo = false;
+        papel = false;
         llave = GameManager.instance.llave;
 
         CambiarIdle(estado);
@@ -603,14 +605,29 @@ public class Player : MovingObject
 
     protected override void OnCantMove(GameObject go)
     {
-        if (go.tag == "PuertaMercadona" && llave)
+        if (go.tag == "PuertaMercadona")
         {
-            animacion = true;
-            Animator animacionpuerta = go.GetComponent<Animator>();
-            animacionpuerta.SetTrigger("AbrirMercadona");
-            StartCoroutine(esperar(1));
-            GameManager.instance.puntos = GameManager.instance.puntos + 100;
-        }
+            if (!llave)
+            {
+                animacion = true;
+                GameManager.instance.InteractuarEncargado(19);
+            }
+
+            else if (GameManager.instance.nivel == 1)
+            {
+                animacion = true;
+                Animator animacionpuerta = go.GetComponent<Animator>();
+                animacionpuerta.SetTrigger("AbrirMercadona");
+                StartCoroutine(esperar(1));
+                GameManager.instance.puntos = GameManager.instance.puntos + 100;
+            }
+
+            else if (GameManager.instance.nivel == 5)
+            {
+                animacion = true;
+                GameManager.instance.InteractuarEncargado(20);
+            }
+        } 
 
         if (go.tag == "PuertaAlmacen" && codigo)
         {
@@ -637,6 +654,15 @@ public class Player : MovingObject
                 Vector2 end = start + new Vector2(0, -1);
                 StartCoroutine(SmoothMovement(end));
                 Invoke("Restart", restartLevelDelay);
+            }
+        }
+
+        if (transform.position.x == 7 && transform.position.y == 3)
+        {
+            if (GameManager.instance.nivel == 1)
+            {
+                animacion = true;
+                GameManager.instance.InteractuarEncargado(21);
             }
         }
     }
@@ -684,7 +710,7 @@ public class Player : MovingObject
     public void pillado()
     {
         GameManager.instance.llave = llave;
-        GameManager.instance.nivel = 5;
+        GameManager.instance.nivel = 6;
         Invoke("Restart", restartLevelDelay);
         posicionrandom.Clear();
     }

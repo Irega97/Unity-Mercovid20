@@ -230,7 +230,7 @@ public class Guardia : MovingObject
             if (GameManager.instance.nivel != 5)
                 GameManager.instance.InteractuarEncargado(14);
             else
-                GameManager.instance.InteractuarEncargado(17);
+                GameManager.instance.InteractuarEncargado(18);
             vistaplayer.animacion = true;
         }
             

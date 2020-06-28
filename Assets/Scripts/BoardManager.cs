@@ -621,19 +621,18 @@ public class BoardManager : MonoBehaviour
                      
                     break;
 
-                case 'G':
-                    if (mapa == 1)
-                        instance = Instantiate(guardiaLlave, new Vector3(Convert.ToInt32(jugadores[pl + 1].Split(' ')[1]), Convert.ToInt32(jugadores[pl + 1].Split(' ')[2]), 0f), Quaternion.identity);
+                case 'L':
+                    instance = Instantiate(guardiaLlave, new Vector3(Convert.ToInt32(jugadores[pl + 1].Split(' ')[1]), Convert.ToInt32(jugadores[pl + 1].Split(' ')[2]), 0f), Quaternion.identity);
 
-                    else if (mapa == 2 || mapa == 3)
-                    {
-                        instance = Instantiate(guardia, new Vector3(Convert.ToInt32(jugadores[pl + 1].Split(' ')[1]), Convert.ToInt32(jugadores[pl + 1].Split(' ')[2]), 0f), Quaternion.identity);
-                        Guardia scriptguardia = instance.GetComponent<Guardia>();
-                        scriptguardia.hormax = Int32.Parse(jugadores[pl + 1].Split(' ')[3]);
-                        scriptguardia.vermax = Int32.Parse(jugadores[pl + 1].Split(' ')[4]);
-                        scriptguardia.move = Int32.Parse(jugadores[pl + 1].Split(' ')[5]);
-                        scriptguardia.ordenmovimiento = Int32.Parse(jugadores[pl + 1].Split(' ')[6]);
-                    }
+                    break;
+
+                case 'G':
+                    instance = Instantiate(guardia, new Vector3(Convert.ToInt32(jugadores[pl + 1].Split(' ')[1]), Convert.ToInt32(jugadores[pl + 1].Split(' ')[2]), 0f), Quaternion.identity);
+                    Guardia scriptguardia = instance.GetComponent<Guardia>();
+                    scriptguardia.hormax = Int32.Parse(jugadores[pl + 1].Split(' ')[3]);
+                    scriptguardia.vermax = Int32.Parse(jugadores[pl + 1].Split(' ')[4]);
+                    scriptguardia.move = Int32.Parse(jugadores[pl + 1].Split(' ')[5]);
+                    scriptguardia.ordenmovimiento = Int32.Parse(jugadores[pl + 1].Split(' ')[6]);
                     
                     break;
             }
