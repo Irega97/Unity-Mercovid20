@@ -188,6 +188,7 @@ MonoBehaviour:
   animacion: 0
   llaveobject: {fileID: 1333417001326216578, guid: 0f95971e96181f147906cb41d30a8c79,
     type: 3}
+  musicacontagio: {fileID: 8300000, guid: 3ebd521ccb9401441972087509eb02d4, type: 3}
   health: 100
   contagiado: 0
   startPos: {x: 0, y: 0}

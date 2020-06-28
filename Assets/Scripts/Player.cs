@@ -72,7 +72,11 @@ public class Player : MovingObject
 
     void CheckIfGameOver()
     {
-        if (health <= 0) GameManager.instance.GameOver();
+        if (health <= 0)
+        {
+            SoundManager.instance.gameover();
+            GameManager.instance.GameOver();
+        }
     }
 
     protected override void AttemptMove(string objectname, int xDir, int yDir)
@@ -682,6 +686,7 @@ public class Player : MovingObject
     {
         health -= loss;
         contagiado = true;
+        SoundManager.instance.contagio();
         StartCoroutine(Contagio(5));
         CheckIfGameOver();
         estadoVida.text = "Vida: " + health;

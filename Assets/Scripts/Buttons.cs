@@ -124,6 +124,7 @@ public class Buttons : MonoBehaviour
                 estadoVida.text = " ¡Te has curado del contagio! ";
                 estadoVida.text = "Vida: " + player.health;
                 player.contagiado = false;
+                SoundManager.instance.quitarcontagio();
             }
 
             GameManager.instance.cantidadJabon--;

@@ -755,6 +755,7 @@ public class GameManager : MonoBehaviour
     public void GameOver()
     {
         presentacion.SetActive(true);
+        SoundManager.instance.gameover();
         enabled = false;
     }
 
@@ -763,7 +764,7 @@ public class GameManager : MonoBehaviour
         cantidadDesinfectante = 0;
         cantidadDesinfectantePlus = 0;
         cantidadDesinfectantePro = 0;
-        cantidadJabon = 0;
+        cantidadJabon = 5;
         cantidadMascarilla = 0;
         cantidadMegaMascarilla = 0;
 }
