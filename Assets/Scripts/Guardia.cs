@@ -36,7 +36,7 @@ public class Guardia : MovingObject
 
     void Update()
     {
-        if (!moving && !pillado2 && !pillado)
+        if (!moving && !pillado2 && !pillado && !GameManager.instance.doingSetup)
         {
             if (move == 0)
             {
@@ -213,6 +213,7 @@ public class Guardia : MovingObject
             else if (move == 3)
                 vistaplayer.CambiarIdle(2);
 
+            GameManager.instance.InteractuarEncargado(14);
             vistaplayer.animacion = true;
         }
             

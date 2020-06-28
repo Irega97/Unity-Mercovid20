@@ -18,7 +18,7 @@ public class GameManager : MonoBehaviour
     public Text textoPersonajes;
     public Text entreMapas;
     public bool doingSetup;
-    public bool llave = false;
+    public bool llave = true;
     public int nivel = 0;
     public int puntos;
     string mapa;

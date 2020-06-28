@@ -508,7 +508,7 @@ public class Player : MovingObject
             animator.SetBool("leftIdle", false);
             animator.SetBool("rightIdle", true);
         }
-
+        this.estado = estado;
     }
 
     IEnumerator esperar(int i)
