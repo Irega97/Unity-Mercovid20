@@ -15,8 +15,11 @@ public class GameManager : MonoBehaviour
     public GameObject presentacion;
     public GameObject encargado1;
     public GameObject entremapas;
+    public GameObject restart;
+    public GameObject quit;
     public Text textoPersonajes;
     public Text entreMapas;
+    public Text presentacionText;
     public bool doingSetup;
     public bool llave = false;
     public int nivel = 0;
@@ -241,10 +244,16 @@ public class GameManager : MonoBehaviour
         entremapas = GameObject.Find("EntreMapas");
         textoPersonajes = GameObject.Find("Text").GetComponent<Text>();
         entreMapas = GameObject.Find("EntreMapasText").GetComponent<Text>();
+        presentacionText = GameObject.Find("TextPresentacion").GetComponent<Text>();
+        restart = GameObject.Find("Restart");
+        quit = GameObject.Find("Quit");
+
 
         presentacion.SetActive(false);
         entremapas.SetActive(false);
         encargado1.SetActive(false);
+        restart.SetActive(false);
+        quit.SetActive(false);
 
         if (instance.nivel == 1)
         {
@@ -754,7 +763,11 @@ public class GameManager : MonoBehaviour
 
     public void GameOver()
     {
+        presentacionText.text = "GAME OVER";
         presentacion.SetActive(true);
+        quit.SetActive(true);
+        restart.SetActive(true);
+
         enabled = false;
     }
 

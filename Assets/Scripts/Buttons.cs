@@ -19,6 +19,7 @@ public class Buttons : MonoBehaviour
     private Text desinfectantepro;
     private Text jabon;
 
+
     // Start is called before the first frame update
     void Start()
     {
@@ -136,5 +137,17 @@ public class Buttons : MonoBehaviour
             estadoVida.text = "Vida: " + player.health;
         }
        
+    }
+
+    public void Restart()
+    {
+        //aún no hace nada
+        Debug.Log("Restart");
+    }
+
+    public void Quit()
+    {
+        //aún no hace nada
+        Debug.Log("Quit");
     }
 }
