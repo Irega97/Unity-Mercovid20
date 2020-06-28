@@ -13,7 +13,8 @@ public class Buttons : MonoBehaviour
     public int cantidadJabon;
     public int cantidadMascarilla;
     public int cantidadMegaMascarilla;
-    public Text estadoVida;
+    public Text estadoText;
+    public Text vidaText;
     private Text desinfectante;
     private Text desinfectanteplus;
     private Text desinfectantepro;
@@ -31,7 +32,7 @@ public class Buttons : MonoBehaviour
         cantidadJabon = GameManager.instance.cantidadJabon;
         player = GameObject.Find("Jugador(Clone)").GetComponent<Player>();
 
-        estadoVida = GameObject.Find("EstadoText").GetComponent<Text>();
+        vidaText = GameObject.Find("VidaText").GetComponent<Text>();
         desinfectante = GameObject.Find("DesinfectanteText").GetComponent<Text>();
         desinfectanteplus = GameObject.Find("DesinfectantePlusText").GetComponent<Text>();
         desinfectantepro = GameObject.Find("DesinfectanteProText").GetComponent<Text>();
@@ -49,11 +50,11 @@ public class Buttons : MonoBehaviour
         {
             if (player.health < 100)
             {
-                estadoVida.text = " + 10 de vida! ";
+                vidaText.text = " + 10 de vida! ";
                 player.health = player.health + 10;
                 if (player.health > 100)
                     player.health = 100;
-                estadoVida.text = "Vida: " + player.health;
+                vidaText.text = "Vida: " + player.health;
             }
             
             cantidadDesinfectante--;
@@ -62,8 +63,8 @@ public class Buttons : MonoBehaviour
         }
         else
         {
-            estadoVida.text = " No te queda más Desinfectante ";
-            estadoVida.text = "Vida: " + player.health;
+            estadoText.text = " No te queda más Desinfectante ";
+            vidaText.text = "Vida: " + player.health;
         }
     }
 
@@ -73,11 +74,11 @@ public class Buttons : MonoBehaviour
         {
             if (player.health < 100)
             {
-                estadoVida.text = " + 25 de vida! ";
+                estadoText.text = " + 25 de vida! ";
                 player.health = player.health + 25;
                 if (player.health > 100)
                     player.health = 100;
-                estadoVida.text = "Vida: " + player.health;
+                vidaText.text = "Vida: " + player.health;
             }
 
             GameManager.instance.cantidadDesinfectantePlus--;
@@ -86,8 +87,8 @@ public class Buttons : MonoBehaviour
         }
         else
         {
-            estadoVida.text = " No te queda más Desinfectante Plus ";
-            estadoVida.text = "Vida: " + player.health;
+            estadoText.text = " No te queda más Desinfectante Plus ";
+            vidaText.text = "Vida: " + player.health;
         }
 
     }
@@ -98,11 +99,11 @@ public class Buttons : MonoBehaviour
         {
             if (player.health < 100)
             {
-                estadoVida.text = " + 50 de vida! ";
+                estadoText.text = " + 50 de vida! ";
                 player.health = player.health + 50;
                 if (player.health > 100)
                     player.health = 100;
-                estadoVida.text = "Vida: " + player.health;
+                vidaText.text = "Vida: " + player.health;
             }
             GameManager.instance.cantidadDesinfectantePro--;
             cantidadDesinfectantePro--;
@@ -110,8 +111,8 @@ public class Buttons : MonoBehaviour
         }
         else
         {
-            estadoVida.text = " No te queda más Desinfectante Pro ";
-            estadoVida.text = "Vida: " + player.health;
+            estadoText.text = " No te queda más Desinfectante Pro ";
+            vidaText.text = "Vida: " + player.health;
         }
 
     }
@@ -122,8 +123,8 @@ public class Buttons : MonoBehaviour
         {
             if (player.contagiado == true)
             {
-                estadoVida.text = " ¡Te has curado del contagio! ";
-                estadoVida.text = "Vida: " + player.health;
+                estadoText.text = " ¡Te has curado del contagio! ";
+                vidaText.text = "Vida: " + player.health;
                 player.contagiado = false;
                 SoundManager.instance.quitarcontagio();
             }
@@ -134,8 +135,8 @@ public class Buttons : MonoBehaviour
         }
         else
         {
-            estadoVida.text = " No te queda más Jabón ";
-            estadoVida.text = "Vida: " + player.health;
+            estadoText.text = " No te queda más Jabón ";
+            vidaText.text = "Vida: " + player.health;
         }
        
     }

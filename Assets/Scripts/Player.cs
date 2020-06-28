@@ -27,7 +27,7 @@ public class Player : MovingObject
     public Sprite propietarioizquierda;
     public bool animacion = false;
     public GameObject llaveobject;
-    private Text estadoVida;
+    private Text vidaText;
     private Animator animator;
     public int health; //puntos de vida 
     public bool contagiado = false;
@@ -51,8 +51,8 @@ public class Player : MovingObject
     {
         health = GameManager.instance.healthPoints;
         contagiado = GameManager.instance.contagio;
-        estadoVida = GameObject.Find("EstadoText").GetComponent<Text>();
-        estadoVida.text = "Vida: " + health;
+        vidaText = GameObject.Find("VidaText").GetComponent<Text>();
+        vidaText.text = "Vida: " + health;
         //CAMBIAR TODO A FALSE
         accion1 = false;
         accion2 = false;
@@ -689,7 +689,7 @@ public class Player : MovingObject
         SoundManager.instance.contagio();
         StartCoroutine(Contagio(5));
         CheckIfGameOver();
-        estadoVida.text = "Vida: " + health;
+        vidaText.text = "Vida: " + health;
 
     }
 
@@ -705,7 +705,7 @@ public class Player : MovingObject
                 health = 0;
 
             CheckIfGameOver();
-            estadoVida.text = "Vida: " + health;
+            vidaText.text = "Vida: " + health;
             perdida++;
             yield return new WaitForSeconds(1);
         }
