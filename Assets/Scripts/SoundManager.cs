@@ -5,9 +5,9 @@ using UnityEngine;
 public class SoundManager : MonoBehaviour
 {
     public static SoundManager instance = null;
-    public AudioSource musica;
-    public AudioClip fondo;
-    public AudioClip contagiado;
+    public AudioSource fondo;
+    public AudioSource mercadona;
+    public AudioSource contagiado;
 
     private void Awake()
     {
@@ -20,24 +20,41 @@ public class SoundManager : MonoBehaviour
         DontDestroyOnLoad(gameObject);
     }
 
+    private void Update()
+    {
+        if (!mercadona.isPlaying)
+            fondo.volume = 1f;
+    }
     public void contagiar()
     {
-        musica.clip = contagiado;
-        musica.Play();
+        if (fondo.isPlaying)
+        {
+            fondo.Stop();
+            contagiado.Play();
+        }
     }
 
     public void curar()
     {
-        musica.clip = fondo;
-        musica.Play();
+        contagiado.Stop();
+        fondo.Play();
+    }
+
+    public void sonidomercadona()
+    {
+        if (fondo.isPlaying)
+            fondo.volume = 0.2f;
+
+        mercadona.Play();
     }
 
     public void gameover()
     {
-        if (!GameManager.instance.contagio)
+        if (!contagiado.isPlaying)
         {
-            musica.clip = contagiado;
-            musica.Play();
+            fondo.Stop();
+            contagiado.Play();
         }
+
     }
 }

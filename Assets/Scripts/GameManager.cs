@@ -50,65 +50,9 @@ public class GameManager : MonoBehaviour
         boardScript = GetComponent<BoardManager>();
         InicializarObjetos();
 
-        AndroidJavaClass javaClass = new AndroidJavaClass("edu.upc.login.apiUnity");
-        String objetos2 = javaClass.CallStatic<String>("getObjetos");
+#if UNITY_STANDALONE || UNITY_WEBPLAYER || UNITY_EDITOR
 
-        if (objetos2 != null)
-        {
-            string[] objetos1 = objetos2.Split('/');
-            List<int> objetos = new List<int>();
-            for (int i = 0; i < objetos1.Length; i++)
-            {
-                objetos.Add(Convert.ToInt32(objetos1[i]));
-            }
-
-
-            for (int i = 0; i < objetos.Count; i++)
-            {
-                if (objetos[i] == 1)
-                {
-                    cantidadDesinfectante = objetos[i + 1];
-                    i++;
-                }
-
-                else if (objetos[i] == 2)
-                {
-                    cantidadDesinfectantePlus = objetos[i + 1];
-                    i++;
-                }
-
-                else if (objetos[i] == 3)
-                {
-                    cantidadDesinfectantePro = objetos[i + 1];
-                    i++;
-                }
-
-                else if (objetos[i] == 4)
-                {
-                    cantidadMascarilla = objetos[i + 1];
-                    i++;
-                }
-
-                else if (objetos[i] == 5)
-                {
-                    cantidadMegaMascarilla = objetos[i + 1];
-                    i++;
-                }
-
-                else
-                {
-                    cantidadJabon = objetos[i + 1];
-                    i++;
-                }
-            }
-        }
-
-        mapa = javaClass.CallStatic<String>("getMapa", 1);
-        personajes = javaClass.CallStatic<String>("getEnemigos", 1);
-        Debug.Log("Se recibe directo del swagger: " + mapa);
-
-        //Se lee de Android
-        /*mapa = "60 60 1                                                    \n" +
+        mapa = "60 60 1                                                    \n" +
                            "A9555555555555555555559955555555599599555555555555555555559C\n" +
                            "7B66666666666666666666DB666666666666DB66666666666666666666D8\n" +
                            "EF                    EF            EF                    EF\n" +
@@ -218,8 +162,65 @@ public class GameManager : MonoBehaviour
                             "V 21 50  \n" +
                             "V 46 40  \n" +
                             "V 38 57  \n" +
-                            "L 46 37  \n";*/
-        
+                            "L 46 37  \n";
+
+#else
+        AndroidJavaClass javaClass = new AndroidJavaClass("edu.upc.login.apiUnity");
+        String objetos2 = javaClass.CallStatic<String>("getObjetos");
+
+        if (objetos2 != null)
+        {
+            string[] objetos1 = objetos2.Split('/');
+            List<int> objetos = new List<int>();
+            for (int i = 0; i < objetos1.Length; i++)
+            {
+                objetos.Add(Convert.ToInt32(objetos1[i]));
+            }
+
+
+            for (int i = 0; i < objetos.Count; i++)
+            {
+                if (objetos[i] == 1)
+                {
+                    cantidadDesinfectante = objetos[i + 1];
+                    i++;
+                }
+
+                else if (objetos[i] == 2)
+                {
+                    cantidadDesinfectantePlus = objetos[i + 1];
+                    i++;
+                }
+
+                else if (objetos[i] == 3)
+                {
+                    cantidadDesinfectantePro = objetos[i + 1];
+                    i++;
+                }
+
+                else if (objetos[i] == 4)
+                {
+                    cantidadMascarilla = objetos[i + 1];
+                    i++;
+                }
+
+                else if (objetos[i] == 5)
+                {
+                    cantidadMegaMascarilla = objetos[i + 1];
+                    i++;
+                }
+
+                else
+                {
+                    cantidadJabon = objetos[i + 1];
+                    i++;
+                }
+            }
+        }
+
+        mapa = javaClass.CallStatic<String>("getMapa", 1);
+        personajes = javaClass.CallStatic<String>("getEnemigos", 1);
+        Debug.Log("Se recibe directo del swagger: " + mapa);
 
         if (cantidadMascarilla > 0 || cantidadMegaMascarilla > 0)
         {
@@ -237,6 +238,7 @@ public class GameManager : MonoBehaviour
                 javaClass.CallStatic("setObjetos", 4);
             }
         }
+#endif
         nivel++;
         InitGame();
     }
@@ -785,7 +787,6 @@ public class GameManager : MonoBehaviour
     {
         //presentacionFinalText.text = "GAME OVER";
         presentacionFinal.SetActive(true);
-        SoundManager.instance.gameover();
         quit.SetActive(true);
         restart.SetActive(true);
         enabled = false;

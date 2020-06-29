@@ -41,6 +41,7 @@ public class Player : MovingObject
     private bool posicion1;
     private bool posicion2;
     private bool posicion3;
+    private bool sonidomercadona;
 
     protected override void Awake()
     {
@@ -55,11 +56,12 @@ public class Player : MovingObject
         vidaText = GameObject.Find("VidaText").GetComponent<Text>();
         vidaText.text = "Vida: " + health;
         //CAMBIAR TODO A FALSE
-        accion1 = false;
-        accion2 = false;
-        codigo = false;
-        papel = false;
-        llave = false;
+        accion1 = true;
+        accion2 = true;
+        codigo = true;
+        papel = true;
+        llave = true;
+        sonidomercadona = false;
         //llave = GameManager.instance.llave;
 
         CambiarIdle(estado);
@@ -316,6 +318,15 @@ public class Player : MovingObject
                 inter = false;
         }
         ComprobarPosicion();
+
+        if (!sonidomercadona)
+        {
+            if (GameManager.instance.nivel == 2 || GameManager.instance.nivel == 3 || GameManager.instance.nivel == 4)
+            {
+                sonidomercadona = true;
+                StartCoroutine(sonidomercadonafuncion());
+            }
+        }
     }
 
     private void ComprobarPosicion()
@@ -683,6 +694,9 @@ public class Player : MovingObject
     public void LoseHealth(int loss)
     {
         health -= loss;
+        if (health <= 0)
+            health = 0;
+
         contagiado = true;
         GameManager.instance.contagio = true;
         StartCoroutine(Contagio(5));
@@ -693,7 +707,6 @@ public class Player : MovingObject
 
    IEnumerator Contagio(int perdida)
     {
-
         while(contagiado)
         {
             if (health > 0)
@@ -710,6 +723,13 @@ public class Player : MovingObject
         
     }
 
+    IEnumerator sonidomercadonafuncion()
+    {
+        yield return new WaitForSeconds(30);
+        SoundManager.instance.sonidomercadona();
+        sonidomercadona = false;
+
+    }
     public void pillado()
     {
         GameManager.instance.llave = llave;

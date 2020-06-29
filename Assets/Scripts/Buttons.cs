@@ -43,7 +43,7 @@ public class Buttons : MonoBehaviour
         desinfectanteplus.text = "x" + cantidadDesinfectantePlus;
         desinfectantepro.text = "x" + cantidadDesinfectantePro;
         jabon.text = "x" + cantidadJabon;
-        javaClass = new AndroidJavaClass("edu.upc.login.apiUnity");
+        //javaClass = new AndroidJavaClass("edu.upc.login.apiUnity");
     }
 
     public void Desinfectante ()
