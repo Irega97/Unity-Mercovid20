@@ -720,7 +720,7 @@ public class Player : MovingObject
         contagiado = true;
         GameManager.instance.contagio = true;
         StartCoroutine(Contagio(5));
-        SoundManager.instance.contagiar();
+        //SoundManager.instance.contagiar();
         CheckIfGameOver();
     }
 

@@ -386,8 +386,8 @@ public class GameManager : MonoBehaviour
         presentacionFinal.SetActive(false);
         entremapas.SetActive(false);
         encargado1.SetActive(false);
-        restart.SetActive(false);
-        quit.SetActive(false);
+        //restart.SetActive(false);
+        //quit.SetActive(false);
 
         if (instance.nivel == 1)
         {
@@ -1288,8 +1288,8 @@ public class GameManager : MonoBehaviour
     public void GameOver()
     {
         presentacionFinal.SetActive(true);
-        quit.SetActive(true);
-        restart.SetActive(true);
+        //quit.SetActive(true);
+        //restart.SetActive(true);
 
         if (Application.platform == RuntimePlatform.Android)
         {
