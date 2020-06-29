@@ -1287,20 +1287,20 @@ public class GameManager : MonoBehaviour
 
     public void GameOver()
     {
+        presentacionFinal.SetActive(true);
+        quit.SetActive(true);
+        restart.SetActive(true);
+
         if (Application.platform == RuntimePlatform.Android)
         {
-            AndroidJavaClass javaClass = new AndroidJavaClass("edu.upc.login.apiUnity");
-            javaClass.CallStatic("guardarStats", instance.duracion, instance.puntos);
             if (!instance.enviado)
             {
+                AndroidJavaClass javaClass = new AndroidJavaClass("edu.upc.login.apiUnity");
+                javaClass.CallStatic("guardarStats", instance.duracion, instance.puntos);
                 instance.enviado = true;
                 Debug.Log("Enviado: Duracion: " + instance.duracion + " puntos: " + instance.puntos);
             }
         }
-
-        presentacionFinal.SetActive(true);
-        quit.SetActive(true);
-        restart.SetActive(true);
         enabled = false;
     }
 

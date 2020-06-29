@@ -716,12 +716,12 @@ public class Player : MovingObject
         if (health <= 0)
             health = 0;
 
+        vidaText.text = "Vida: " + health;
         contagiado = true;
         GameManager.instance.contagio = true;
         StartCoroutine(Contagio(5));
         SoundManager.instance.contagiar();
         CheckIfGameOver();
-        vidaText.text = "Vida: " + health;
     }
 
    IEnumerator Contagio(int perdida)
