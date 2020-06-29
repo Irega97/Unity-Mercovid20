@@ -75,7 +75,7 @@ public class Player : MovingObject
     {
         if (health <= 0)
         {
-            //SoundManager.instance.gameover();
+            SoundManager.instance.gameover();
             GameManager.instance.GameOver();
         }
     }
@@ -114,7 +114,6 @@ public class Player : MovingObject
                     if (Mathf.Abs(direction.x) < 50 && Mathf.Abs(direction.y) < 50)
                     {
                         inter = true;
-                        //GameManager.instance.Sensibilidad(direction);
                         if (Mathf.Abs(direction.x) > Mathf.Abs(direction.y))
                         {
                             if (direction.x > 0)
@@ -724,7 +723,7 @@ public class Player : MovingObject
         contagiado = true;
         GameManager.instance.contagio = true;
         StartCoroutine(Contagio(5));
-        //SoundManager.instance.contagiar();
+        SoundManager.instance.contagiar();
         CheckIfGameOver();
     }
 
