@@ -13,6 +13,7 @@ public class GameManager : MonoBehaviour
     public bool contagio = false;
     public float levelStartDelay = 5f;
     public GameObject presentacion;
+    public GameObject presentacionFinal;
     public GameObject encargado1;
     public GameObject entremapas;
     public GameObject restart;
@@ -20,6 +21,7 @@ public class GameManager : MonoBehaviour
     public Text textoPersonajes;
     public Text entreMapas;
     public Text presentacionText;
+    public Text presentacionFinalText;
     public bool doingSetup;
     public bool llave = false;
     public int nivel = 0;
@@ -51,17 +53,8 @@ public class GameManager : MonoBehaviour
         AndroidJavaClass javaClass = new AndroidJavaClass("edu.upc.login.apiUnity");
         String objetos2 = javaClass.CallStatic<String>("getObjetos");
 
-        /*AndroidJavaClass UnityPlayer = new AndroidJavaClass("com.unity3d.player.UnityPlayer");
-        AndroidJavaObject currentActivity = UnityPlayer.GetStatic<AndroidJavaObject>("currentActivity");
-
-        AndroidJavaObject intent = currentActivity.Call<AndroidJavaObject>("getIntent");
-        bool hasExtra = intent.Call<bool>("hasExtra", "objetos");*/
-
-        //if (hasExtra)
         if (objetos2 != null)
         {
-            //AndroidJavaObject extras = intent.Call<AndroidJavaObject>("getExtras");
-            //objetos2 = extras.Call<string>("getString", "objetos");
             string[] objetos1 = objetos2.Split('/');
             List<int> objetos = new List<int>();
             for (int i = 0; i < objetos1.Length; i++)
@@ -110,8 +103,12 @@ public class GameManager : MonoBehaviour
             }
         }
 
+        mapa = javaClass.CallStatic<String>("getMapa", 1);
+        personajes = javaClass.CallStatic<String>("getEnemigos", 1);
+        Debug.Log("Se recibe directo del swagger: " + mapa);
+
         //Se lee de Android
-        mapa = "60 60 1                                                    \n" +
+        /*mapa = "60 60 1                                                    \n" +
                            "A9555555555555555555559955555555599599555555555555555555559C\n" +
                            "7B66666666666666666666DB666666666666DB66666666666666666666D8\n" +
                            "EF                    EF            EF                    EF\n" +
@@ -221,20 +218,23 @@ public class GameManager : MonoBehaviour
                             "V 21 50  \n" +
                             "V 46 40  \n" +
                             "V 38 57  \n" +
-                            "L 46 37  \n";
+                            "L 46 37  \n";*/
         
 
         if (cantidadMascarilla > 0 || cantidadMegaMascarilla > 0)
         {
+           javaClass = new AndroidJavaClass("edu.upc.login.apiUnity");
             if (cantidadMegaMascarilla > 0)
             {
                 healthPoints = healthPoints + 50;
                 cantidadMegaMascarilla--;
+                javaClass.CallStatic("setObjetos", 5);
             }
             else
             {
                 healthPoints = healthPoints + 25;
                 cantidadMascarilla--;
+                javaClass.CallStatic("setObjetos", 4);
             }
         }
         nivel++;
@@ -245,16 +245,20 @@ public class GameManager : MonoBehaviour
     {
         doingSetup = true;
         presentacion = GameObject.Find("Presentacion");
+        presentacionFinal = GameObject.Find("Final");
         encargado1 = GameObject.Find("Encargado1");
         entremapas = GameObject.Find("EntreMapas");
         textoPersonajes = GameObject.Find("Text").GetComponent<Text>();
         entreMapas = GameObject.Find("EntreMapasText").GetComponent<Text>();
         presentacionText = GameObject.Find("TextPresentacion").GetComponent<Text>();
+        presentacionFinalText = GameObject.Find("TextPresentacionFinal").GetComponent<Text>();
+
         restart = GameObject.Find("Restart");
         quit = GameObject.Find("Quit");
 
 
         presentacion.SetActive(false);
+        presentacionFinal.SetActive(false);
         entremapas.SetActive(false);
         encargado1.SetActive(false);
         restart.SetActive(false);
@@ -286,7 +290,7 @@ public class GameManager : MonoBehaviour
             entremapas.SetActive(true);
         }
 
-        boardScript.SetupScene(mapa, personajes);
+        boardScript.SetupScene(instance.mapa, instance.personajes);
 
         Invoke("HidePresentacion", levelStartDelay);
     }
@@ -299,10 +303,13 @@ public class GameManager : MonoBehaviour
 
     static private void OnSceneLoaded(Scene arg0, LoadSceneMode arg1)
     {
+        AndroidJavaClass javaClass = new AndroidJavaClass("edu.upc.login.apiUnity");
         //Pedir cosas a Android
         if (instance.nivel == 1)
             {
-             instance.mapa = "20 16 2             \n" +
+            instance.mapa = javaClass.CallStatic<String>("getMapa", 2);
+            instance.personajes = javaClass.CallStatic<String>("getEnemigos", 2);
+            instance.mapa = "20 16 2             \n" +
                              "33333333 001100117 8\n" +
                              "3                   \n" +
                              "3                   \n" +
@@ -329,6 +336,8 @@ public class GameManager : MonoBehaviour
 
         else if (instance.nivel == 2)
         {
+            instance.mapa = javaClass.CallStatic<String>("getMapa", 3);
+            instance.personajes = javaClass.CallStatic<String>("getEnemigos", 3);
             instance.mapa = "19 11 3            \n" +
                             "                   \n" +
                             " MMMMM       MMMMM \n" +
@@ -353,6 +362,8 @@ public class GameManager : MonoBehaviour
 
         else if (instance.nivel == 3)
         {
+            instance.mapa = javaClass.CallStatic<String>("getMapa", 4);
+            instance.personajes = javaClass.CallStatic<String>("getEnemigos", 4);
             instance.mapa = "20 16 2              \n" +
                              "33333333 001100117 8\n" +
                              "3                   \n" +
@@ -382,7 +393,9 @@ public class GameManager : MonoBehaviour
 
         else if (instance.nivel == 4)
         {
-           instance.mapa = "60 60 1                                                    \n" +
+            instance.mapa = javaClass.CallStatic<String>("getMapa", 5);
+            instance.personajes = javaClass.CallStatic<String>("getEnemigos", 5);
+            instance.mapa = "60 60 1                                                    \n" +
                            "A9555555555555555555559955555555599599555555555555555555559C\n" +
                            "7B66666666666666666666DB666666666666DB66666666666666666666D8\n" +
                            "EF                    EF            EF                    EF\n" +
@@ -515,6 +528,8 @@ public class GameManager : MonoBehaviour
 
         else if (instance.nivel == 6)
         {
+            instance.mapa = javaClass.CallStatic<String>("getMapa", 6);
+            instance.personajes = javaClass.CallStatic<String>("getEnemigos", 6);
             instance.mapa = "60 60 1                                                    \n" +
                            "A9555555555555555555559955555555599599555555555555555555559C\n" +
                            "7B66666666666666666666DB666666666666DB66666666666666666666D8\n" +
@@ -768,8 +783,9 @@ public class GameManager : MonoBehaviour
 
     public void GameOver()
     {
-        presentacionText.text = "GAME OVER";
-        presentacion.SetActive(true);
+        //presentacionFinalText.text = "GAME OVER";
+        presentacionFinal.SetActive(true);
+        SoundManager.instance.gameover();
         quit.SetActive(true);
         restart.SetActive(true);
         enabled = false;

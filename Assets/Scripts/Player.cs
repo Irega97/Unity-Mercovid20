@@ -28,7 +28,7 @@ public class Player : MovingObject
     public Sprite propietarioizquierda;
     public bool animacion = false;
     public GameObject llaveobject;
-    private Text estadoVida;
+    private Text vidaText;
     private Animator animator;
     public int health; //puntos de vida 
     public bool contagiado = false;
@@ -52,8 +52,8 @@ public class Player : MovingObject
     {
         health = GameManager.instance.healthPoints;
         contagiado = GameManager.instance.contagio;
-        estadoVida = GameObject.Find("EstadoText").GetComponent<Text>();
-        estadoVida.text = "Vida: " + health;
+        vidaText = GameObject.Find("VidaText").GetComponent<Text>();
+        vidaText.text = "Vida: " + health;
         //CAMBIAR TODO A FALSE
         accion1 = false;
         accion2 = false;
@@ -76,6 +76,7 @@ public class Player : MovingObject
     {
         if (health <= 0)
         {
+            //SoundManager.instance.gameover();
             GameManager.instance.GameOver();
         }
     }
@@ -679,18 +680,15 @@ public class Player : MovingObject
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 
-    private void OnTriggerEnter2D(Collider2D other)
-    {
-
-    }
-
     public void LoseHealth(int loss)
     {
         health -= loss;
         contagiado = true;
+        GameManager.instance.contagio = true;
         StartCoroutine(Contagio(5));
+        SoundManager.instance.contagiar();
         CheckIfGameOver();
-        estadoVida.text = "Vida: " + health;
+        vidaText.text = "Vida: " + health;
     }
 
    IEnumerator Contagio(int perdida)
@@ -705,7 +703,7 @@ public class Player : MovingObject
                 health = 0;
 
             CheckIfGameOver();
-            estadoVida.text = "Vida: " + health;
+            vidaText.text = "Vida: " + health;
             perdida++;
             yield return new WaitForSeconds(1);
         }
