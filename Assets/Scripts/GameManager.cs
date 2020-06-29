@@ -17,6 +17,8 @@ public class GameManager : MonoBehaviour
     public GameObject entremapas;
     public GameObject restart;
     public GameObject quit;
+    public GameObject canvas;
+    public GameObject final;
     public Text textoPersonajes;
     public Text entreMapas;
     public Text presentacionText;
@@ -380,7 +382,6 @@ public class GameManager : MonoBehaviour
 
         restart = GameObject.Find("Restart");
         quit = GameObject.Find("Quit");
-
 
         presentacion.SetActive(false);
         presentacionFinal.SetActive(false);
@@ -1287,9 +1288,10 @@ public class GameManager : MonoBehaviour
 
     public void GameOver()
     {
+
         presentacionFinal.SetActive(true);
-        //quit.SetActive(true);
-        //restart.SetActive(true);
+        quit.SetActive(true);
+        restart.SetActive(true);
 
         if (Application.platform == RuntimePlatform.Android)
         {
