@@ -89,6 +89,7 @@ public class Player : MovingObject
     // Update is called once per frame
     void Update()
     {
+        Debug.Log(animacion);
 
 #if UNITY_STANDALONE || UNITY_WEBPLAYER || UNITY_EDITOR
         horizontal = (int)Input.GetAxisRaw("Horizontal"); //-1 si es la izquierda, 1 si es derecha, 0 si no pulsa ninguna tecla
