@@ -48,6 +48,15 @@ public class CameraTracker : MonoBehaviour
                 if (y > 10.5f)
                     y = 10.5f;
             }
+
+            if (mapa == 3)
+            {
+                if (x > 10f)
+                    x = 10f;
+
+                if (y > 5.5f)
+                    y = 5.5f;
+            }
             transform.position = new Vector3(x, y, -10);
         }
     }

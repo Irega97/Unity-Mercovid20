@@ -23,8 +23,9 @@ public class SoundManager : MonoBehaviour
     private void Update()
     {
         if (!mercadona.isPlaying)
-            fondo.volume = 1f;
+            fondo.volume = 0.2f;
     }
+
     public void contagiar()
     {
         if (fondo.isPlaying)
