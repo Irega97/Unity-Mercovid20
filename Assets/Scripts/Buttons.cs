@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.UI;
 
 public class Buttons : MonoBehaviour
@@ -33,17 +31,20 @@ public class Buttons : MonoBehaviour
         player = GameObject.Find("Jugador(Clone)").GetComponent<Player>();
 
         vidaText = GameObject.Find("VidaText").GetComponent<Text>();
+        
         //estadoText = GameObject.Find("").GetComponent<Text>();
         desinfectante = GameObject.Find("DesinfectanteText").GetComponent<Text>();
         desinfectanteplus = GameObject.Find("DesinfectantePlusText").GetComponent<Text>();
         desinfectantepro = GameObject.Find("DesinfectanteProText").GetComponent<Text>();
         jabon = GameObject.Find("JabonText").GetComponent<Text>();
 
+
         desinfectante.text = "x" + cantidadDesinfectante;
         desinfectanteplus.text = "x" + cantidadDesinfectantePlus;
         desinfectantepro.text = "x" + cantidadDesinfectantePro;
         jabon.text = "x" + cantidadJabon;
-        //javaClass = new AndroidJavaClass("edu.upc.login.apiUnity");
+        if (Application.platform == RuntimePlatform.Android)
+            javaClass = new AndroidJavaClass("edu.upc.login.apiUnity");
     }
 
     public void Desinfectante ()
@@ -61,7 +62,9 @@ public class Buttons : MonoBehaviour
             
             cantidadDesinfectante--;
             GameManager.instance.cantidadDesinfectante--;
-            javaClass.CallStatic("setObjetos", 1);
+            if (Application.platform == RuntimePlatform.Android)
+                javaClass.CallStatic("setObjetos", 1);
+
             desinfectante.text = "x" + cantidadDesinfectante;
         }
         else
@@ -86,7 +89,8 @@ public class Buttons : MonoBehaviour
 
             GameManager.instance.cantidadDesinfectantePlus--;
             cantidadDesinfectantePlus--;
-            javaClass.CallStatic("setObjetos", 2);
+            if (Application.platform == RuntimePlatform.Android)
+                javaClass.CallStatic("setObjetos", 2);
             desinfectanteplus.text = "x" + cantidadDesinfectantePlus;
         }
         else
@@ -111,7 +115,8 @@ public class Buttons : MonoBehaviour
             }
             GameManager.instance.cantidadDesinfectantePro--;
             cantidadDesinfectantePro--;
-            javaClass.CallStatic("setObjetos", 3);
+            if (Application.platform == RuntimePlatform.Android)
+                javaClass.CallStatic("setObjetos", 3);
             desinfectantepro.text = "x" + cantidadDesinfectantePro;
         }
         else
@@ -136,7 +141,8 @@ public class Buttons : MonoBehaviour
 
             GameManager.instance.cantidadJabon--;
             cantidadJabon--;
-            javaClass.CallStatic("setObjetos", 6);
+            if (Application.platform == RuntimePlatform.Android)
+                javaClass.CallStatic("setObjetos", 6);
             jabon.text = "x" + cantidadJabon;
             SoundManager.instance.curar();
         }
@@ -150,13 +156,13 @@ public class Buttons : MonoBehaviour
 
     public void Restart()
     {
-        //aún no hace nada
         Debug.Log("Restart");
     }
 
     public void Quit()
     {
-        //aún no hace nada
         Debug.Log("Quit");
+        if (Application.platform == RuntimePlatform.Android)
+            Application.Quit();
     }
 }

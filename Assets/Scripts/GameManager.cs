@@ -10,7 +10,6 @@ public class GameManager : MonoBehaviour
     public BoardManager boardScript;
     public static GameManager instance = null;
     public int healthPoints = 100;
-    public bool contagio = false;
     public float levelStartDelay = 5f;
     public GameObject presentacion;
     public GameObject presentacionFinal;
@@ -22,10 +21,17 @@ public class GameManager : MonoBehaviour
     public Text entreMapas;
     public Text presentacionText;
     public Text presentacionFinalText;
+    private Text tiempoText;
+    private int minutos, segundos;
+    private float contador;
+    private Text puntosText;
     public bool doingSetup;
     public bool llave = false;
+    public bool codigo = false;
+    public bool contagio = false;
     public int nivel = 0;
     public int puntos;
+    public string duracion;
     string mapa;
     string personajes;
     string objetos2;
@@ -36,6 +42,7 @@ public class GameManager : MonoBehaviour
     public int cantidadMascarilla;
     public int cantidadMegaMascarilla;
     string objetos;
+    bool enviado = false;
 
     void Awake()
     {
@@ -52,7 +59,7 @@ public class GameManager : MonoBehaviour
 
 #if UNITY_STANDALONE || UNITY_WEBPLAYER || UNITY_EDITOR
 
-        mapa = "60 60 1                                                    \n" +
+                    mapa = "60 60 1                                                    \n" +
                            "A9555555555555555555559955555555599599555555555555555555559C\n" +
                            "7B66666666666666666666DB666666666666DB66666666666666666666D8\n" +
                            "EF                    EF            EF                    EF\n" +
@@ -219,12 +226,125 @@ public class GameManager : MonoBehaviour
         }
 
         mapa = javaClass.CallStatic<String>("getMapa", 1);
+
+        /*if (mapa == null)
+                    mapa = "60 60 1                                                    \n" +
+                           "A9555555555555555555559955555555599599555555555555555555559C\n" +
+                           "7B66666666666666666666DB666666666666DB66666666666666666666D8\n" +
+                           "EF                    EF            EF                    EF\n" +
+                           "EF                    EF            EF                    EF\n" +
+                           "EF   Ábbbbá  Áaaaaá   EF    eee     EF   Áccccá  ddddd    EF\n" +
+                           "EF   Ébbbbé  Éaaaaé   EF    eee     EF   Éccccé  ddddd    EF\n" +
+                           "EF   Íbbbbí  Íaaaaí   IJ    eee     IJ   Íccccí  ddddd    EF\n" +
+                           "EF   Óbbbbó  Óaaaaó   EF    eee     EF   Óccccó  ddddd    EF\n" +
+                           "EF                    EF            EF                    EF\n" +
+                           "EF                    EF            EF                    EF\n" +
+                           "7155555555555599555555415555G5555555415555559955555555555548\n" +
+                           "7B666666666666DB666666226666H666666622666666DB666666666666D8\n" +
+                           "EF            EF                            EF            EF\n" +
+                           "EF            EF   hhhhh                    EF            EF\n" +
+                           "EF   Áccccá   EF   hhhhh       ttttt        EF   Áaaaaá   EF\n" +
+                           "EF   Éccccé   IJ   hhhhh       ttttt        IJ   Éaaaaé   EF\n" +
+                           "EF   Íccccí   EF   hhhhh       ttttt        EF   Íaaaaí   EF\n" +
+                           "EF   Óccccó   EF   hhhhh       ttttt        EF   Óaaaaó   EF\n" +
+                           "EF            EF                            EF            EF\n" +
+                           "EF            EF                            EF            EF\n" +
+                           "71555555555555415555G555555555555555G55555554155555555555548\n" +
+                           "7B666666666666226666H666666666666666H666666622666666666666D8\n" +
+                           "EFiiiii ggggg                            ffff  MMMMMMMMMMMEF\n" +
+                           "EFiiiii ggggg                            fffff MMMMMMMMMMMEF\n" +
+                           "EFiiiii ggggg                            fffff MMMMMMMMMMMEF\n" +
+                           "EFiiiii ggggg                            ffff  MMMMMMMMMMMEF\n" +
+                           "EFiiiii ggggg           pppppppppp                        EF\n" +
+                           "EF                      pppppppppp                        EF\n" +
+                           "EF                      pppppppppp                        EF\n" +
+                           "EF                      pppppppppp                        EF\n" +
+                           "EF                      pppppppppp                        EF\n" +
+                           "EF                      pppppppppp             ggggg iiiiiEF\n" +
+                           "EFddddd ffff            pppppppppp             ggggg iiiiiEF\n" +
+                           "EFddddd fffff           pppppppppp             ggggg iiiiiEF\n" +
+                           "EFddddd fffff                                  ggggg iiiiiEF\n" +
+                           "EFddddd ffff                                   ggggg iiiiiEF\n" +
+                           "EF                                                        EF\n" +
+                           "EF                                                        EF\n" +
+                           "71555555555555995555G5555555555555555555G5559955555555555548\n" +
+                           "7B666666666666DB6666H6666666666666666666H666DB666666666666D8\n" +
+                           "EF            EF                            EF            EF\n" +
+                           "EF            EF     hhhhh                  EF            EF\n" +
+                           "EF   Áccccá   EF     hhhhh       ttttt      EF   Áaaaaá   EF\n" +
+                           "EF   Éccccé   EF     hhhhh       ttttt      EF   Éaaaaé   EF\n" +
+                           "EF   Íccccí   IJ     hhhhh       ttttt      IJ   Íaaaaí   EF\n" +
+                           "EF   Óccccó   EF     hhhhh       ttttt      EF   Óaaaaó   EF\n" +
+                           "EF            EF                            EF            EF\n" +
+                           "EF            EF                            EF            EF\n" +
+                           "7155555555555541555555995555G5555995555555554155555555555548\n" +
+                           "7B66666666666622666666DB6666H6666666DB66666622666666666666D8\n" +
+                           "EF                    EF            EF                    EF\n" +
+                           "EF                    EF            EF                    EF\n" +
+                           "EF   Ábbbbá  Áaaaaá   EF    eee     EF   Áccccá  ddddd    EF\n" +
+                           "EF   Ébbbbé  Éaaaaé   EF    eee     EF   Éccccé  ddddd    EF\n" +
+                           "EF   Íbbbbí  Íaaaaí   IJ    eee     IJ   Íccccí  ddddd    EF\n" +
+                           "EF   Óbbbbó  Óaaaaó   EF    eee     EF   Óccccó  ddddd    EF\n" +
+                           "EF                    EF            EF                    EF\n" +
+                           "EF                    EF            EF                    EF\n" +
+                           "715555555555555555555541555555555555415555555555555555555548\n" +
+                           "026666666666666666666622666666666666226666666666666666666623\n";*/
+
         personajes = javaClass.CallStatic<String>("getEnemigos", 1);
-        Debug.Log("Se recibe directo del swagger: " + mapa);
+
+        /*if (personajes == null)
+            personajes = "48      \n" +
+                            "P 7 3 1            \n" +
+                            "0 0 0 23 11 0 0    \n" +
+                            "1 0 48 23 11 0 0   \n" +
+                            "2 36 48 23 11 0 0  \n" +
+                            "3 36 0 23 11 0 0   \n" +
+                            "4 22 0 15 11 0 0   \n" +
+                            "0 0 10 15 11 0 0   \n" +
+                            "1 44 10 15 11 0 0  \n" +
+                            "2 44 38 15 11 0 0  \n" +
+                            "3 0 38 15 11 0 0   \n" +
+                            "4 22 48 15 11 0 0  \n" +
+                            "0 0 20 59 19 0 0   \n" +
+                            "1 22 1 21 9 2 1    \n" +
+                            "2 58 1 21 9 2 1    \n" +
+                            "3 58 49 21 9 2 1   \n" +
+                            "4 22 49 21 9 2 1   \n" +
+                            "0 58 39 13 9 2 1   \n" +
+                            "1 36 1 13 9 2 1    \n" +
+                            "2 58 11 13 9 2 1   \n" +
+                            "3 14 11 13 9 2 1   \n" +
+                            "4 14 39 13 9 2 1   \n" +
+                            "0 36 49 13 9 2 1   \n" +
+                            "1 58 21 57 17 2 1  \n" +
+                            "2 14 10 31 11 0 0  \n" +
+                            "3 44 11 29 9 2 1   \n" +
+                            "4 14 38 31 11 0 0  \n" +
+                            "0 44 39 29 9 2 1   \n" +
+                            "H 24 9   \n" +
+                            "H 2 22   \n" +
+                            "H 2 30   \n" +
+                            "H 57 30  \n" +
+                            "H 16 40  \n" +
+                            "H 24 50  \n" +
+                            "H 40 37  \n" +
+                            "H 16 19  \n" +
+                            "H 43 12  \n" +
+                            "H 43 47  \n" +
+                            "V 21 2   \n" +
+                            "V 38 9   \n" +
+                            "V 13 12  \n" +
+                            "V 46 19  \n" +
+                            "V 23 37  \n" +
+                            "V 34 22  \n" +
+                            "V 13 47  \n" +
+                            "V 21 50  \n" +
+                            "V 46 40  \n" +
+                            "V 38 57  \n" +
+                            "L 46 37  \n";*/
 
         if (cantidadMascarilla > 0 || cantidadMegaMascarilla > 0)
         {
-           javaClass = new AndroidJavaClass("edu.upc.login.apiUnity");
             if (cantidadMegaMascarilla > 0)
             {
                 healthPoints = healthPoints + 50;
@@ -250,6 +370,9 @@ public class GameManager : MonoBehaviour
         presentacionFinal = GameObject.Find("Final");
         encargado1 = GameObject.Find("Encargado1");
         entremapas = GameObject.Find("EntreMapas");
+        puntosText = GameObject.Find("PuntosText").GetComponent<Text>();
+        puntosText = GameObject.Find("PuntosText").GetComponent<Text>();
+        tiempoText = GameObject.Find("DuracionText").GetComponent<Text>();
         textoPersonajes = GameObject.Find("Text").GetComponent<Text>();
         entreMapas = GameObject.Find("EntreMapasText").GetComponent<Text>();
         presentacionText = GameObject.Find("TextPresentacion").GetComponent<Text>();
@@ -297,6 +420,39 @@ public class GameManager : MonoBehaviour
         Invoke("HidePresentacion", levelStartDelay);
     }
 
+    void Update()
+    {
+        if (!instance.doingSetup)
+        {
+            contador += Time.deltaTime;
+            if (contador >= 1)
+            {
+                contador = 0;
+                segundos++;
+            }
+
+            if (segundos >= 60)
+            {
+                minutos++;
+                segundos = 0;
+            }
+            instance.duracion = minutos + ":" + segundos;
+        }
+        if (segundos/10 < 1 && minutos/10 < 1)
+            tiempoText.text = "Duración: 0" + minutos + ":0" + segundos;
+
+        else if (segundos/10 < 1)
+            tiempoText.text = "Duración: " + minutos + ":0" + segundos;
+
+        else if (minutos/10 < 1)
+            tiempoText.text = "Duración: 0" + minutos + ":" + segundos;
+
+        else
+            tiempoText.text = "Duración: " + minutos + ":" + segundos;
+
+        puntosText.text = "Puntuación: " + instance.puntos;
+    }
+
     [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.AfterSceneLoad)]
     static public void CallbackInitialization()
     {
@@ -305,12 +461,9 @@ public class GameManager : MonoBehaviour
 
     static private void OnSceneLoaded(Scene arg0, LoadSceneMode arg1)
     {
-        AndroidJavaClass javaClass = new AndroidJavaClass("edu.upc.login.apiUnity");
-        //Pedir cosas a Android
+#if UNITY_STANDALONE || UNITY_WEBPLAYER || UNITY_EDITOR
         if (instance.nivel == 1)
             {
-            instance.mapa = javaClass.CallStatic<String>("getMapa", 2);
-            instance.personajes = javaClass.CallStatic<String>("getEnemigos", 2);
             instance.mapa = "20 16 2             \n" +
                              "33333333 001100117 8\n" +
                              "3                   \n" +
@@ -338,8 +491,6 @@ public class GameManager : MonoBehaviour
 
         else if (instance.nivel == 2)
         {
-            instance.mapa = javaClass.CallStatic<String>("getMapa", 3);
-            instance.personajes = javaClass.CallStatic<String>("getEnemigos", 3);
             instance.mapa = "19 11 3            \n" +
                             "                   \n" +
                             " MMMMM       MMMMM \n" +
@@ -357,15 +508,11 @@ public class GameManager : MonoBehaviour
                                   "H 18 0          \n" +
                                   "P 17 0 0        \n" +
                                   "G 0 3 18 7 1 0  \n" +
-                                  "G 16 2 15 2 2 1 \n";
-                                  
-                                  
+                                  "G 16 2 15 2 2 1 \n";                    
         }
 
         else if (instance.nivel == 3)
         {
-            instance.mapa = javaClass.CallStatic<String>("getMapa", 4);
-            instance.personajes = javaClass.CallStatic<String>("getEnemigos", 4);
             instance.mapa = "20 16 2              \n" +
                              "33333333 001100117 8\n" +
                              "3                   \n" +
@@ -385,7 +532,7 @@ public class GameManager : MonoBehaviour
                              "565      44444444444\n";
 
             instance.personajes = "6                 \n" +
-                                  "P 19 15 1           \n" +
+                                  "P 18 14 1         \n" +
                                   "H 2 1             \n" +
                                   "G 1 13 18 1 3 1   \n" +
                                   "G 19 2 12 3 1 1   \n" +
@@ -395,8 +542,6 @@ public class GameManager : MonoBehaviour
 
         else if (instance.nivel == 4)
         {
-            instance.mapa = javaClass.CallStatic<String>("getMapa", 5);
-            instance.personajes = javaClass.CallStatic<String>("getEnemigos", 5);
             instance.mapa = "60 60 1                                                    \n" +
                            "A9555555555555555555559955555555599599555555555555555555559C\n" +
                            "7B66666666666666666666DB666666666666DB66666666666666666666D8\n" +
@@ -530,8 +675,6 @@ public class GameManager : MonoBehaviour
 
         else if (instance.nivel == 6)
         {
-            instance.mapa = javaClass.CallStatic<String>("getMapa", 6);
-            instance.personajes = javaClass.CallStatic<String>("getEnemigos", 6);
             instance.mapa = "60 60 1                                                    \n" +
                            "A9555555555555555555559955555555599599555555555555555555559C\n" +
                            "7B66666666666666666666DB666666666666DB66666666666666666666D8\n" +
@@ -645,6 +788,365 @@ public class GameManager : MonoBehaviour
                          "L 46 37  \n";
             instance.nivel = 0;
         }
+
+ #else
+        AndroidJavaClass javaClass = new AndroidJavaClass("edu.upc.login.apiUnity");
+        if (instance.nivel == 1)
+        {
+            instance.mapa = javaClass.CallStatic<String>("getMapa", 2);
+            instance.personajes = javaClass.CallStatic<String>("getEnemigos", 2);
+
+            if (instance.mapa == null)
+                instance.mapa = "20 16 2             \n" +
+                             "33333333 001100117 8\n" +
+                             "3                   \n" +
+                             "3                   \n" +
+                             "3     2222222222    \n" +
+                             "3     2222222222    \n" +
+                             "3                   \n" +
+                             "                    \n" +
+                             "   MMM  2222222222  \n" +
+                             "   MMM  2222222222  \n" +
+                             "                    \n" +
+                             "                    \n" +
+                             "   MMM  2222222222  \n" +
+                             "   MMM  2222222222  \n" +
+                             "                    \n" +
+                             "                    \n" +
+                             "565       44444444444\n";
+
+            if (instance.personajes == null)
+                instance.personajes = "3                 \n" +
+                                      "P 1 0 0           \n" +
+                                      "H 2 1             \n" +
+                                      "G 18 10 16 4 0 0  \n";
+
+        }
+
+        else if (instance.nivel == 2)
+        {
+            instance.mapa = javaClass.CallStatic<String>("getMapa", 3);
+            instance.personajes = javaClass.CallStatic<String>("getEnemigos", 3);
+
+            if (instance.mapa == null)
+                instance.mapa = "19 11 3            \n" +
+                                "                   \n" +
+                                " MMMMM       MMMMM \n" +
+                                " MMMMM       MMMMM \n" +
+                                " MMMMM       MMMMM \n" +
+                                " MMMMMM00100MMMMMM \n" +
+                                " MMMMMMMMMMMMMMMMM \n" +
+                                " MMMMMMMMMMMMMMMMM \n" +
+                                "                   \n" +
+                                "                   \n" +
+                                "                   \n" +
+                                "                 6 \n";
+
+            if (instance.personajes == null)
+                instance.personajes = "4               \n" +
+                                      "H 18 0          \n" +
+                                      "P 17 0 0        \n" +
+                                      "G 0 3 18 7 1 0  \n" +
+                                      "G 16 2 15 2 2 1 \n";
+
+        }
+
+        else if (instance.nivel == 3)
+        {
+            instance.mapa = javaClass.CallStatic<String>("getMapa", 4);
+            instance.personajes = javaClass.CallStatic<String>("getEnemigos", 4);
+
+            if (instance.mapa == null)
+                instance.mapa = "20 16 2              \n" +
+                                 "33333333 001100117 8\n" +
+                                 "3                   \n" +
+                                 "3                   \n" +
+                                 "3     2222222222    \n" +
+                                 "3     2222222222    \n" +
+                                 "3                   \n" +
+                                 "                    \n" +
+                                 "   MMM  2222222222  \n" +
+                                 "   MMM  2222222222  \n" +
+                                 "                    \n" +
+                                 "                    \n" +
+                                 "   MMM  2222222222  \n" +
+                                 "   MMM  2222222222  \n" +
+                                 "                    \n" +
+                                 "                    \n" +
+                                 "565      44444444444\n";
+
+            if (instance.personajes == null)
+                instance.personajes = "6                 \n" +
+                                      "P 18 14 1           \n" +
+                                      "H 2 1             \n" +
+                                      "G 1 13 18 1 3 1   \n" +
+                                      "G 19 2 12 3 1 1   \n" +
+                                      "G 0 9 6 7 0 1     \n" +
+                                      "G 19 10 12 4 0 0  \n";
+        }
+
+        else if (instance.nivel == 4)
+        {
+            instance.mapa = javaClass.CallStatic<String>("getMapa", 5);
+            instance.personajes = javaClass.CallStatic<String>("getEnemigos", 5);
+
+            if (instance.mapa == null)
+                instance.mapa = "60 60 1                                                    \n" +
+                               "A9555555555555555555559955555555599599555555555555555555559C\n" +
+                               "7B66666666666666666666DB666666666666DB66666666666666666666D8\n" +
+                               "EF                    EF            EF                    EF\n" +
+                               "EF                    EF            EF                    EF\n" +
+                               "EF   Ábbbbá  Áaaaaá   EF    eee     EF   Áccccá  ddddd    EF\n" +
+                               "EF   Ébbbbé  Éaaaaé   EF    eee     EF   Éccccé  ddddd    EF\n" +
+                               "EF   Íbbbbí  Íaaaaí   IJ    eee     IJ   Íccccí  ddddd    EF\n" +
+                               "EF   Óbbbbó  Óaaaaó   EF    eee     EF   Óccccó  ddddd    EF\n" +
+                               "EF                    EF            EF                    EF\n" +
+                               "EF                    EF            EF                    EF\n" +
+                               "7155555555555599555555415555G5555555415555559955555555555548\n" +
+                               "7B666666666666DB666666226666H666666622666666DB666666666666D8\n" +
+                               "EF            EF                            EF            EF\n" +
+                               "EF            EF   hhhhh                    EF            EF\n" +
+                               "EF   Áccccá   EF   hhhhh       ttttt        EF   Áaaaaá   EF\n" +
+                               "EF   Éccccé   IJ   hhhhh       ttttt        IJ   Éaaaaé   EF\n" +
+                               "EF   Íccccí   EF   hhhhh       ttttt        EF   Íaaaaí   EF\n" +
+                               "EF   Óccccó   EF   hhhhh       ttttt        EF   Óaaaaó   EF\n" +
+                               "EF            EF                            EF            EF\n" +
+                               "EF            EF                            EF            EF\n" +
+                               "71555555555555415555G555555555555555G55555554155555555555548\n" +
+                               "7B666666666666226666H666666666666666H666666622666666666666D8\n" +
+                               "EFiiiii ggggg                            ffff  MMMMMMMMMMMEF\n" +
+                               "EFiiiii ggggg                            fffff MMMMMMMMMMMEF\n" +
+                               "EFiiiii ggggg                            fffff MMMMMMMMMMMEF\n" +
+                               "EFiiiii ggggg                            ffff  MMMMMMMMMMMEF\n" +
+                               "EFiiiii ggggg           pppppppppp                        EF\n" +
+                               "EF                      pppppppppp                        EF\n" +
+                               "EF                      pppppppppp                        EF\n" +
+                               "EF                      pppppppppp                        EF\n" +
+                               "EF                      pppppppppp                        EF\n" +
+                               "EF                      pppppppppp             ggggg iiiiiEF\n" +
+                               "EFddddd ffff            pppppppppp             ggggg iiiiiEF\n" +
+                               "EFddddd fffff           pppppppppp             ggggg iiiiiEF\n" +
+                               "EFddddd fffff                                  ggggg iiiiiEF\n" +
+                               "EFddddd ffff                                   ggggg iiiiiEF\n" +
+                               "EF                                                        EF\n" +
+                               "EF                                                        EF\n" +
+                               "71555555555555995555G5555555555555555555G5559955555555555548\n" +
+                               "7B666666666666DB6666H6666666666666666666H666DB666666666666D8\n" +
+                               "EF            EF                            EF            EF\n" +
+                               "EF            EF     hhhhh                  EF            EF\n" +
+                               "EF   Áccccá   EF     hhhhh       ttttt      EF   Áaaaaá   EF\n" +
+                               "EF   Éccccé   EF     hhhhh       ttttt      EF   Éaaaaé   EF\n" +
+                               "EF   Íccccí   IJ     hhhhh       ttttt      IJ   Íaaaaí   EF\n" +
+                               "EF   Óccccó   EF     hhhhh       ttttt      EF   Óaaaaó   EF\n" +
+                               "EF            EF                            EF            EF\n" +
+                               "EF            EF                            EF            EF\n" +
+                               "7155555555555541555555995555G5555995555555554155555555555548\n" +
+                               "7B66666666666622666666DB6666H6666666DB66666622666666666666D8\n" +
+                               "EF                    EF            EF                    EF\n" +
+                               "EF                    EF            EF                    EF\n" +
+                               "EF   Ábbbbá  Áaaaaá   EF    eee     EF   Áccccá  ddddd    EF\n" +
+                               "EF   Ébbbbé  Éaaaaé   EF    eee     EF   Éccccé  ddddd    EF\n" +
+                               "EF   Íbbbbí  Íaaaaí   IJ    eee     IJ   Íccccí  ddddd    EF\n" +
+                               "EF   Óbbbbó  Óaaaaó   EF    eee     EF   Óccccó  ddddd    EF\n" +
+                               "EF                    EF            EF                    EF\n" +
+                               "EF                    EF            EF                    EF\n" +
+                               "715555555555555555555541555555555555415555555555555555555548\n" +
+                               "026666666666666666666622666666666666226666666666666666666623\n";
+
+            if (instance.personajes == null)
+                instance.personajes = "66      \n" +
+                             "P 49 33 1          \n" +
+                             "0 0 0 23 11 0 0    \n" +
+                             "1 0 48 23 11 0 0   \n" +
+                             "2 36 48 23 11 0 0  \n" +
+                             "3 36 0 23 11 0 0   \n" +
+                             "4 22 0 15 11 0 0   \n" +
+                             "0 0 10 15 11 0 0   \n" +
+                             "1 44 10 15 11 0 0  \n" +
+                             "2 44 38 15 11 0 0  \n" +
+                             "3 0 38 15 11 0 0   \n" +
+                             "4 22 48 15 11 0 0  \n" +
+                             "0 0 20 59 19 0 0   \n" +
+                             "1 22 1 21 9 2 1    \n" +
+                             "2 58 1 21 9 2 1    \n" +
+                             "3 58 49 21 9 2 1   \n" +
+                             "4 22 49 21 9 2 1   \n" +
+                             "0 58 39 13 9 2 1   \n" +
+                             "1 36 1 13 9 2 1    \n" +
+                             "2 58 11 13 9 2 1   \n" +
+                             "3 14 11 13 9 2 1   \n" +
+                             "4 14 39 13 9 2 1   \n" +
+                             "0 36 49 13 9 2 1   \n" +
+                             "1 58 21 57 17 2 1  \n" +
+                             "2 14 10 31 11 0 0  \n" +
+                             "3 44 11 29 9 2 1   \n" +
+                             "4 14 38 31 11 0 0  \n" +
+                             "0 44 39 29 9 2 1   \n" +
+                             "G 2 9 17 7 3 0     \n" +
+                             "G 57 9 17 7 2 1    \n" +
+                             "G 57 57 17 7 2 1   \n" +
+                             "G 2 57 17 7 3 0    \n" +
+                             "G 26 17 6 3 3 0    \n" +
+                             "G 24 8 9 6 3 0     \n" +
+                             "G 37 32 19 3 3 0   \n" +
+                             "G 2 19 9 7 3 0     \n" +
+                             "G 57 19 9 7 2 1    \n" +
+                             "G 16 18 4 5 3 0    \n" +
+                             "G 43 18 5 5 2 1    \n" +
+                             "G 2 32 20 4 3 0    \n" +
+                             "G 2 47 9 7 3 0     \n" +
+                             "G 57 47 9 7 2 1    \n" +
+                             "G 16 46 2 5 3 0    \n" +
+                             "G 43 46 3 5 2 1    \n" +
+                             "G 24 45 7 5 2 1    \n" +
+                             "G 24 57 11 6 3 0   \n" +
+                             "H 24 9   \n" +
+                             "H 2 22   \n" +
+                             "H 2 30   \n" +
+                             "H 57 30  \n" +
+                             "H 16 40  \n" +
+                             "H 24 50  \n" +
+                             "H 40 37  \n" +
+                             "H 16 19  \n" +
+                             "H 43 12  \n" +
+                             "H 43 47  \n" +
+                             "V 21 2   \n" +
+                             "V 38 9   \n" +
+                             "V 13 12  \n" +
+                             "V 46 19  \n" +
+                             "V 23 37  \n" +
+                             "V 34 22  \n" +
+                             "V 13 47  \n" +
+                             "V 21 50  \n" +
+                             "V 46 40  \n" +
+                             "V 38 57  \n" +
+                             "L 46 37  \n";
+        }
+
+        else if (instance.nivel == 6)
+        {
+            instance.mapa = javaClass.CallStatic<String>("getMapa", 6);
+            instance.personajes = javaClass.CallStatic<String>("getEnemigos", 6);
+
+            if (instance.mapa == null)
+                instance.mapa = "60 60 1                                                    \n" +
+                               "A9555555555555555555559955555555599599555555555555555555559C\n" +
+                               "7B66666666666666666666DB666666666666DB66666666666666666666D8\n" +
+                               "EF                    EF            EF                    EF\n" +
+                               "EF                    EF            EF                    EF\n" +
+                               "EF   Ábbbbá  Áaaaaá   EF    eee     EF   Áccccá  ddddd    EF\n" +
+                               "EF   Ébbbbé  Éaaaaé   EF    eee     EF   Éccccé  ddddd    EF\n" +
+                               "EF   Íbbbbí  Íaaaaí   IJ    eee     IJ   Íccccí  ddddd    EF\n" +
+                               "EF   Óbbbbó  Óaaaaó   EF    eee     EF   Óccccó  ddddd    EF\n" +
+                               "EF                    EF            EF                    EF\n" +
+                               "EF                    EF            EF                    EF\n" +
+                               "7155555555555599555555415555G5555555415555559955555555555548\n" +
+                               "7B666666666666DB666666226666H666666622666666DB666666666666D8\n" +
+                               "EF            EF                            EF            EF\n" +
+                               "EF            EF   hhhhh                    EF            EF\n" +
+                               "EF   Áccccá   EF   hhhhh       ttttt        EF   Áaaaaá   EF\n" +
+                               "EF   Éccccé   IJ   hhhhh       ttttt        IJ   Éaaaaé   EF\n" +
+                               "EF   Íccccí   EF   hhhhh       ttttt        EF   Íaaaaí   EF\n" +
+                               "EF   Óccccó   EF   hhhhh       ttttt        EF   Óaaaaó   EF\n" +
+                               "EF            EF                            EF            EF\n" +
+                               "EF            EF                            EF            EF\n" +
+                               "71555555555555415555G555555555555555G55555554155555555555548\n" +
+                               "7B666666666666226666H666666666666666H666666622666666666666D8\n" +
+                               "EFiiiii ggggg                            ffff  MMMMMMMMMMMEF\n" +
+                               "EFiiiii ggggg                            fffff MMMMMMMMMMMEF\n" +
+                               "EFiiiii ggggg                            fffff MMMMMMMMMMMEF\n" +
+                               "EFiiiii ggggg                            ffff  MMMMMMMMMMMEF\n" +
+                               "EFiiiii ggggg           pppppppppp                        EF\n" +
+                               "EF                      pppppppppp                        EF\n" +
+                               "EF                      pppppppppp                        EF\n" +
+                               "EF                      pppppppppp                        EF\n" +
+                               "EF                      pppppppppp                        EF\n" +
+                               "EF                      pppppppppp             ggggg iiiiiEF\n" +
+                               "EFddddd ffff            pppppppppp             ggggg iiiiiEF\n" +
+                               "EFddddd fffff           pppppppppp             ggggg iiiiiEF\n" +
+                               "EFddddd fffff                                  ggggg iiiiiEF\n" +
+                               "EFddddd ffff                                   ggggg iiiiiEF\n" +
+                               "EF                                                        EF\n" +
+                               "EF                                                        EF\n" +
+                               "71555555555555995555G5555555555555555555G5559955555555555548\n" +
+                               "7B666666666666DB6666H6666666666666666666H666DB666666666666D8\n" +
+                               "EF            EF                            EF            EF\n" +
+                               "EF            EF     hhhhh                  EF            EF\n" +
+                               "EF   Áccccá   EF     hhhhh       ttttt      EF   Áaaaaá   EF\n" +
+                               "EF   Éccccé   EF     hhhhh       ttttt      EF   Éaaaaé   EF\n" +
+                               "EF   Íccccí   IJ     hhhhh       ttttt      IJ   Íaaaaí   EF\n" +
+                               "EF   Óccccó   EF     hhhhh       ttttt      EF   Óaaaaó   EF\n" +
+                               "EF            EF                            EF            EF\n" +
+                               "EF            EF                            EF            EF\n" +
+                               "7155555555555541555555995555G5555995555555554155555555555548\n" +
+                               "7B66666666666622666666DB6666H6666666DB66666622666666666666D8\n" +
+                               "EF                    EF            EF                    EF\n" +
+                               "EF                    EF            EF                    EF\n" +
+                               "EF   Ábbbbá  Áaaaaá   EF    eee     EF   Áccccá  ddddd    EF\n" +
+                               "EF   Ébbbbé  Éaaaaé   EF    eee     EF   Éccccé  ddddd    EF\n" +
+                               "EF   Íbbbbí  Íaaaaí   IJ    eee     IJ   Íccccí  ddddd    EF\n" +
+                               "EF   Óbbbbó  Óaaaaó   EF    eee     EF   Óccccó  ddddd    EF\n" +
+                               "EF                    EF            EF                    EF\n" +
+                               "EF                    EF            EF                    EF\n" +
+                               "715555555555555555555541555555555555415555555555555555555548\n" +
+                               "026666666666666666666622666666666666226666666666666666666623\n";
+
+            if (instance.personajes == null)
+                instance.personajes = "48      \n" +
+                             "P 4 23 1           \n" +
+                             "0 0 0 23 11 0 0    \n" +
+                             "1 0 48 23 11 0 0   \n" +
+                             "2 36 48 23 11 0 0  \n" +
+                             "3 36 0 23 11 0 0   \n" +
+                             "4 22 0 15 11 0 0   \n" +
+                             "0 0 10 15 11 0 0   \n" +
+                             "1 44 10 15 11 0 0  \n" +
+                             "2 44 38 15 11 0 0  \n" +
+                             "3 0 38 15 11 0 0   \n" +
+                             "4 22 48 15 11 0 0  \n" +
+                             "0 0 20 59 19 0 0   \n" +
+                             "1 22 1 21 9 2 1    \n" +
+                             "2 58 1 21 9 2 1    \n" +
+                             "3 58 49 21 9 2 1   \n" +
+                             "4 22 49 21 9 2 1   \n" +
+                             "0 58 39 13 9 2 1   \n" +
+                             "1 36 1 13 9 2 1    \n" +
+                             "2 58 11 13 9 2 1   \n" +
+                             "3 14 11 13 9 2 1   \n" +
+                             "4 14 39 13 9 2 1   \n" +
+                             "0 36 49 13 9 2 1   \n" +
+                             "1 58 21 57 17 2 1  \n" +
+                             "2 14 10 31 11 0 0  \n" +
+                             "3 44 11 29 9 2 1   \n" +
+                             "4 14 38 31 11 0 0  \n" +
+                             "0 44 39 29 9 2 1   \n" +
+                             "H 24 9   \n" +
+                             "H 2 22   \n" +
+                             "H 2 30   \n" +
+                             "H 57 30  \n" +
+                             "H 16 40  \n" +
+                             "H 24 50  \n" +
+                             "H 40 37  \n" +
+                             "H 16 19  \n" +
+                             "H 43 12  \n" +
+                             "H 43 47  \n" +
+                             "V 21 2   \n" +
+                             "V 38 9   \n" +
+                             "V 13 12  \n" +
+                             "V 46 19  \n" +
+                             "V 23 37  \n" +
+                             "V 34 22  \n" +
+                             "V 13 47  \n" +
+                             "V 21 50  \n" +
+                             "V 46 40  \n" +
+                             "V 38 57  \n" +
+                             "L 46 37  \n";
+
+            instance.nivel = 0;
+        }
+
+
+#endif
         instance.nivel++;
         instance.InitGame();
     }
@@ -785,7 +1287,17 @@ public class GameManager : MonoBehaviour
 
     public void GameOver()
     {
-        //presentacionFinalText.text = "GAME OVER";
+        if (Application.platform == RuntimePlatform.Android)
+        {
+            AndroidJavaClass javaClass = new AndroidJavaClass("edu.upc.login.apiUnity");
+            javaClass.CallStatic("guardarStats", instance.duracion, instance.puntos);
+            if (!instance.enviado)
+            {
+                instance.enviado = true;
+                Debug.Log("Enviado: Duracion: " + instance.duracion + " puntos: " + instance.puntos);
+            }
+        }
+
         presentacionFinal.SetActive(true);
         quit.SetActive(true);
         restart.SetActive(true);
