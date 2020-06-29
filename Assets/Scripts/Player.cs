@@ -384,6 +384,7 @@ public class Player : MovingObject
                 if (posicion1 && posicion2 && posicion3)
                 {
                     codigo = true;
+                    GameManager.instance.codigo = true;
                     animacion = true;
                     CambiarIdle(0);
                     GameManager.instance.InteractuarEncargado(8);
@@ -445,6 +446,8 @@ public class Player : MovingObject
                     posicionrandom.Add(new Vector3(57f, 43f, 0f));
                     posicionrandom.Add(new Vector3(57f, 15f, 0f));
                     posicionrandom.Add(new Vector3(2f, 15f, 0f));
+                    posicionrandom.Add(new Vector3(7f, 36f, 0f));
+                    posicionrandom.Add(new Vector3(2f, 23f, 0f));
                     int randomIndex = Random.Range(0, posicionrandom.Count);
                     Vector3 randomPosition = posicionrandom[randomIndex];
                     llaveobject = Instantiate(llaveobject, randomPosition, Quaternion.identity);
@@ -460,10 +463,9 @@ public class Player : MovingObject
                 GameManager.instance.puntos = GameManager.instance.puntos + 30;
             }
 
-            else if (hit.transform.gameObject.tag == "Codigo" && codigo)
+            else if (hit.transform.gameObject.tag == "Codigo" && codigo && GameManager.instance.nivel == 2)
             {
                 animacion = true;
-                codigo = true;
                 GameManager.instance.InteractuarEncargado(9);
                 Animator animacionpuerta = GameObject.Find("PuertaAlmacenLarge(Clone)").GetComponent<Animator>();
                 animacionpuerta.SetTrigger("AbrirMercadona");
@@ -492,7 +494,7 @@ public class Player : MovingObject
                 animacion = true;
                 if (GameManager.instance.nivel == 2)
                 {
-                    if (!cesta)
+                    if (!cesta && !codigo)
                         GameManager.instance.InteractuarEncargado(2);
 
                     else if (!codigo)
@@ -554,7 +556,8 @@ public class Player : MovingObject
                 animacion = true;
                 GameManager.instance.InteractuarEncargado(16);
                 papel = true;
-                GameManager.instance.puntos = GameManager.instance.puntos + 100;
+                if (GameManager.instance.puntos < 300)
+                    GameManager.instance.puntos = GameManager.instance.puntos + 100;
             }
 
             else if (hit.transform.gameObject.tag == "ConjuntoPapel")
@@ -626,7 +629,7 @@ public class Player : MovingObject
 
         else if (i == 0)
         {
-            if (GameObject.Find("Encagardo1") == null)
+            if (GameObject.Find("Encargado1") == null)
                 animacion = false;
         }
     }
@@ -665,7 +668,8 @@ public class Player : MovingObject
             Vector2 end = start + new Vector2(0, 1);
             StartCoroutine(SmoothMovement(end));
             Invoke("Restart", restartLevelDelay);
-            GameManager.instance.puntos = GameManager.instance.puntos + 40;
+            if (GameManager.instance.puntos < 200)
+                GameManager.instance.puntos = GameManager.instance.puntos + 40;
         }
 
         if (go.tag == "Borde")
