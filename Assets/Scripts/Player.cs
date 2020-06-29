@@ -330,7 +330,7 @@ public class Player : MovingObject
     {
         if (GameManager.instance.nivel == 2)
         {
-            if (transform.position.x == 1 && transform.position.y == 1 && !accion1)
+            if (transform.position.x == 1 && transform.position.y == 1 && !accion1 && !codigo)
             {
                 animacion = true;
                 GameManager.instance.InteractuarEncargado(2);
@@ -338,7 +338,15 @@ public class Player : MovingObject
                 CambiarIdle(3);
             }
 
-            else if (transform.position.x == 1 && transform.position.y == 14 && !cesta)
+            else if (transform.position.x == 1 && transform.position.y == 1 && !accion1 && codigo)
+            {
+                animacion = true;
+                GameManager.instance.InteractuarEncargado(15);
+                accion1 = true;
+                CambiarIdle(3);
+            }
+
+            else if (transform.position.x == 1 && transform.position.y == 14 && !cesta && !codigo)
             {
                 CambiarIdle(0);
                 cesta = true;

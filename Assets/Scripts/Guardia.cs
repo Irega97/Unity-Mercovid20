@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using UnityEditor;
 using UnityEngine;
 
 public class Guardia : MovingObject
@@ -233,6 +234,69 @@ public class Guardia : MovingObject
                 GameManager.instance.InteractuarEncargado(18);
             vistaplayer.animacion = true;
         }
-            
+
+        else
+        {
+            end = start + new Vector2(0, 1);
+            hit = Physics2D.Linecast(start, end, player);
+
+            if (hit.transform != null)
+            {
+                move = 1;
+                pillado = true;
+                Player vistaplayer = hit.transform.gameObject.GetComponent<Player>();
+                vistaplayer.CambiarIdle(1);
+                vistaplayer.animacion = true;
+            }
+
+            else
+            {
+                end = start + new Vector2(0, -1);
+                hit = Physics2D.Linecast(start, end, player);
+                if (hit.transform != null)
+                {
+                    move = 0;
+                    pillado = true;
+                    Player vistaplayer = hit.transform.gameObject.GetComponent<Player>();
+                    vistaplayer.CambiarIdle(0);
+                    vistaplayer.animacion = true;
+                }
+                else
+                {
+                    end = start + new Vector2(1, 0);
+                    hit = Physics2D.Linecast(start, end, player);
+                    if (hit.transform != null)
+                    {
+                        move = 3;
+                        pillado = true;
+                        Player vistaplayer = hit.transform.gameObject.GetComponent<Player>();
+                        vistaplayer.CambiarIdle(2);
+                        vistaplayer.animacion = true;
+                    }
+                    else
+                    {
+                        end = start + new Vector2(-1, 0);
+                        hit = Physics2D.Linecast(start, end, player);
+                        if (hit.transform != null)
+                        {
+                            move = 2;
+                            pillado = true;
+                            Player vistaplayer = hit.transform.gameObject.GetComponent<Player>();
+                            vistaplayer.CambiarIdle(3);
+                            vistaplayer.animacion = true;
+                        }
+                    }
+                }
+            }
+        }    
+
+        if (pillado)
+        {
+            if (GameManager.instance.nivel != 5)
+                GameManager.instance.InteractuarEncargado(14);
+
+            else
+                GameManager.instance.InteractuarEncargado(18);
+        }
     }
 }

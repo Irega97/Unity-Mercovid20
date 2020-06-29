@@ -227,7 +227,7 @@ public class GameManager : MonoBehaviour
 
         mapa = javaClass.CallStatic<String>("getMapa", 1);
 
-        /*if (mapa == null)
+        if (mapa == null)
                     mapa = "60 60 1                                                    \n" +
                            "A9555555555555555555559955555555599599555555555555555555559C\n" +
                            "7B66666666666666666666DB666666666666DB66666666666666666666D8\n" +
@@ -288,11 +288,11 @@ public class GameManager : MonoBehaviour
                            "EF                    EF            EF                    EF\n" +
                            "EF                    EF            EF                    EF\n" +
                            "715555555555555555555541555555555555415555555555555555555548\n" +
-                           "026666666666666666666622666666666666226666666666666666666623\n";*/
+                           "026666666666666666666622666666666666226666666666666666666623\n";
 
         personajes = javaClass.CallStatic<String>("getEnemigos", 1);
 
-        /*if (personajes == null)
+        if (personajes == null)
             personajes = "48      \n" +
                             "P 7 3 1            \n" +
                             "0 0 0 23 11 0 0    \n" +
@@ -341,7 +341,7 @@ public class GameManager : MonoBehaviour
                             "V 21 50  \n" +
                             "V 46 40  \n" +
                             "V 38 57  \n" +
-                            "L 46 37  \n";*/
+                            "L 46 37  \n";
 
         if (cantidadMascarilla > 0 || cantidadMegaMascarilla > 0)
         {
