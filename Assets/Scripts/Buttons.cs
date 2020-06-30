@@ -158,13 +158,11 @@ public class Buttons : MonoBehaviour
     public void Restart()
     {
         GameManager.instance.nivel = 0;
-        GameManager.instance.enabled = true;
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 
     public void Quit()
     {
-        Debug.Log("Quit");
         if (Application.platform == RuntimePlatform.Android)
             Application.Quit();
     }
