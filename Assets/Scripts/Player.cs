@@ -28,6 +28,8 @@ public class Player : MovingObject
     public Sprite propietarioizquierda;
     public bool animacion = false;
     public GameObject llaveobject;
+    public GameObject presentacionFinal;
+    public Text presentacionFinalText;
     private Text vidaText;
     private Animator animator;
     public int health; //puntos de vida 
@@ -47,6 +49,7 @@ public class Player : MovingObject
     {
         animator = GetComponent<Animator>();
         base.Awake();
+
     }
 
     protected override void Start()
@@ -75,7 +78,7 @@ public class Player : MovingObject
     {
         if (health <= 0)
         {
-            //SoundManager.instance.gameover();
+            SoundManager.instance.gameover();
             GameManager.instance.GameOver();
         }
     }
@@ -704,6 +707,7 @@ public class Player : MovingObject
             else if (GameManager.instance.nivel == 5)
             {
                 GameManager.instance.puntos = GameManager.instance.puntos + 150;
+                GameManager.instance.GanarPartida();
             }
         }
     }
@@ -724,7 +728,7 @@ public class Player : MovingObject
         contagiado = true;
         GameManager.instance.contagio = true;
         StartCoroutine(Contagio(5));
-        //SoundManager.instance.contagiar();
+        SoundManager.instance.contagiar();
         CheckIfGameOver();
     }
 
