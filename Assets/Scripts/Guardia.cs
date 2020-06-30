@@ -177,25 +177,8 @@ public class Guardia : MovingObject
 
     protected override void OnCantMove(GameObject go)
     {
-        if (go.tag == "Player")
-        {
-            pillado2 = true;
-            GameObject.Find("Jugador(Clone)").GetComponent<Player>().pillado();
-        }
-        else
-        {
-            if (move == 0)
-                vertical++;
-
-            else if (move == 1)
-                vertical--;
-
-            else if (move == 2)
-                horizontal++;
-
-            else
-                vertical++;
-        }
+        pillado2 = true;
+        GameObject.Find("Jugador(Clone)").GetComponent<Player>().pillado();
     }
 
     public void pillar()
