@@ -28,6 +28,8 @@ public class Player : MovingObject
     public Sprite propietarioizquierda;
     public bool animacion = false;
     public GameObject llaveobject;
+    public GameObject presentacionFinal;
+    public Text presentacionFinalText;
     private Text vidaText;
     private Text puntosText;
     private Animator animator;
@@ -49,6 +51,7 @@ public class Player : MovingObject
     {
         animator = GetComponent<Animator>();
         base.Awake();
+
     }
 
     protected override void Start()
@@ -708,6 +711,7 @@ public class Player : MovingObject
             else if (GameManager.instance.nivel == 5)
             {
                 GameManager.instance.puntos = GameManager.instance.puntos + 150;
+                GameManager.instance.GanarPartida();
             }
         }
     }

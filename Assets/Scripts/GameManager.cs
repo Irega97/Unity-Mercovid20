@@ -385,8 +385,8 @@ public class GameManager : MonoBehaviour
         presentacionFinal.SetActive(false);
         entremapas.SetActive(false);
         encargado1.SetActive(false);
-        //restart.SetActive(false);
-        //quit.SetActive(false);
+        restart.SetActive(false);
+        quit.SetActive(false);
 
         if (instance.nivel == 1)
         {
@@ -1438,4 +1438,10 @@ public class GameManager : MonoBehaviour
         cantidadMascarilla = 0;
         cantidadMegaMascarilla = 0;
 }
+    public void GanarPartida()
+    {
+        presentacionFinalText.text = "¡UAU, BIENVENIDO AL HALL DE LA FAMA! ";
+        presentacionFinal.SetActive(true);
+
+    }
 }
