@@ -178,7 +178,7 @@ public class Guardia : MovingObject
     protected override void OnCantMove(GameObject go)
     {
         pillado2 = true;
-        GameObject.Find("Jugador(Clone)").GetComponent<Player>().pillado();
+        GameObject.Find("Jugador(Clone)").GetComponent<Player>().pillado(0);
     }
 
     public void pillar()
@@ -216,6 +216,8 @@ public class Guardia : MovingObject
             else
                 GameManager.instance.InteractuarEncargado(18);
             vistaplayer.animacion = true;
+            vistaplayer.cogido = true;
+            GameObject.Find("Jugador(Clone)").GetComponent<Player>().pillado(1);
         }
 
         else
@@ -230,6 +232,8 @@ public class Guardia : MovingObject
                 Player vistaplayer = hit.transform.gameObject.GetComponent<Player>();
                 vistaplayer.CambiarIdle(1);
                 vistaplayer.animacion = true;
+                vistaplayer.cogido = true;
+                GameObject.Find("Jugador(Clone)").GetComponent<Player>().pillado(1);
             }
 
             else
@@ -243,6 +247,8 @@ public class Guardia : MovingObject
                     Player vistaplayer = hit.transform.gameObject.GetComponent<Player>();
                     vistaplayer.CambiarIdle(0);
                     vistaplayer.animacion = true;
+                    vistaplayer.cogido = true;
+                    GameObject.Find("Jugador(Clone)").GetComponent<Player>().pillado(1);
                 }
                 else
                 {
@@ -255,6 +261,8 @@ public class Guardia : MovingObject
                         Player vistaplayer = hit.transform.gameObject.GetComponent<Player>();
                         vistaplayer.CambiarIdle(2);
                         vistaplayer.animacion = true;
+                        vistaplayer.cogido = true;
+                        GameObject.Find("Jugador(Clone)").GetComponent<Player>().pillado(1);
                     }
                     else
                     {
@@ -267,6 +275,8 @@ public class Guardia : MovingObject
                             Player vistaplayer = hit.transform.gameObject.GetComponent<Player>();
                             vistaplayer.CambiarIdle(3);
                             vistaplayer.animacion = true;
+                            vistaplayer.cogido = true;
+                            GameObject.Find("Jugador(Clone)").GetComponent<Player>().pillado(1);
                         }
                     }
                 }

@@ -1565,6 +1565,8 @@ public class GameManager : MonoBehaviour
     {
         presentacionFinalText.text = "¡UAU, BIENVENIDO AL HALL DE LA FAMA! ";
         presentacionFinal.SetActive(true);
+        quit.SetActive(true);
+        restart.SetActive(true);
         if (Application.platform == RuntimePlatform.Android)
         {
             if (!instance.enviado)

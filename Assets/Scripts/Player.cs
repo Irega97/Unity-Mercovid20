@@ -34,6 +34,7 @@ public class Player : MovingObject
     private Animator animator;
     public int health; //puntos de vida 
     public bool contagiado = false;
+    public bool cogido = false;
     public Vector2 startPos;
     public Vector2 direction;
     List<Vector3> posicionrandom = new List<Vector3>();
@@ -285,7 +286,7 @@ public class Player : MovingObject
 
         if (inter)
         {
-            if (GameObject.Find("Encargado1"))
+            if (GameObject.Find("Encargado1") && !cogido)
             {
                 GameManager.instance.AcabarConversa();
                 animacion = false;
@@ -636,6 +637,12 @@ public class Player : MovingObject
         }
     }
 
+    IEnumerator coger()
+    {
+        yield return new WaitForSeconds(5);
+        Restart();
+    }
+
     protected override void OnCantMove(GameObject go)
     {
         if (go.tag == "PuertaMercadona")
@@ -757,11 +764,17 @@ public class Player : MovingObject
 
     }
 
-    public void pillado()
+    public void pillado(int i)
     {
-        GameManager.instance.llave = llave;
-        GameManager.instance.nivel = 6;
-        Invoke("Restart", restartLevelDelay);
-        posicionrandom.Clear();
+        if (i == 0)
+        {
+            GameManager.instance.nivel = 6;
+            Invoke("Restart", restartLevelDelay);
+            posicionrandom.Clear();
+        }
+
+        else if (i == 1)
+            coger();
+        
     }
 }
