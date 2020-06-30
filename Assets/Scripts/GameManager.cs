@@ -25,7 +25,7 @@ public class GameManager : MonoBehaviour
     private Text tiempoText;
     public int minutos, segundos;
     private float contador;
-    private Text puntosText;
+    public Text puntosText;
     public bool doingSetup;
     public bool llave = false;
     public bool codigo = false;
@@ -450,8 +450,6 @@ public class GameManager : MonoBehaviour
             tiempoText.text = "Duración: " + minutos + ":" + segundos;
 
         puntosText.text = "Puntuación: " + instance.puntos;
-
-        Debug.Log(puntosText.text);
     }
 
     [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.AfterSceneLoad)]
@@ -465,12 +463,12 @@ public class GameManager : MonoBehaviour
 #if UNITY_STANDALONE || UNITY_WEBPLAYER || UNITY_EDITOR
         if (instance.nivel == 0)
         {
-            /*instance.codigo = false;
+            instance.codigo = false;
             instance.llave = false;
             instance.segundos = 0;
             instance.minutos = 0;
             instance.contador = 0;
-            instance.puntos = 0;*/
+            instance.puntos = 0;
 
            instance.mapa = "60 60 1                                                     \n" +
                            "A9555555555555555555559955555555599599555555555555555555559C\n" +
@@ -977,7 +975,7 @@ public class GameManager : MonoBehaviour
 
         else if (instance.nivel == 3)
         {
-            instance.mapa = javaClass.CallStatic<String>("getMapa", 4);
+            instance.mapa = javaClass.CallStatic<String>("getMapa", 2);
             instance.personajes = javaClass.CallStatic<String>("getEnemigos", 4);
 
             if (instance.mapa == null)
@@ -1011,7 +1009,7 @@ public class GameManager : MonoBehaviour
 
         else if (instance.nivel == 4)
         {
-            instance.mapa = javaClass.CallStatic<String>("getMapa", 5);
+            instance.mapa = javaClass.CallStatic<String>("getMapa", 1);
             instance.personajes = javaClass.CallStatic<String>("getEnemigos", 5);
 
             if (instance.mapa == null)
@@ -1149,7 +1147,7 @@ public class GameManager : MonoBehaviour
 
         else if (instance.nivel == 6)
         {
-            instance.mapa = javaClass.CallStatic<String>("getMapa", 6);
+            instance.mapa = javaClass.CallStatic<String>("getMapa", 1);
             instance.personajes = javaClass.CallStatic<String>("getEnemigos", 6);
 
             if (instance.mapa == null)
@@ -1411,7 +1409,6 @@ public class GameManager : MonoBehaviour
 
     public void GameOver()
     {
-
         presentacionFinal.SetActive(true);
         quit.SetActive(true);
         restart.SetActive(true);
@@ -1423,10 +1420,8 @@ public class GameManager : MonoBehaviour
                 AndroidJavaClass javaClass = new AndroidJavaClass("edu.upc.login.apiUnity");
                 javaClass.CallStatic("guardarStats", instance.duracion, instance.puntos);
                 instance.enviado = true;
-                Debug.Log("Enviado: Duracion: " + instance.duracion + " puntos: " + instance.puntos);
             }
         }
-        enabled = false;
     }
 
     private void InicializarObjetos()
@@ -1438,10 +1433,19 @@ public class GameManager : MonoBehaviour
         cantidadMascarilla = 0;
         cantidadMegaMascarilla = 0;
 }
+    
     public void GanarPartida()
     {
         presentacionFinalText.text = "¡UAU, BIENVENIDO AL HALL DE LA FAMA! ";
         presentacionFinal.SetActive(true);
-
+        if (Application.platform == RuntimePlatform.Android)
+        {
+            if (!instance.enviado)
+            {
+                AndroidJavaClass javaClass = new AndroidJavaClass("edu.upc.login.apiUnity");
+                javaClass.CallStatic("guardarStats", instance.duracion, instance.puntos);
+                instance.enviado = true;
+            }
+        }
     }
 }

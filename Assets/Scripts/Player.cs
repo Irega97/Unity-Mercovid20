@@ -31,10 +31,8 @@ public class Player : MovingObject
     public GameObject presentacionFinal;
     public Text presentacionFinalText;
     private Text vidaText;
-    private Text puntosText;
     private Animator animator;
     public int health; //puntos de vida 
-    public int puntos;
     public bool contagiado = false;
     public Vector2 startPos;
     public Vector2 direction;
@@ -59,10 +57,7 @@ public class Player : MovingObject
         health = GameManager.instance.healthPoints;
         contagiado = GameManager.instance.contagio;
         vidaText = GameObject.Find("VidaText").GetComponent<Text>();
-        puntosText = GameObject.Find("PuntosText").GetComponent<Text>();
-        puntos = GameManager.instance.puntos;
         vidaText.text = "Vida: " + health;
-        puntosText.text = "Puntuación: " + puntos;
         //CAMBIAR TODO A FALSE
         accion1 = false;
         accion2 = false;
