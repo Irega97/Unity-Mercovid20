@@ -17,7 +17,6 @@ public class GameManager : MonoBehaviour
     public GameObject entremapas;
     public GameObject restart;
     public GameObject quit;
-    public GameObject canvas;
     public GameObject final;
     public Text textoPersonajes;
     public Text entreMapas;
