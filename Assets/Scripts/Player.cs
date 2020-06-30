@@ -416,10 +416,10 @@ public class Player : MovingObject
         {
             if (transform.position.x == 1 && transform.position.y == 1 && !accion1)
             {
-                /*animacion = true;
+                //animacion = true;
                 GameManager.instance.InteractuarEncargado(13);
                 accion1 = true;
-                CambiarIdle(3);*/
+                CambiarIdle(3);
             }
         }
     }
