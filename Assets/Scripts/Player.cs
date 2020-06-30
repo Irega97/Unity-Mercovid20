@@ -29,8 +29,10 @@ public class Player : MovingObject
     public bool animacion = false;
     public GameObject llaveobject;
     private Text vidaText;
+    private Text puntosText;
     private Animator animator;
     public int health; //puntos de vida 
+    public int puntos;
     public bool contagiado = false;
     public Vector2 startPos;
     public Vector2 direction;
@@ -54,7 +56,10 @@ public class Player : MovingObject
         health = GameManager.instance.healthPoints;
         contagiado = GameManager.instance.contagio;
         vidaText = GameObject.Find("VidaText").GetComponent<Text>();
+        puntosText = GameObject.Find("PuntosText").GetComponent<Text>();
+        puntos = GameManager.instance.puntos;
         vidaText.text = "Vida: " + health;
+        puntosText.text = "Puntuación: " + puntos;
         //CAMBIAR TODO A FALSE
         accion1 = false;
         accion2 = false;
@@ -89,7 +94,6 @@ public class Player : MovingObject
     // Update is called once per frame
     void Update()
     {
-        Debug.Log(animacion);
 
 #if UNITY_STANDALONE || UNITY_WEBPLAYER || UNITY_EDITOR
         horizontal = (int)Input.GetAxisRaw("Horizontal"); //-1 si es la izquierda, 1 si es derecha, 0 si no pulsa ninguna tecla

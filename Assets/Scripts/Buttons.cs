@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class Buttons : MonoBehaviour
 {
@@ -156,7 +157,8 @@ public class Buttons : MonoBehaviour
 
     public void Restart()
     {
-        Debug.Log("Restart");
+        GameManager.instance.nivel = 0;
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 
     public void Quit()
