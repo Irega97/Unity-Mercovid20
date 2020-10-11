@@ -30,10 +30,7 @@ public class Buttons : MonoBehaviour
         cantidadMegaMascarilla = GameManager.instance.cantidadMegaMascarilla;
         cantidadJabon = GameManager.instance.cantidadJabon;
         player = GameObject.Find("Jugador(Clone)").GetComponent<Player>();
-
         vidaText = GameObject.Find("VidaText").GetComponent<Text>();
-        
-        //estadoText = GameObject.Find("").GetComponent<Text>();
         desinfectante = GameObject.Find("DesinfectanteText").GetComponent<Text>();
         desinfectanteplus = GameObject.Find("DesinfectantePlusText").GetComponent<Text>();
         desinfectantepro = GameObject.Find("DesinfectanteProText").GetComponent<Text>();
@@ -44,6 +41,7 @@ public class Buttons : MonoBehaviour
         desinfectanteplus.text = "x" + cantidadDesinfectantePlus;
         desinfectantepro.text = "x" + cantidadDesinfectantePro;
         jabon.text = "x" + cantidadJabon;
+
         if (Application.platform == RuntimePlatform.Android)
             javaClass = new AndroidJavaClass("edu.upc.login.apiUnity");
     }
@@ -56,23 +54,24 @@ public class Buttons : MonoBehaviour
             {
                 vidaText.text = " + 10 de vida! ";
                 player.health = player.health + 10;
+
                 if (player.health > 100)
                     player.health = 100;
+
                 vidaText.text = "Vida: " + player.health;
             }
             
             cantidadDesinfectante--;
             GameManager.instance.cantidadDesinfectante--;
+
             if (Application.platform == RuntimePlatform.Android)
                 javaClass.CallStatic("setObjetos", 1);
 
             desinfectante.text = "x" + cantidadDesinfectante;
         }
+
         else
-        {
-            //estadoText.text = " No te queda más Desinfectante ";
             vidaText.text = "Vida: " + player.health;
-        }
     }
 
     public void DesinfectantePlus()
@@ -81,24 +80,25 @@ public class Buttons : MonoBehaviour
         {
             if (player.health < 100)
             {
-                //estadoText.text = " + 25 de vida! ";
                 player.health = player.health + 25;
+
                 if (player.health > 100)
                     player.health = 100;
+
                 vidaText.text = "Vida: " + player.health;
             }
 
             GameManager.instance.cantidadDesinfectantePlus--;
             cantidadDesinfectantePlus--;
+
             if (Application.platform == RuntimePlatform.Android)
                 javaClass.CallStatic("setObjetos", 2);
+
             desinfectanteplus.text = "x" + cantidadDesinfectantePlus;
         }
+
         else
-        {
-            //estadoText.text = " No te queda más Desinfectante Plus ";
             vidaText.text = "Vida: " + player.health;
-        }
 
     }
 
@@ -108,23 +108,24 @@ public class Buttons : MonoBehaviour
         {
             if (player.health < 100)
             {
-                //estadoText.text = " + 50 de vida! ";
                 player.health = player.health + 50;
+
                 if (player.health > 100)
                     player.health = 100;
+
                 vidaText.text = "Vida: " + player.health;
             }
+
             GameManager.instance.cantidadDesinfectantePro--;
             cantidadDesinfectantePro--;
+
             if (Application.platform == RuntimePlatform.Android)
                 javaClass.CallStatic("setObjetos", 3);
+
             desinfectantepro.text = "x" + cantidadDesinfectantePro;
         }
         else
-        {
-            //estadoText.text = " No te queda más Desinfectante Pro ";
             vidaText.text = "Vida: " + player.health;
-        }
 
     }
 
@@ -134,24 +135,23 @@ public class Buttons : MonoBehaviour
         {
             if (player.contagiado == true)
             {
-                //estadoText.text = " ¡Te has curado del contagio! ";
                 vidaText.text = "Vida: " + player.health;
                 GameManager.instance.contagio = false;
                 player.contagiado = false;
+                SoundManager.instance.curar();
             }
 
             GameManager.instance.cantidadJabon--;
             cantidadJabon--;
+
             if (Application.platform == RuntimePlatform.Android)
                 javaClass.CallStatic("setObjetos", 6);
+
             jabon.text = "x" + cantidadJabon;
-            SoundManager.instance.curar();
         }
+
         else
-        {
-            //estadoText.text = " No te queda más Jabón ";
             vidaText.text = "Vida: " + player.health;
-        }
        
     }
 

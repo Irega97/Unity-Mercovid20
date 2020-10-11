@@ -1556,7 +1556,7 @@ public class GameManager : MonoBehaviour
         cantidadDesinfectante = 0;
         cantidadDesinfectantePlus = 0;
         cantidadDesinfectantePro = 0;
-        cantidadJabon = 5;
+        cantidadJabon = 0;
         cantidadMascarilla = 0;
         cantidadMegaMascarilla = 0;
 }
